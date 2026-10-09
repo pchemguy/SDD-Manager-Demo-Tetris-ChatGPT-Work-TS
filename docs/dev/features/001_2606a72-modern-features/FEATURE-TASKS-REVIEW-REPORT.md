@@ -1,10 +1,12 @@
 # Modern-feature task-list review
 
+> Historical snapshot archived by T-041 on 2026-10-09. Current authority is [main TASKS](../../TASKS.md), [SPEC](../../SPEC.md), [PLAN](../../PLAN.md) and [layout](../../layout.md). Archived checkboxes are not executable owners or current completion claims.
+
 ## Current gate
 
 State: **Ready for implementation handoff; TASKS accepted**. Conformance, hierarchy, dependencies and decomposition pass; no confirmed issue remains. Full Phase 2 inline execution with GitHub tracking is accepted. This review completes preparation QC only; it does not establish preparation integration, phase activation, implemented features or verified task completion.
 
-Reviewed owner: [FEATURE-TASKS](FEATURE-TASKS.md), Phase 2/milestones 2.1–2.5/T-023–T-041, with no children. Campaign: [001_2606a72-modern-features](features/001_2606a72-modern-features/README.md). The user accepted [FEATURE-PLAN](FEATURE-PLAN.md)/[feature layout](layout/modern-features.md) at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. [Plan review Revision 2](FEATURE-PLAN-REVIEW-REPORT.md#revision-2--planlayout-acceptance) reconciles acceptance-only edits with unchanged strategy/allocation. [Specification review](FEATURE-SPEC-REVIEW-REPORT.md) and accepted [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md) supply current upstream conformance.
+Reviewed owner: [FEATURE-TASKS](FEATURE-TASKS.md), Phase 2/milestones 2.1–2.5/T-023–T-041, with no children. Campaign: [001_2606a72-modern-features](README.md). The user accepted [FEATURE-PLAN](FEATURE-PLAN.md)/[feature layout](modern-features.md) at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. [Plan review Revision 2](FEATURE-PLAN-REVIEW-REPORT.md#revision-2--planlayout-acceptance) reconciles acceptance-only edits with unchanged strategy/allocation. [Specification review](FEATURE-SPEC-REVIEW-REPORT.md) and accepted [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md) supply current upstream conformance.
 
 Exact reviewed/governing pending contents (SHA-256):
 

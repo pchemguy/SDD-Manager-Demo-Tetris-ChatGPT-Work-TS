@@ -46,3 +46,10 @@ it("does not rewrite an unchanged live status on every frame", () => {
   expect(writes).toBe(2);
   expect(label).toBe("Paused");
 });
+it("labels held kind, empty state and lifecycle-aware availability", () => {
+  const held={textContent:""},availability={textContent:""};
+  const v=new View({score:{textContent:""},lines:{textContent:""},level:{textContent:""},status:{textContent:""},held,availability});
+  const g=new Game();v.render(g.snapshot());expect(held.textContent).toBe("Empty");expect(availability.textContent).toBe("Available · C");
+  g.apply("hold");v.render(g.snapshot());expect(availability.textContent).toBe("Used until lock");
+  g.apply("pause");v.render(g.snapshot());expect(availability.textContent).toBe("Unavailable while paused");
+});

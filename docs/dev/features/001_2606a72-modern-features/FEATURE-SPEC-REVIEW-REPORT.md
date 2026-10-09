@@ -1,10 +1,12 @@
 # Modern-feature specification review
 
+> Historical snapshot archived by T-041 on 2026-10-09. Current authority is [main TASKS](../../TASKS.md), [SPEC](../../SPEC.md), [PLAN](../../PLAN.md) and [layout](../../layout.md). Archived checkboxes are not executable owners or current completion claims.
+
 ## Current gate
 
 State: **Ready for dependent feature planning**. Design conformance and specification QC pass; no confirmed issue remains. The user accepted the complete specification at `2999f0fbaaa46813c97e2fed035dfab3b1b279fc` on 2026-10-09. Revision 1 records the current acceptance reconciliation. This report establishes neither implementation nor product/browser verification.
 
-Scope: [FEATURE-SPEC](FEATURE-SPEC.md), F1–F8 and FA1–FA10; no focused children. Campaign: [001_2606a72-modern-features](features/001_2606a72-modern-features/README.md). Preparation checkpoint: `a4185c2f586388171c4ef12314fb26e6a83ce8aa`; baseline: `2606a7213d4ddcf18497fafabb6cc5c349a26178`. The user accepted the design at the preparation checkpoint on 2026-10-09. Pending FEATURE_DECOMPOSITION changes reconcile acceptance, remove unselected alternatives, and link the specification; its accepted capability/component policies are unchanged.
+Scope: [FEATURE-SPEC](FEATURE-SPEC.md), F1–F8 and FA1–FA10; no focused children. Campaign: [001_2606a72-modern-features](README.md). Preparation checkpoint: `a4185c2f586388171c4ef12314fb26e6a83ce8aa`; baseline: `2606a7213d4ddcf18497fafabb6cc5c349a26178`. The user accepted the design at the preparation checkpoint on 2026-10-09. Pending FEATURE_DECOMPOSITION changes reconcile acceptance, remove unselected alternatives, and link the specification; its accepted capability/component policies are unchanged.
 
 Exact reviewed and governing pending contents (SHA-256):
 

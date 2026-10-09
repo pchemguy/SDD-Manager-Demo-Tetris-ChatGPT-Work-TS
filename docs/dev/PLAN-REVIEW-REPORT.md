@@ -2,6 +2,10 @@
 
 ## Current gate
 
+State: **Ready** for the complete current PLAN/layout strategy gate. T-041 independently assessed incorporated main owners; archived feature Ready is historical only. The latest assessment is Revision 3. Accepted inline execution/publication authority remains separate from document conformance.
+
+## Initial gate (historical)
+
 State: **Ready** for task derivation. The user accepted PLAN/layout on 2026-10-09. This review does not authorize implementation; current acceptance/navigation reconciliation is recorded in Revision 1.
 
 Reviewed scope: [PLAN](PLAN.md) and [layout](layout.md); no focused children. Governing inputs: accepted [SPEC](SPEC.md), [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), and [DECOMPOSITION](DECOMPOSITION.md). The accepted specification checkpoint is `04766e9d8dd21a1e7b6ef5cbab08c20f8ff4cff1`; pending upstream changes are acceptance/navigation only, as assessed in [SPEC review Revision 1](SPEC-REVIEW-REPORT.md#revision-1--acceptance-and-navigation-reconciliation).
@@ -63,3 +67,22 @@ The user accepted PLAN/layout at `3b9f97b554611b0bad5841361bd13b4e36d0aedd` on 2
 ## Revision 2 — Accepted execution scope
 
 The user accepted TASKS and full Phase 1 inline execution with GitHub tracking. Only acceptance/tracking metadata changed; contracts, milestones, task definitions and physical allocation are unchanged. Inspected those differences; earlier conformance coverage remains applicable. Ready is retained. Current owner SHA-256: `e96a1fd75365d88307ffd2292b020efcb217577d7e21c5b687bf6d273efc182a`. Preparation integration and provider activation remain separate gates; no task is completed by this decision.
+
+## Revision 3 — Complete feature incorporation and main-owner reassessment
+
+Date: 2026-10-09. Reviewer: implementing agent applying focused SDD assessment criteria; separate inline document review, no independent-agent claim. Accepted source checkpoints and original cycles above remain historical evidence. Reviewed actual complete pending roots after incorporation, not just the feature overlay or hashes.
+
+Compared full current SPEC/design against both phase routes, dependencies, earliest usefulness, deferrals, reviews/exits and source/check/report placement. Phase 1 remains the completed playable dependency; Phase 2 delivers ghost/drop/Space-P first (2.1), bag/hold and valid fixtures (2.2), kicks/full interactions (2.3), complete desktop/stable/reproducible delivery (2.4), then one phase review/incorporation/integration outcome (2.5). S1–S8/A1–A11/FA1–FA10 have a delivery and objective exit route; later phase refinements do not falsely become earlier baseline claims. Required target gaps block closure. Each delivery boundary ends in distinct review/report; final review depends on delivery closures, not its own milestone. Explicit preparation, incorporation/archive and two-parent merge/check/push/readback gates remain.
+
+Count assessment: two phases, each with four delivery milestones and one excluded dedicated review milestone; eight delivery milestones plus two review milestones = ten. Retained as coherent useful capability boundaries, no padding. Physical map covers every rule/component, immutable valid fixture/source, production stable runner, current doc/QC owner and actual feature report prefix. Pure placement has no state, Game owns bag/hold/timers, composition binds both previews; no competing state, production test import, new runtime dependency or ambiguous path is required.
+
+Confirmed incorporation corrections: stale F contract references in current PLAN/TASKS and a duplicate S3 range in SPEC were mapped to complete current owners; no accepted behavior changed. Current navigation, local targets, stable identities, historical markers, ownership and authored whitespace are checked. No remaining confirmed conformance finding, unresolved product decision or placement gap. Ready is based on this complete reassessment. Completion status/verification bookkeeping changes alone retain this structural gate; record subsequent status hashes with their actual check.
+
+| Source | SHA-256 |
+| --- | --- |
+| `PLAN.md` | `072c70fe7e6718ea69c2f0cb299f3037ff9c6b0717bfae4ebd6101620a134617` |
+| `layout.md` | `89ea5b60aa9eafaa6869870475510ac103f787dcb1c204fd3c046b7f5ae064bc` |
+| `SPEC.md` | `a6066686bfdbabef400580fc4db61490d82e0d15988bc8679b15622bdc734683` |
+| `PROJECT.md` | `b4c8d05b88d93c2ddac7000d360fcb589fc5f2fe17347ad457658469cf5a2a05` |
+| `ARCHITECTURE.md` | `626aada524f8c9aa1dc391035a73b5046df0c61bcd931a8a603a03b428e31032` |
+| `DECOMPOSITION.md` | `d69ef96f1ad8f3d0fbfeaf084d1e6155c5e24dd8345fcf2537da6e22ca7fd8e1` |

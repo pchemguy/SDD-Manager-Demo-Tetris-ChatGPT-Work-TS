@@ -1,8 +1,10 @@
 # Modern-feature specification
 
+> Historical snapshot archived by T-041 on 2026-10-09. Current authority is [main TASKS](../../TASKS.md), [SPEC](../../SPEC.md), [PLAN](../../PLAN.md) and [layout](../../layout.md). Archived checkboxes are not executable owners or current completion claims.
+
 ## Scope and authority
 
-This scoped delta belongs to [campaign 001_2606a72-modern-features](features/001_2606a72-modern-features/README.md). Its accepted design is [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md), accepted by the user at `a4185c2f586388171c4ef12314fb26e6a83ce8aa` on 2026-10-09. [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), and [DECOMPOSITION](DECOMPOSITION.md) supply the retained purpose and ownership. The user accepted this specification at `2999f0fbaaa46813c97e2fed035dfab3b1b279fc` on 2026-10-09.
+This scoped delta belongs to [campaign 001_2606a72-modern-features](README.md). Its accepted design is [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md), accepted by the user at `a4185c2f586388171c4ef12314fb26e6a83ce8aa` on 2026-10-09. [PROJECT](../../PROJECT.md), [ARCHITECTURE](../../ARCHITECTURE.md), and [DECOMPOSITION](../../DECOMPOSITION.md) supply the retained purpose and ownership. The user accepted this specification at `2999f0fbaaa46813c97e2fed035dfab3b1b279fc` on 2026-10-09.
 
 The feature adds hold, ghost projection, seven-bag selection, horizontal wall kicks, and hard drop to the desktop browser game. It retains full-gravity-interval grounded locking, the 10 × 20 board without hidden rows, seven canonical geometries, clockwise-only rotation, one-piece next preview, line scoring/progression, pause/focus/restart lifecycle, detached snapshots, and static delivery. Multiplayer, touch controls, audio, persistence, expanded next queues, counterclockwise rotation, vertical floor kicks, spin/combo bonuses, and exact commercial-standard conformance are outside scope.
 
@@ -19,7 +21,7 @@ The feature adds hold, ghost projection, seven-bag selection, horizontal wall ki
 | S7, key mapping | F7 assigns C to hold, Space to hard drop, and P to pause/resume, including manual focus return. Arrow repeat, chronological scheduling, and cleanup guarantees remain applicable. |
 | S8, presentation | F8 adds held preview/text/availability and ghost geometry within the accepted desktop/static/browser obligations. |
 
-This document governs only the declared delta while active. Unaffected behavior remains owned by [main SPEC](SPEC.md). Incorporation into the complete main documents belongs to sdd-integrate-feature; preparation does not change implemented product behavior.
+This document governs only the declared delta while active. Unaffected behavior remains owned by [main SPEC](../../SPEC.md). Incorporation into the complete main documents belongs to sdd-integrate-feature; preparation does not change implemented product behavior.
 
 ## F2 — Seven-bag selection
 

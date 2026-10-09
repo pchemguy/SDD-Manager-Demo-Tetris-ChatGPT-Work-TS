@@ -1,3 +1,5 @@
+import { drawsForBag } from "../helpers/random";
+import { TEST_BAG } from "../helpers/scenarios";
 /** Inspect production Canvas pixels, desktop bounds and device-pixel backing dimensions. */
 import { test, expect } from "@playwright/test";
 for (const ratio of [1, 2])
@@ -9,15 +11,16 @@ for (const ratio of [1, 2])
       deviceScaleFactor: ratio,
     });
     const page = await context.newPage();
-    await page.addInitScript(() => {
-      Math.random = () => 0.15;
-    });
+    await page.clock.install({time:new Date("2026-10-09T12:00:00Z")});
+    await page.addInitScript((values) => { let i=0; Math.random=()=>values[i++ % values.length]!; }, drawsForBag(TEST_BAG));
     await page.goto("/");
+    await page.clock.pauseAt(new Date("2026-10-09T12:00:01Z"));
     for (const viewport of [
       { width: 1024, height: 768 },
       { width: 1440, height: 1000 },
     ]) {
       await page.setViewportSize(viewport);
+      await page.clock.runFor(16); // Resize rendering needs a frame even with a paused test clock.
       await expect
         .poll(() =>
           page.locator("#board").evaluate((c: HTMLCanvasElement) => c.width),
@@ -53,9 +56,24 @@ for (const ratio of [1, 2])
         });
       expect(pixels.colored).toBe(4);
       expect(pixels.height).toBe(pixels.width * 2);
-      await page.screenshot({
-        path: info.outputPath(`desktop-${viewport.width}-dpr-${ratio}.png`),
-      });
+      for (const id of ["preview","held-preview","instructions","restart"]){
+        const box=(await page.locator(`#${id}`).boundingBox())!;
+        expect(box.x).toBeGreaterThanOrEqual(0);expect(box.y+box.height).toBeLessThanOrEqual(viewport.height);
+        expect(box.x+box.width).toBeLessThanOrEqual(viewport.width);
+      }
+      await expect(page.locator("#held-kind")).toHaveText("Empty");
+      await page.screenshot({path:info.outputPath(`desktop-${viewport.width}-dpr-${ratio}.png`)});
+      await page.keyboard.press("c");await page.keyboard.press("Space");
+      await expect(page.locator("#held-kind")).toHaveText("O");
+      const held=await page.locator("#held-preview").evaluate((c:HTMLCanvasElement)=>({w:c.width,h:c.height,css:c.getBoundingClientRect().width,color:Array.from(c.getContext("2d")!.getImageData(c.width*.4,c.height*.4,1,1).data).slice(0,3)}));
+      expect(held.w).toBe(Math.round(held.css*ratio));expect(held.h).toBe(held.w);expect(held.color).toEqual([244,208,111]);
+      await page.screenshot({path:info.outputPath(`overlap-${viewport.width}-dpr-${ratio}.png`)});
+      await page.keyboard.press("p");await expect(page.locator("#hold-availability")).toHaveText("Unavailable while paused");
+      await page.screenshot({path:info.outputPath(`held-paused-${viewport.width}-dpr-${ratio}.png`)});
+      for(const selector of ["#instructions","#restart","footer"]){
+        const box=(await page.locator(selector).boundingBox())!;expect(box.y+box.height).toBeLessThanOrEqual(viewport.height);
+      }
+      await page.getByRole("button",{name:"Restart game"}).click();
     }
     await context.close();
   });

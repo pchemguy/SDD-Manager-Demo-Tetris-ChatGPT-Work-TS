@@ -1,0 +1,133 @@
+/** Immutable conforming bag and legal placement traces shared by unit and production runners. */
+import type { Kind } from "../../src/engine/types";
+export const TEST_BAG: Kind[] = ["O","I","T","S","Z","J","L"];
+/** Each literal trace was independently constructed and verified through public gameplay. */
+export const CLEAR_TRACE = [
+  {"kind": "O", "orientation": 0, "x": 0, "cleared": 0, "total": 0, "y": 18},
+  {"kind": "I", "orientation": 0, "x": 2, "cleared": 0, "total": 0, "y": 18},
+  {"kind": "T", "orientation": 0, "x": 2, "cleared": 0, "total": 0, "y": 17},
+  {"kind": "S", "orientation": 0, "x": 1, "cleared": 0, "total": 0, "y": 16},
+  {"kind": "Z", "orientation": 0, "x": 5, "cleared": 0, "total": 0, "y": 18},
+  {"kind": "J", "orientation": 2, "x": 7, "cleared": 1, "total": 1, "y": 17},
+  {"kind": "L", "orientation": 3, "x": 7, "cleared": 1, "total": 2, "y": 17},
+  {"kind": "O", "orientation": 0, "x": 4, "cleared": 0, "total": 2, "y": 18},
+  {"kind": "I", "orientation": 1, "x": 4, "cleared": 0, "total": 2, "y": 16},
+  {"kind": "T", "orientation": 1, "x": -1, "cleared": 0, "total": 2, "y": 17},
+  {"kind": "S", "orientation": 1, "x": 7, "cleared": 1, "total": 3, "y": 16},
+  {"kind": "Z", "orientation": 0, "x": 0, "cleared": 0, "total": 3, "y": 17},
+  {"kind": "J", "orientation": 0, "x": 3, "cleared": 0, "total": 3, "y": 17},
+  {"kind": "L", "orientation": 3, "x": 6, "cleared": 1, "total": 4, "y": 16},
+  {"kind": "O", "orientation": 0, "x": 4, "cleared": 0, "total": 4, "y": 17},
+  {"kind": "I", "orientation": 1, "x": 7, "cleared": 0, "total": 4, "y": 16},
+  {"kind": "T", "orientation": 2, "x": 1, "cleared": 1, "total": 5, "y": 16},
+  {"kind": "S", "orientation": 1, "x": 6, "cleared": 0, "total": 5, "y": 16},
+  {"kind": "Z", "orientation": 1, "x": -1, "cleared": 1, "total": 6, "y": 16},
+  {"kind": "J", "orientation": 0, "x": 2, "cleared": 0, "total": 6, "y": 17},
+  {"kind": "L", "orientation": 1, "x": 4, "cleared": 1, "total": 7, "y": 16},
+  {"kind": "O", "orientation": 0, "x": 3, "cleared": 0, "total": 7, "y": 17},
+  {"kind": "I", "orientation": 1, "x": -2, "cleared": 0, "total": 7, "y": 15},
+  {"kind": "T", "orientation": 1, "x": 5, "cleared": 0, "total": 7, "y": 16},
+  {"kind": "S", "orientation": 0, "x": 1, "cleared": 0, "total": 7, "y": 16},
+  {"kind": "Z", "orientation": 0, "x": 7, "cleared": 1, "total": 8, "y": 16},
+  {"kind": "J", "orientation": 2, "x": 2, "cleared": 0, "total": 8, "y": 15},
+  {"kind": "L", "orientation": 3, "x": 0, "cleared": 0, "total": 8, "y": 15},
+  {"kind": "O", "orientation": 0, "x": 0, "cleared": 0, "total": 8, "y": 13},
+  {"kind": "I", "orientation": 1, "x": 7, "cleared": 0, "total": 8, "y": 15},
+  {"kind": "T", "orientation": 1, "x": 4, "cleared": 1, "total": 9, "y": 15},
+  {"kind": "S", "orientation": 1, "x": 6, "cleared": 2, "total": 11, "y": 16},
+  {"kind": "Z", "orientation": 1, "x": 7, "cleared": 0, "total": 11, "y": 16},
+  {"kind": "J", "orientation": 0, "x": 2, "cleared": 0, "total": 11, "y": 17},
+  {"kind": "L", "orientation": 3, "x": 5, "cleared": 1, "total": 12, "y": 16},
+  {"kind": "O", "orientation": 0, "x": 3, "cleared": 0, "total": 12, "y": 17},
+  {"kind": "I", "orientation": 1, "x": 5, "cleared": 1, "total": 13, "y": 16},
+  {"kind": "T", "orientation": 1, "x": 7, "cleared": 0, "total": 13, "y": 16},
+  {"kind": "S", "orientation": 1, "x": 0, "cleared": 1, "total": 14, "y": 16}
+] as const;
+/** Final L lock clears one row before the next O spawn is obstructed. */
+export const CLEAR_TOP_OUT_TRACE = [
+  {"kind": "O", "orientation": 0, "x": 7, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": 4, "cleared": 0},
+  {"kind": "T", "orientation": 3, "x": 5, "cleared": 0},
+  {"kind": "S", "orientation": 1, "x": 5, "cleared": 0},
+  {"kind": "Z", "orientation": 3, "x": 2, "cleared": 0},
+  {"kind": "J", "orientation": 0, "x": 0, "cleared": 0},
+  {"kind": "L", "orientation": 1, "x": -1, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 7, "cleared": 0},
+  {"kind": "I", "orientation": 3, "x": 2, "cleared": 0},
+  {"kind": "T", "orientation": 3, "x": 6, "cleared": 0},
+  {"kind": "S", "orientation": 0, "x": 5, "cleared": 0},
+  {"kind": "Z", "orientation": 1, "x": 0, "cleared": 0},
+  {"kind": "J", "orientation": 3, "x": 6, "cleared": 0},
+  {"kind": "L", "orientation": 3, "x": 4, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 5, "cleared": 0},
+  {"kind": "I", "orientation": 0, "x": 6, "cleared": 0},
+  {"kind": "T", "orientation": 1, "x": -1, "cleared": 0},
+  {"kind": "S", "orientation": 0, "x": 1, "cleared": 0},
+  {"kind": "Z", "orientation": 0, "x": 2, "cleared": 0},
+  {"kind": "J", "orientation": 0, "x": 0, "cleared": 0},
+  {"kind": "L", "orientation": 0, "x": 3, "cleared": 1}
+] as const;
+
+/** Valid post-initial-hold placement trace for replacement failure/timing. */
+export const OCCUPIED_HOLD_FAILURE = [
+  {"kind": "I", "orientation": 1, "x": 7, "cleared": 0},
+  {"kind": "T", "orientation": 2, "x": 5, "cleared": 0},
+  {"kind": "S", "orientation": 3, "x": 8, "cleared": 0},
+  {"kind": "Z", "orientation": 0, "x": 1, "cleared": 0},
+  {"kind": "J", "orientation": 3, "x": 4, "cleared": 0},
+  {"kind": "L", "orientation": 1, "x": 6, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 0, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": 1, "cleared": 0},
+  {"kind": "T", "orientation": 0, "x": 7, "cleared": 0},
+  {"kind": "S", "orientation": 2, "x": 6, "cleared": 0},
+  {"kind": "Z", "orientation": 3, "x": 5, "cleared": 0},
+  {"kind": "J", "orientation": 1, "x": 6, "cleared": 0},
+  {"kind": "L", "orientation": 2, "x": 7, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 8, "cleared": 0},
+  {"kind": "I", "orientation": 0, "x": 3, "cleared": 0},
+  {"kind": "T", "orientation": 2, "x": 5, "cleared": 0}
+] as const;
+
+/** Valid post-initial-hold placement trace for replacement failure/timing. */
+export const GROUNDED_HOLD = [
+  {"kind": "I", "orientation": 3, "x": -1, "cleared": 0},
+  {"kind": "T", "orientation": 0, "x": 0, "cleared": 0},
+  {"kind": "S", "orientation": 3, "x": 3, "cleared": 0},
+  {"kind": "Z", "orientation": 0, "x": 2, "cleared": 0},
+  {"kind": "J", "orientation": 1, "x": 2, "cleared": 0},
+  {"kind": "L", "orientation": 1, "x": 3, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 1, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": 6, "cleared": 0},
+  {"kind": "T", "orientation": 3, "x": 4, "cleared": 0},
+  {"kind": "S", "orientation": 2, "x": 5, "cleared": 0},
+  {"kind": "Z", "orientation": 3, "x": 7, "cleared": 0},
+  {"kind": "J", "orientation": 1, "x": 4, "cleared": 0}
+] as const;
+
+/** Active S fits while visible next Z is obstructed before any lock. */
+export const EMPTY_HOLD_FAILURE = [
+  {"kind": "O", "orientation": 0, "x": 8, "cleared": 0},
+  {"kind": "I", "orientation": 0, "x": 2, "cleared": 0},
+  {"kind": "T", "orientation": 3, "x": 1, "cleared": 0},
+  {"kind": "S", "orientation": 3, "x": 4, "cleared": 0},
+  {"kind": "Z", "orientation": 2, "x": 5, "cleared": 0},
+  {"kind": "J", "orientation": 2, "x": 7, "cleared": 0},
+  {"kind": "L", "orientation": 0, "x": 4, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 3, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": 6, "cleared": 0},
+  {"kind": "T", "orientation": 2, "x": 6, "cleared": 0},
+  {"kind": "S", "orientation": 0, "x": 0, "cleared": 0},
+  {"kind": "Z", "orientation": 2, "x": 5, "cleared": 0},
+  {"kind": "J", "orientation": 3, "x": 0, "cleared": 0},
+  {"kind": "L", "orientation": 2, "x": 0, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 6, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": -2, "cleared": 0},
+  {"kind": "T", "orientation": 2, "x": 6, "cleared": 0},
+  {"kind": "S", "orientation": 0, "x": 2, "cleared": 0},
+  {"kind": "Z", "orientation": 2, "x": 2, "cleared": 0},
+  {"kind": "J", "orientation": 0, "x": 6, "cleared": 0},
+  {"kind": "L", "orientation": 2, "x": 1, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 8, "cleared": 0},
+  {"kind": "I", "orientation": 2, "x": 3, "cleared": 0},
+  {"kind": "T", "orientation": 0, "x": 5, "cleared": 0}
+] as const;

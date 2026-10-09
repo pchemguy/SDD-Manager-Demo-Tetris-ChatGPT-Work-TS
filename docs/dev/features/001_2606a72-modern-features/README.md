@@ -1,31 +1,17 @@
-# Modern-feature campaign
+# Modern-feature campaign — historical source package
 
-## Identity and scope
+Campaign: 001_2606a72-modern-features, opened 2026-10-09 against published baseline 2606a7213d4ddcf18497fafabb6cc5c349a26178. Scope: hold, ghost, seven-bag selection, clockwise horizontal wall kicks and delayed hard drop, retaining full-gravity-interval locking.
 
-Campaign: `001_2606a72-modern-features` (feature workflow).
+Preparation branch design-docs/001_2606a72-modern-features and implementation branch feature/001_2606a72-modern-features are retained. Preparation was explicitly merged/published on main as 71f6275a7b77ed02e9e9f1e6f23762770866f1c5. Accepted checkpoints: design a4185c2f586388171c4ef12314fb26e6a83ce8aa; SPEC 2999f0fbaaa46813c97e2fed035dfab3b1b279fc; PLAN/layout 9d77973073110aaf07ed899685bbd931e8ed6657; TASKS a29696df319f3763fd547cb082ff3a7bf36b99b2. Full Phase 2 inline execution and GitHub tracking were accepted; all 19 issue associations were read back before execution.
 
-Baseline: `2606a7213d4ddcf18497fafabb6cc5c349a26178`, the published, completed classic browser baseline on `main`. The user opened this campaign on 2026-10-09 to implement the five deferred capabilities: hold, ghost piece, seven-bag randomization, wall kicks, and hard drop. The full-gravity-interval grounded lock rule is an established constraint.
+## Current authority and disposition
 
-Preparation branch: `design-docs/001_2606a72-modern-features`.
-Preparation and final integration target: `main` on the existing `origin` remote.
-Intended implementation branch: `feature/001_2606a72-modern-features`; not created yet.
+T-041 incorporates accepted content into [PROJECT](../../PROJECT.md), [ARCHITECTURE](../../ARCHITECTURE.md), [DECOMPOSITION](../../DECOMPOSITION.md), [SPEC](../../SPEC.md), [PLAN](../../PLAN.md), [layout](../../layout.md) and sole executable [TASKS](../../TASKS.md). Adjacent main QC is rechecked independently. Phase 2 IDs/statuses/evidence and GitHub associations survive transfer. T-041 remains the live final task in main TASKS; its historical source checkbox does not drive completion.
 
-## Current sources and readiness
+These selected sources retain their basenames and historical reviewed identity: [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md), [FEATURE-SPEC](FEATURE-SPEC.md) and [review](FEATURE-SPEC-REVIEW-REPORT.md), [FEATURE-PLAN](FEATURE-PLAN.md), [layout source](modern-features.md) and [plan review](FEATURE-PLAN-REVIEW-REPORT.md), [FEATURE-TASKS snapshot](FEATURE-TASKS.md) and [task review](FEATURE-TASKS-REVIEW-REPORT.md). Archived Ready gates are historical; main owners govern the complete product. No active root feature delta or second executable checklist remains.
 
-- [PROJECT](../../PROJECT.md) identifies the feature scope and retained constraints.
-- [ARCHITECTURE](../../ARCHITECTURE.md) remains sufficient: engine rules, browser controller, and presentation keep their dependency direction.
-- [FEATURE_DECOMPOSITION](../../FEATURE_DECOMPOSITION.md) records the accepted affected components, interactions, behavior choices, and verification seams.
-- [FEATURE-SPEC](../../FEATURE-SPEC.md) defines the exact behavior delta; its [review](../../FEATURE-SPEC-REVIEW-REPORT.md) assesses design conformance and readiness.
-- [FEATURE-PLAN](../../FEATURE-PLAN.md), [feature layout](../../layout/modern-features.md), and [plan review](../../FEATURE-PLAN-REVIEW-REPORT.md) define the accepted delivery strategy and ownership.
-- [FEATURE-TASKS](../../FEATURE-TASKS.md) is the feature's sole executable task owner; its [review](../../FEATURE-TASKS-REVIEW-REPORT.md) assesses conformance to the accepted strategy.
-- [SPEC](../../SPEC.md), [PLAN](../../PLAN.md), [layout](../../layout.md), and [TASKS](../../TASKS.md) own the completed baseline. They do not authorize these feature tasks.
+## Implementation evidence
 
-The user accepted the feature design at a4185c2f586388171c4ef12314fb26e6a83ce8aa, FEATURE-SPEC at 2999f0fbaaa46813c97e2fed035dfab3b1b279fc, and FEATURE-PLAN/layout at 9d77973073110aaf07ed899685bbd931e8ed6657 on 2026-10-09. FEATURE-TASKS and its conformance review are prepared: T-023–T-041 are unchecked. TASKS at a29696df319f3763fd547cb082ff3a7bf36b99b2 and full Phase 2 inline execution with GitHub tracking are accepted on 2026-10-09. No product implementation has started.
+Delivery reports: [2.1](reports/2.1.md), [2.2](reports/2.2.md), [2.3](reports/2.3.md), [2.4](reports/2.4.md). Final [phase report](reports/PHASE-REPORT.md) and [implementation report](IMPLEMENTATION-REPORT.md) remain under this actual feature prefix; the final receipt distinguishes branch acceptance from target integration/publication. Baseline reports and closed tracking records remain unchanged.
 
-The request establishes the objective of implementing this feature set. Before execution, accepted preparation must be explicitly merged, checked, and published to the actual default branch; the implementation branch then starts from that checkpoint. Active FEATURE-TASKS will own feature execution. Complete implementation includes accepted document incorporation, verification, source archival in this package, and explicit integration/publication to main under SDD Manager.
-
-## Retained scope and boundaries
-
-Repository publication authorization remains active; do not request repeated push permission. Existing GitHub tracking belongs to the completed baseline phase. GitHub tracking is confirmed for Phase 2; project its objects only after preparation integration and eligible-phase activation.
-
-Keep the completed baseline reports and closed tracking records unchanged. Preserve its gameplay, deterministic engine boundary, desktop support, static delivery, and disclosures except for explicitly accepted feature deltas. Multiplayer, touch controls, audio, persistence, expanded previews, counterclockwise rotation, spin/combo bonuses, and exact conformance to a commercial rule standard are outside this campaign.
+All five capabilities and current-stable desktop acceptance are verified. T-041 completes final incorporation/review/archive and publication. Exact integration/publication state is recorded in the implementation receipt and main TASKS. No later campaign is selected. Multiplayer, touch, audio, persistence, expanded queues, counterclockwise rotation, vertical floor kicks and commercial-rule-standard conformance remain outside scope. Publication authorization persists; never commit credentials.

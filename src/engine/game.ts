@@ -1,7 +1,8 @@
 /** Own one deterministic browser-independent session; browser code only sends commands/elapsed time. */
 import { emptyBoard, fits, place, clearRows } from "./board";
 import { cells, spawn } from "./pieces";
-import { select } from "./random";
+import { landingDistance, clockwiseCandidate } from "./placement";
+import { Bag } from "./random";
 import { gravity, levelFor, lineAward } from "./progression";
 import type {
   ActivePiece,
@@ -16,14 +17,18 @@ export class Game {
   private board: Board = emptyBoard();
   private active: ActivePiece | null = null;
   private next: Kind = "I";
+  private held: Kind | null = null;
+  private holdUsed = false;
   private status: Status = "running";
   private score = 0;
   private lines = 0;
   private level = 1;
   private gravityAge = 0;
   private lockRemaining: number | null = null;
+  private readonly bag: Bag;
   /** Create a fresh running game. Randomness must return finite values in [0,1). */
-  constructor(private readonly random: () => number = Math.random) {
+  constructor(random: () => number = Math.random) {
+    this.bag = new Bag(random);
     this.restart();
   }
   /** Reset progress and draw active then next without rewinding the supplied source. */
@@ -33,13 +38,16 @@ export class Game {
     this.lines = 0;
     this.level = 1;
     this.status = "running";
-    this.active = spawn(select(this.random));
-    this.next = select(this.random);
+    this.held = null;
+    this.holdUsed = false;
+    this.bag.reset();
+    this.active = spawn(this.bag.next());
+    this.next = this.bag.next();
     this.gravityAge = 0;
     this.lockRemaining = null;
     this.updateGrounding();
   }
-  /** Apply an instantaneous command; collisions and ineffective commands report false. */
+  /** Apply an instantaneous command. Hard drop scores translation but only elapsed-time lock expiry commits it; ineffective commands report false. */
   apply(command: Command): boolean {
     if (command === "restart") {
       this.restart();
@@ -56,13 +64,23 @@ export class Game {
       return true;
     }
     if (this.status !== "running" || !this.active) return false;
-    const candidate = { ...this.active };
+    if (command === "hold") return this.hold();
+    if (command === "hardDrop") {
+      const distance = landingDistance(this.board, this.active);
+      if (distance === 0) return false;
+      this.active = { ...this.active, y: this.active.y + distance };
+      this.score += 2 * distance;
+      this.updateGrounding();
+      return true;
+    }
+    let candidate = { ...this.active };
     if (command === "left") candidate.x--;
     else if (command === "right") candidate.x++;
     else if (command === "softDrop") candidate.y++;
     else if (command === "rotateClockwise") {
-      if (candidate.kind === "O") return false;
-      candidate.orientation = (candidate.orientation + 1) % 4;
+      const rotated = clockwiseCandidate(this.board, this.active);
+      if (!rotated) return false;
+      candidate = rotated;
     } else return false;
     if (!fits(this.board, cells(candidate))) return false;
     this.active = candidate;
@@ -78,12 +96,34 @@ export class Game {
       active: this.active
         ? { ...this.active, cells: cells(this.active) }
         : null,
+      ghost: this.active ? cells({ ...this.active, y: this.active.y + landingDistance(this.board, this.active) }) : null,
+      held: this.held,
+      canHold: this.status === "running" && this.active !== null && !this.holdUsed,
       next: this.next,
       score: this.score,
       lines: this.lines,
       level: this.level,
       gravityInterval: gravity(this.level),
     };
+  }
+  /** Replace active geometry once per lock. Store outgoing kind even if incoming spawn fails; draw a preview only after a successful empty-hold spawn. */
+  private hold(): boolean {
+    if (this.holdUsed || !this.active) return false;
+    const empty = this.held === null;
+    const incoming = spawn(this.held ?? this.next);
+    this.held = this.active.kind;
+    this.holdUsed = true;
+    this.gravityAge = 0;
+    this.lockRemaining = null;
+    if (!fits(this.board, cells(incoming))) {
+      this.active = null;
+      this.status = "gameOver";
+      return true;
+    }
+    this.active = incoming;
+    if (empty) this.next = this.bag.next();
+    this.updateGrounding();
+    return true;
   }
   /** Reconcile grounded transitions without refreshing a timer that is already running. */
   private updateGrounding(): void {
@@ -118,7 +158,8 @@ export class Game {
       return;
     }
     this.active = candidate;
-    this.next = select(this.random);
+    this.holdUsed = false;
+    this.next = this.bag.next();
     this.updateGrounding();
   }
   /** Advance finite nonnegative gameplay milliseconds; invalid input throws before any mutation, including when inactive. Paused/game-over time is ignored. */
