@@ -71,12 +71,15 @@ export class Game {
     if(elapsed===0||this.status!=='running')return;
     let remaining=elapsed;
     while(remaining>0&&this.status==='running'&&this.active){
-      const step=Math.min(remaining,gravity(this.level)-this.gravityAge,this.lockRemaining??Infinity);
+      const gravityRemaining=gravity(this.level)-this.gravityAge;
+      const lockRemaining=this.lockRemaining??Infinity;
+      const step=Math.min(remaining,gravityRemaining,lockRemaining);
+      const lockDue=step===lockRemaining,gravityDue=step===gravityRemaining;
       remaining-=step;this.gravityAge+=step;
       if(this.lockRemaining!==null)this.lockRemaining-=step;
       // A lock/gravity tie belongs to the outgoing piece's lock, never a descent of its successor.
-      if(this.lockRemaining!==null&&this.lockRemaining<=1e-7){this.lock();continue;}
-      if(this.gravityAge>=gravity(this.level)-1e-7){
+      if(lockDue){this.lock();continue;}
+      if(gravityDue){
         this.gravityAge=0;
         const candidate={...this.active,y:this.active.y+1};
         if(fits(this.board,cells(candidate)))this.active=candidate;

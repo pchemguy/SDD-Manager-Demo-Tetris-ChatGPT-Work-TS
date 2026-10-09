@@ -69,11 +69,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: pause/resume preserve timers, inactive sessions reject gameplay, restart resets progress/timers, effective/ineffective command results match SPEC, invalid elapsed values raise RangeError before mutation in all states.
             Evidence: npm test -- tests/engine; finite/nonnegative/zero boundaries, unchanged paused/game-over sessions, restart randomness, retained snapshot integrity, and API/documentation consistency; npm run typecheck.
             Verified: Observed pause outcome and invalid-time RED failures. GREEN: 35 engine tests and typecheck passed; pause/resume preserve independent remainders, inactive commands fail atomically, restart clears pending timers/progress, and negative/nonfinite elapsed raises RangeError before mutation in running/paused/game-over states.
-        - [ ] T-010 — Verify timing boundaries across lifecycle and progression integration
+        - [x] T-010 — Verify timing boundaries across lifecycle and progression integration
             Scope: focused tests/engine timing/integration scenarios and bounded engine fixes if failures expose violations.
             Depends on: T-009. Contracts: S4–S6; A3–A7.
             Outcome: deterministic evidence for partition equivalence across locks/spawns/level changes, grounded-at-spawn behavior, gravity/lock ties, late landing, cancellation/re-grounding, post-clear spawn obstruction, and pause/resume remainders. Reuse valid fixtures; do not add redundant implementation-mirroring tests.
             Evidence: npm test -- tests/engine; compare independent controlled sessions under equivalent time partitions, test failure boundaries, npm run typecheck/build, and visible browser progression/lifecycle smoke. Preserve MVP regressions.
+            Verified: Observed an early-deadline RED caused by epsilon event checks; replaced tolerance with explicit selected deadline equality. GREEN: 38 engine tests, typecheck/build and production Chromium smoke passed. Public-command fixture verified row clear before obstructed next-I spawn with no replacement draw; fractional partition/pause/tie tests passed. Native Canvas/HTML demonstration displayed Level 2, Lines 10, Paused then Playing with preserved timing.
         - [ ] T-011 — Review, test, and report milestone 1.2
             Depends on: T-008–T-010 complete and published; milestone 1.1 complete/closed if hosted.
             Scope: whole S1–S6 engine, browser consumers, focused and regression evidence; code review, required repairs, and complete engine-contract exits.
