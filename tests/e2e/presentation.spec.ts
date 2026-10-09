@@ -1,3 +1,5 @@
+import { drawsForBag } from "../helpers/random";
+import { TEST_BAG } from "../helpers/scenarios";
 /** Inspect production Canvas pixels, desktop bounds and device-pixel backing dimensions. */
 import { test, expect } from "@playwright/test";
 for (const ratio of [1, 2])
@@ -9,9 +11,7 @@ for (const ratio of [1, 2])
       deviceScaleFactor: ratio,
     });
     const page = await context.newPage();
-    await page.addInitScript(() => {
-      Math.random = () => 0.15;
-    });
+    await page.addInitScript((values) => { let i=0; Math.random=()=>values[i++ % values.length]!; }, drawsForBag(TEST_BAG));
     await page.goto("/");
     for (const viewport of [
       { width: 1024, height: 768 },

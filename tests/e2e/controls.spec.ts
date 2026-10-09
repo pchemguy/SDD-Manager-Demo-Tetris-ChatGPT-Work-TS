@@ -1,3 +1,5 @@
+import { drawsForBag } from "../helpers/random";
+import { TEST_BAG } from "../helpers/scenarios";
 /** Verify real key events under a controlled browser clock; native wall-time checks also run in Firefox. */
 import { test, expect, type Page } from "@playwright/test";
 async function leftmost(page: Page): Promise<number> {
@@ -20,9 +22,7 @@ async function leftmost(page: Page): Promise<number> {
 }
 test.beforeEach(async ({ page }) => {
   await page.clock.install({ time: new Date("2026-10-09T12:00:00Z") });
-  await page.addInitScript(() => {
-    Math.random = () => 0.15;
-  });
+  await page.addInitScript((values) => { let i=0; Math.random=()=>values[i++ % values.length]!; }, drawsForBag(TEST_BAG));
   await page.goto("/");
   await page.clock.pauseAt(new Date("2026-10-09T12:00:01Z"));
 });

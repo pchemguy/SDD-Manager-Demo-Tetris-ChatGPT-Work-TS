@@ -2,7 +2,7 @@
 import { emptyBoard, fits, place, clearRows } from "./board";
 import { cells, spawn } from "./pieces";
 import { landingDistance } from "./placement";
-import { select } from "./random";
+import { Bag } from "./random";
 import { gravity, levelFor, lineAward } from "./progression";
 import type {
   ActivePiece,
@@ -23,8 +23,10 @@ export class Game {
   private level = 1;
   private gravityAge = 0;
   private lockRemaining: number | null = null;
+  private readonly bag: Bag;
   /** Create a fresh running game. Randomness must return finite values in [0,1). */
-  constructor(private readonly random: () => number = Math.random) {
+  constructor(random: () => number = Math.random) {
+    this.bag = new Bag(random);
     this.restart();
   }
   /** Reset progress and draw active then next without rewinding the supplied source. */
@@ -34,8 +36,9 @@ export class Game {
     this.lines = 0;
     this.level = 1;
     this.status = "running";
-    this.active = spawn(select(this.random));
-    this.next = select(this.random);
+    this.bag.reset();
+    this.active = spawn(this.bag.next());
+    this.next = this.bag.next();
     this.gravityAge = 0;
     this.lockRemaining = null;
     this.updateGrounding();
@@ -128,7 +131,7 @@ export class Game {
       return;
     }
     this.active = candidate;
-    this.next = select(this.random);
+    this.next = this.bag.next();
     this.updateGrounding();
   }
   /** Advance finite nonnegative gameplay milliseconds; invalid input throws before any mutation, including when inactive. Paused/game-over time is ignored. */

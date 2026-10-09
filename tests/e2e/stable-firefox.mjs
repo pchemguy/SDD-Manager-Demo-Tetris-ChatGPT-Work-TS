@@ -5,6 +5,8 @@
 import { spawn } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
+import { drawsForBag } from "../helpers/random.ts";
+import { TEST_BAG, CLEAR_TRACE } from "../helpers/fixtures.ts";
 const binary = process.env.TETRIS_FIREFOX_EXECUTABLE,
   gecko = process.env.TETRIS_GECKODRIVER;
 assert(
@@ -76,7 +78,7 @@ async function preload(url) {
         method: "script.addPreloadScript",
         params: {
           functionDeclaration:
-            "()=>{window.__tetrisTestRandom=()=>.15;Math.random=()=>window.__tetrisTestRandom();}",
+            `()=>{let values=${JSON.stringify(drawsForBag(TEST_BAG))},i=0;window.__tetrisTestRandom=()=>values[i++ % values.length];Math.random=()=>window.__tetrisTestRandom();}`,
         },
       }),
     );
@@ -141,14 +143,15 @@ try {
       );
     const reset = () =>
       run(
-        "window.__tetrisTestRandom=()=>0.15;document.querySelector('#restart').click();",
+        "let i=0,values=arguments[0];window.__tetrisTestRandom=()=>values[i++ % values.length];document.querySelector('#restart').click();",
+        [drawsForBag(TEST_BAG)],
       );
     await request(`${base}/url`, { url: "http://127.0.0.1:4173" });
     await reset();
     assert.equal(await status(), "Playing");
     assert.equal(
       await run("return document.querySelector('#next-kind').textContent"),
-      "O",
+      "I",
     );
     const offset = await run(
       "return {x:outerWidth-innerWidth,y:outerHeight-innerHeight}",
@@ -268,23 +271,17 @@ try {
         await run("return document.querySelector('#score').textContent"),
         "0",
       );
-      // Clear two rows through native movement/drop/lock events in the built app.
+      // Clear two rows using seven different kinds and native commands from the shared trace.
       await reset();
-      for (const x of [0, 2, 4, 6, 8]) {
-        const horizontal = x < 4 ? "\uE012" : "\uE014";
-        await keys(
-          Array.from({ length: Math.abs(x - 4) }, () => [
-            { type: "keyDown", value: horizontal },
-            { type: "keyUp", value: horizontal },
-          ]).flat(),
-        );
-        await keys([
-          ...Array.from({ length: 20 }, () => [
-            { type: "keyDown", value: "\uE015" },
-            { type: "keyUp", value: "\uE015" },
-          ]).flat(),
-          { type: "pause", duration: 1050 },
-        ]);
+      for (const step of CLEAR_TRACE.slice(0,7)) {
+        await run("return document.querySelector('#next-kind').textContent");
+        for (let r=0;r<step.orientation;r++) await press("\uE013");
+        const origin = step.kind === "O" ? 4 : 3;
+        const horizontal = step.x < origin ? "\uE012" : "\uE014";
+        await keys(Array.from({length:Math.abs(step.x-origin)},()=>[
+          {type:"keyDown",value:horizontal},{type:"keyUp",value:horizontal}
+        ]).flat());
+        await press(" "); await delay(1050);
       }
       assert.equal(
         await run("return document.querySelector('#lines').textContent"),
@@ -297,9 +294,10 @@ try {
       await screenshot("game-over");
       await reset();
       assert.equal(await status(), "Playing");
-      // Horizontal I then repeated O permits observing clockwise rotation through pixels.
+      // A valid fresh I-first bag permits observing clockwise rotation through pixels.
       await run(
-        "let first=true;window.__tetrisTestRandom=()=>{if(first){first=false;return 0;}return .15;};document.querySelector('#restart').click();",
+        "let i=0,values=arguments[0];window.__tetrisTestRandom=()=>values[i++ % values.length];document.querySelector('#restart').click();",
+        [drawsForBag(["I","O","T","S","Z","J","L"])],
       );
       const initial = await request(`${base}/screenshot`);
       await press("\uE013");

@@ -1,12 +1,12 @@
+import { drawsForBag } from "../helpers/random";
+import { TEST_BAG } from "../helpers/scenarios";
 /** Verify named keyboard controls and explicit lifecycle labels on the production page. */
 import { test, expect } from "@playwright/test";
 test("text instructions, named keyboard Restart and explicit lifecycle labels", async ({
   page,
 }, info) => {
   await page.clock.install({ time: new Date("2026-10-09T12:00:00Z") });
-  await page.addInitScript(() => {
-    Math.random = () => 0.15;
-  });
+  await page.addInitScript((values) => { let i=0; Math.random=()=>values[i++ % values.length]!; }, drawsForBag(TEST_BAG));
   await page.goto("/");
   await page.clock.pauseAt(new Date("2026-10-09T12:00:01Z"));
   await expect(page.getByRole("status")).toHaveText("Playing");

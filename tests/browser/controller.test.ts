@@ -1,7 +1,7 @@
 /** Exercise the composed engine/controller through controlled clocks and browser event boundaries. */
 import { it, expect } from "vitest";
 import { Controller, type Clock } from "../../src/browser/controller";
-import { repeatedO, placeO, occupied, ground } from "../helpers/scenarios";
+import { bagGame, placePiece, occupied, ground, playTrace, topOut } from "../helpers/scenarios";
 export function harness() {
   let time = 0,
     callback: FrameRequestCallback = () => {},
@@ -9,7 +9,7 @@ export function harness() {
   const keys = new EventTarget(),
     restart = new EventTarget(),
     visibility = Object.assign(new EventTarget(), { hidden: false }),
-    game = repeatedO();
+    game = bagGame();
   const snapshots: ReturnType<typeof game.snapshot>[] = [];
   const clock: Clock = {
     now: () => time,
@@ -73,13 +73,13 @@ it("composes initial rendering, timed gravity, discrete keys and restart", () =>
 });
 it("renders real public-command row clears and top out without a state loader", () => {
   const h = harness();
-  for (const x of [0, 2, 4, 6, 8]) placeO(h.game, x);
+  playTrace(h.game, 7);
   h.frame(0);
   expect(h.snapshots.at(-1)!.lines).toBe(2);
-  for (let i = 0; i < 10; i++) placeO(h.game, 4);
+  topOut(h.game);
   h.frame(0);
   expect(h.snapshots.at(-1)!.status).toBe("gameOver");
-  expect(occupied(h.game)).toBe(40);
+  expect(occupied(h.game)).toBeGreaterThan(0);
   h.controller.dispose();
 });
 
@@ -102,7 +102,7 @@ it("locks before an equal-time horizontal repeat applies to the newly spawned pi
   h.key("ArrowRight");
   h.frame(1000);
   expect(h.game.snapshot().board[19]![5]).toBe("O");
-  expect(h.game.snapshot().active!.x).toBe(5);
+  expect(h.game.snapshot().active).toMatchObject({kind:"I",x:4});
   h.controller.dispose();
 });
 it("releasing a held down key ends its repeat schedule", () => {

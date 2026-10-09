@@ -1,8 +1,8 @@
 /** Feature contracts exercised through commands, elapsed time and detached observations. */
 import { it, expect } from "vitest";
-import { repeatedO, placeO, moveTo, occupied } from "../helpers/scenarios";
+import { bagGame, placePiece, moveTo, occupied } from "../helpers/scenarios";
 it("hard drop scores its exact projection and waits a full late-cycle interval", () => {
-  const g = repeatedO();
+  const g = bagGame();
   g.advance(900);
   const ghost = g.snapshot().ghost;
   expect(g.apply("hardDrop")).toBe(true);
@@ -18,7 +18,7 @@ it("hard drop scores its exact projection and waits a full late-cycle interval",
   expect(g.snapshot().active!.y).toBe(0);
 });
 it("drop preserves gravity age, inactive state and countdown through grounded movement", () => {
-  const g = repeatedO();
+  const g = bagGame();
   g.advance(900); g.apply("hardDrop");
   g.advance(900); g.apply("left"); g.advance(100);
   expect(occupied(g)).toBe(4);
@@ -27,8 +27,8 @@ it("drop preserves gravity age, inactive state and countdown through grounded mo
   expect(g.snapshot()).toEqual(s);
 });
 it("airborne adjustment cancels drop lock and a second landing gets a fresh full interval", () => {
-  const g = repeatedO(); placeO(g, 4);
-  g.apply("hardDrop"); g.advance(900); moveTo(g, 2);
+  const g = bagGame(); placePiece(g, 4);
+  g.apply("hardDrop"); g.advance(900); moveTo(g, 0);
   g.advance(100);
   expect(occupied(g)).toBe(4);
   const before = g.snapshot().score;
@@ -38,7 +38,7 @@ it("airborne adjustment cancels drop lock and a second landing gets a fresh full
   g.advance(1); expect(occupied(g)).toBe(8);
 });
 it("timer expiry occurs before a command at the successor boundary", () => {
-  const g = repeatedO(); g.apply("hardDrop"); g.advance(1000);
+  const g = bagGame(); g.apply("hardDrop"); g.advance(1000);
   expect(g.apply("hardDrop")).toBe(true);
   expect(g.snapshot().active!.y).toBe(16);
   expect(occupied(g)).toBe(4);

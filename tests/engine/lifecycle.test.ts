@@ -1,8 +1,8 @@
 /** Verify lifecycle outcomes, timer preservation and invalid-time atomicity in every session state. */
 import { it, expect } from "vitest";
-import { repeatedO, ground, occupied, placeO } from "../helpers/scenarios";
+import { bagGame, ground, occupied, placePiece, topOut } from "../helpers/scenarios";
 it("pause/resume preserve gravity and grounded remainders and report effective outcomes", () => {
-  const g = repeatedO();
+  const g = bagGame();
   g.advance(900);
   expect(g.apply("pause")).toBe(true);
   const paused = g.snapshot();
@@ -34,9 +34,9 @@ it("pause/resume preserve gravity and grounded remainders and report effective o
 });
 it("rejects nonfinite and negative elapsed before mutation in every lifecycle state", () => {
   for (const state of ["running", "paused", "gameOver"]) {
-    const g = repeatedO();
+    const g = bagGame();
     if (state === "paused") g.apply("pause");
-    if (state === "gameOver") for (let i = 0; i < 10; i++) placeO(g, 4);
+    if (state === "gameOver") topOut(g);
     for (const time of [-1, NaN, Infinity, -Infinity]) {
       const before = g.snapshot();
       expect(() => g.advance(time)).toThrow(RangeError);
@@ -48,8 +48,8 @@ it("rejects nonfinite and negative elapsed before mutation in every lifecycle st
   }
 });
 it("game over rejects play, pause and resume; restart resets progress and timers", () => {
-  const g = repeatedO();
-  for (let i = 0; i < 10; i++) placeO(g, 4);
+  const g = bagGame();
+  topOut(g);
   const before = g.snapshot();
   for (const cmd of [
     "left",
@@ -76,7 +76,7 @@ it("game over rejects play, pause and resume; restart resets progress and timers
   expect(g.snapshot().active!.y).toBe(1);
 });
 it("restart from pause clears a pending lock countdown", () => {
-  const g = repeatedO();
+  const g = bagGame();
   ground(g);
   g.advance(999);
   g.apply("pause");

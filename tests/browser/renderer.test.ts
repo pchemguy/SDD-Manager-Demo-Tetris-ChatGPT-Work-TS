@@ -1,5 +1,6 @@
 /** Model only the Canvas drawing boundary; real pixel/font evidence belongs to browser checks. */
 import { it, expect } from "vitest";
+import { bagGame } from "../helpers/scenarios";
 import { Game } from "../../src/engine/game";
 import { Renderer } from "../../src/browser/renderer";
 function canvas(width: number, height: number) {
@@ -38,7 +39,7 @@ function canvas(width: number, height: number) {
 it("paints independent locked and active cells plus next geometry", () => {
   const b = canvas(300, 600),
     p = canvas(120, 120);
-  const s = new Game(() => 0.15).snapshot();
+  const s = bagGame().snapshot();
   s.board[19]![0] = "I";
   new Renderer(b.element, p.element).render(s);
   expect(
@@ -60,7 +61,7 @@ it("sizes the backing store to measured CSS pixels times device pixel ratio", ()
     getBoundingClientRect: () => ({ width: 120, height: 120 }),
   });
   new Renderer(b.element, p.element, () => 2).render(
-    new Game(() => 0.15).snapshot(),
+    bagGame().snapshot(),
   );
   expect([b.element.width, b.element.height]).toEqual([720, 1440]);
   expect([p.element.width, p.element.height]).toEqual([240, 240]);
@@ -72,14 +73,14 @@ it("keeps backing cells square when fractional CSS sizes would round axes differ
   const b = canvas(293.75, 587.5),
     p = canvas(96, 96);
   new Renderer(b.element, p.element, () => 2).render(
-    new Game(() => 0.15).snapshot(),
+    bagGame().snapshot(),
   );
   expect(b.element.height).toBe(b.element.width * 2);
 });
 
 it("draws inset ghost outlines before active solid cells, including paused overlap", () => {
   const b = canvas(300, 600), p = canvas(120, 120);
-  const g = new Game(() => .15); g.apply("hardDrop"); g.apply("pause");
+  const g = bagGame(); g.apply("hardDrop"); g.apply("pause");
   const s = g.snapshot(); new Renderer(b.element, p.element).render(s);
   const outline = b.strokes.filter(v => v.w === 26 && v.h === 26);
   expect(outline).toHaveLength(4);

@@ -21,7 +21,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Executable tasks](docs/dev/TASKS.md)
 - [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, arrow controls and Restart are present. The [modern-feature campaign](docs/dev/features/001_2606a72-modern-features/README.md) has accepted design, specification, plan and layout. [FEATURE-TASKS](docs/dev/FEATURE-TASKS.md) and its [conformance review](docs/dev/FEATURE-TASKS-REVIEW-REPORT.md) are accepted for full Phase 2 inline execution with GitHub tracking. Preparation is integrated and published as 71f6275; all 19 task associations are verified. Ghost and delayed hard drop are implemented on the feature branch; bag, hold and kicks remain pending.
+The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, arrow controls and Restart are present. The [modern-feature campaign](docs/dev/features/001_2606a72-modern-features/README.md) has accepted design, specification, plan and layout. [FEATURE-TASKS](docs/dev/FEATURE-TASKS.md) and its [conformance review](docs/dev/FEATURE-TASKS-REVIEW-REPORT.md) are accepted for full Phase 2 inline execution with GitHub tracking. Preparation is integrated and published as 71f6275; all 19 task associations are verified. Ghost, delayed hard drop and seven-bag selection are implemented on the feature branch; hold and kicks remain pending.
 
 ## Development setup
 
@@ -75,13 +75,15 @@ The browser-independent entry is `Game` in `src/engine/game.ts`:
 ```ts
 import { Game } from "./src/engine/game";
 
-const game = new Game(() => 0.15); // Controlled conforming source; repeated O pieces.
+const game = new Game(() => 0.15); // Controlled conforming source; deterministic seven-kind bags.
 const changed = game.apply("left");
 game.advance(1000); // Elapsed gameplay milliseconds.
 const snapshot = game.snapshot();
 ```
 
-`apply` accepts left, right, rotateClockwise, softDrop, hardDrop, pause, resume and restart. It returns whether observable state changed; collisions and O rotation return false. Restart returns true and takes two fresh draws from the current source. Supplied randomness must produce finite values in [0,1).
+`apply` accepts left, right, rotateClockwise, softDrop, hardDrop, pause, resume and restart. It returns whether observable state changed; collisions and O rotation return false. Restart returns true and discards the remaining bag and creates a fresh six-random-draw shuffle, then consumes active and next kinds. Supplied randomness must produce finite values in [0,1).
+
+Each instance shuffles `[I,O,T,S,Z,J,L]` with descending Fisher–Yates (six source calls per bag), consumes it forward and refills lazily. Tests use conforming selected bag permutations and public-command placement traces, including clearing, progression and blocked next spawn; constant randomness cannot yield unlimited O pieces.
 
 Hard drop adds two points per translated row and waits the full current gravity interval before locking. Ghost outlines predict the same landing; movement during the delay remains possible.
 
