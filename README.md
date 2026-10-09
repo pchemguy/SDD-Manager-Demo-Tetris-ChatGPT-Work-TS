@@ -21,4 +21,4 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Executable tasks](docs/dev/TASKS.md)
 - [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The specification and PLAN/layout are accepted. TASKS awaits acceptance and execution-range selection. No product build or test commands exist yet.
+The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. No product build or test commands exist yet.

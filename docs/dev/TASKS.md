@@ -4,7 +4,7 @@
 
 This is the sole executable owner of the full baseline hierarchy. It derives from accepted [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), [DECOMPOSITION](DECOMPOSITION.md), [SPEC](SPEC.md), [PLAN](PLAN.md), and [layout](layout.md). [TASKS review](TASKS-REVIEW-REPORT.md) assesses generation quality; all checkboxes are unchecked because no implementation has occurred.
 
-PLAN/layout were accepted by the user on 2026-10-09 at `3b9f97b554611b0bad5841361bd13b4e36d0aedd`. This list awaits human acceptance and selection of an execution range/method. The first candidate task is T-001; it is not active yet. GitHub tracking is recommended but confirmation is pending. No hosted objects exist.
+PLAN/layout were accepted by the user on 2026-10-09 at `3b9f97b554611b0bad5841361bd13b4e36d0aedd`. The user accepted this list and selected full Phase 1 (T-001–T-022), inline execution, and GitHub tracking on 2026-10-09. The selected stopping boundary is complete baseline integration/publication; modern features remain outside this run. Activation has not yet occurred.
 
 Before execution, integrate accepted preparation through the required explicit merge/check/push into actual default `main`, verify remote containment, and create `phase/1-baseline-browser-game`. Establish the hosted choice and eligible phase objects before its first task if tracking is enabled. No product dependency installation occurs during task preparation.
 
@@ -131,4 +131,4 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
 
 ## Progress and stopping boundary
 
-All 22 tasks are planned and unchecked. No task or milestone is active or complete. A human-selected bounded range controls execution; review tasks count toward next-N ranges. Partial ranges publish and pause on the phase branch. Full phase execution includes T-022's integration/publication boundary; it does not start the separate modern-feature campaign automatically.
+All 22 tasks are planned and unchecked. No task or milestone is active or complete. The accepted full-phase range controls execution; review tasks count toward next-N ranges. Partial ranges publish and pause on the phase branch. Full phase execution includes T-022's integration/publication boundary; it does not start the separate modern-feature campaign automatically.

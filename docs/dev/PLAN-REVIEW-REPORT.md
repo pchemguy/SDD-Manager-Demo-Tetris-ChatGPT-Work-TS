@@ -59,3 +59,7 @@ The user accepted PLAN/layout at `3b9f97b554611b0bad5841361bd13b4e36d0aedd` on 2
 | `docs/dev/PROJECT.md` | `fb92cb94be795c4e5a4bf3e81b40c772f0c329fd24a7e12018110bb5a088e143` |
 | `docs/dev/ARCHITECTURE.md` | `4ce927e133be43bdf2b40461bd11960340e76857314db629cc5b2687d4f7149b` |
 | `docs/dev/DECOMPOSITION.md` | `71cbbe32339eebceb926e09c328cd788f73301291855f307d37943db372ebd47` |
+
+## Revision 2 — Accepted execution scope
+
+The user accepted TASKS and full Phase 1 inline execution with GitHub tracking. Only acceptance/tracking metadata changed; contracts, milestones, task definitions and physical allocation are unchanged. Inspected those differences; earlier conformance coverage remains applicable. Ready is retained. Current owner SHA-256: `e96a1fd75365d88307ffd2292b020efcb217577d7e21c5b687bf6d273efc182a`. Preparation integration and provider activation remain separate gates; no task is completed by this decision.

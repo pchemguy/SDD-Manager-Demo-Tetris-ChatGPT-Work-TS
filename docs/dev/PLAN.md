@@ -50,7 +50,7 @@ Preparation stays on `design-docs/main` until accepted preparation and required 
 
 Tasks commit/push evidence on the phase branch. A partial range pauses there. Full verified phase completion permits one explicit merge to main, merged-state verification, publication, and remote containment confirmation. Do not merge partial milestone work automatically or create another phase to evade a blocker.
 
-Git publication is authorized by the user. GitHub issue/label/milestone tracking is recommended for this demonstration but confirmation is pending; no hosted objects have been created. If confirmed, activate only eligible Phase 1 before its first task: create its phase label, all five milestones, and every derived task issue with its phase/milestone associations. Close/read back tasks and milestones only after local verification/commit/publication evidence. If tracking is declined, preserve identical local review/report gates. Confirm the choice before phase activation; a token alone is not recorded as activation.
+Git publication is authorized by the user. The user confirmed GitHub issue/label/milestone tracking for Phase 1 on 2026-10-09. Activate only eligible Phase 1 before its first task: create its phase label, all five milestones, and every derived task issue with its phase/milestone associations. Close/read back tasks and milestones only after local verification/commit/publication evidence. The phase choice is confirmed; activation still requires provider readback. A token alone is not recorded as activation.
 
 ## Risks and decision boundaries
 
@@ -59,4 +59,4 @@ Git publication is authorized by the user. GitHub issue/label/milestone tracking
 - Scenarios for line-count thresholds/top-out may require valid deterministic fixtures. Keep fixture construction in tests and avoid a production state-mutation API solely for testing.
 - Setup/docs must support ordinary Node/npm use and Windows CMD. Do not hardcode PowerShell launch commands or change the user's preconfigured Python environment.
 
-No unresolved product requirement is delegated to TASKS. TASKS acceptance, hosted-tracking choice, executable-range selection, and concrete toolchain/browser availability remain their respective preparation/execution gates.
+No unresolved product requirement is delegated to TASKS. TASKS and full Phase 1 inline execution with tracking are accepted. Concrete toolchain/browser availability remains an execution evidence gate.

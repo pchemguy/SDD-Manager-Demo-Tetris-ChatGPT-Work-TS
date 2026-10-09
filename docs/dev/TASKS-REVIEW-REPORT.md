@@ -2,7 +2,7 @@
 
 ## Current gate
 
-State: **Ready** under TASKS/PLAN conformance and decomposition criteria. TASKS acceptance and human selection of execution method/range remain pending. Implementation also requires accepted-preparation integration/publication and the phase tracking decision/activation gate.
+State: **Ready** under TASKS/PLAN conformance and decomposition criteria. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. Implementation also requires accepted-preparation integration/publication and the phase tracking decision/activation gate.
 
 Scope: sole [TASKS](TASKS.md) root, Phase 1/milestones 1.1–1.5/T-001–T-022; no child or active feature list. Governing inputs: accepted [PLAN](PLAN.md), [layout](layout.md), [SPEC](SPEC.md), [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), and [DECOMPOSITION](DECOMPOSITION.md). Upstream readiness: [PLAN review Revision 1](PLAN-REVIEW-REPORT.md#revision-1--acceptance-and-current-owner-navigation) and [SPEC review](SPEC-REVIEW-REPORT.md); acceptance/navigation-only edits preserve reviewed contracts. Accepted PLAN/layout checkpoint: `3b9f97b554611b0bad5841361bd13b4e36d0aedd`.
 
@@ -49,3 +49,7 @@ Task scope review: no task hides a whole browser/engine subsystem. T-003 establi
 Structural checks: exactly one Phase 1 heading/check item, five matching milestone check items, 22 monotonic project-wide unique IDs, no tabs, four-space parent increments, details attached at twelve spaces, explicit final review per delivery milestone, and exactly one final phase review task. All dependencies reference earlier tasks or the required preparation/closure gate; no cycle or self-dependent review milestone exists. TASKS remains the only executable owner; no active FEATURE-TASKS exists.
 
 No confirmed QC finding was identified. Numeric shape alone is not treated as a pass: the six-task MVP departure is retained on the concrete boundaries above. Local Markdown targets, command labels, and authored whitespace checks passed. Exact file hashes establish the pending reviewed state. No implementation verification, completion, browser-target availability, or hosted activation is claimed.
+
+## Revision 1 — Accepted execution scope
+
+The user accepted TASKS and full Phase 1 inline execution with GitHub tracking. Only acceptance/tracking metadata changed; contracts, milestones, task definitions and physical allocation are unchanged. Inspected those differences; earlier conformance coverage remains applicable. Ready is retained. Current owner SHA-256: `68c8f77c3b23470fc6bb1073fe649f4b2e0771f807958acb2d26f344e81fcddb`. Preparation integration and provider activation remain separate gates; no task is completed by this decision.
