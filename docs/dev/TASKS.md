@@ -81,7 +81,7 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Evidence: A1–A7 engine obligations, unit/type/build checks and browser state demonstration pass; report committed/pushed; managed milestone closure read back if active.
             Report: docs/dev/reports/phases/1/1.2.md; include implemented features, Findings/Blockers and TODO.
             Verified: Coherent S1-S6 engine/consumer code review completed; early-deadline finding repaired and rechecked. All 42 unit tests passed, with 38 engine tests; typecheck/build, production Chromium play smoke and native Level 2/pause-resume presentation passed. A1-A7 exits verified; report records later browser-control/compatibility gates.
-    - [ ] Milestone 1.3 — Complete browser controls and lifecycle
+    - [x] Milestone 1.3 — Complete browser controls and lifecycle
         - [x] T-012 — Implement deterministic held-key repeat and directional priority
             Scope: src/browser/input.ts and tests/browser/input.test.ts; controller consumes its command schedule.
             Depends on: T-011. Contracts: repeat/priority portions of S7/A8.
