@@ -10,6 +10,7 @@ function canvas(width: number, height: number) {
     w: number;
     h: number;
   }[] = [];
+  const strokes: { color: string; x: number; y: number; w: number; h: number; fillsBefore: number }[] = [];
   const context = {
     fillStyle: "",
     strokeStyle: "",
@@ -17,7 +18,9 @@ function canvas(width: number, height: number) {
     fillRect(x: number, y: number, w: number, h: number) {
       paints.push({ color: this.fillStyle, x, y, w, h });
     },
-    strokeRect() {},
+    strokeRect(x: number, y: number, w: number, h: number) {
+      strokes.push({color: this.strokeStyle, x, y, w, h, fillsBefore: paints.length});
+    },
     clearRect() {},
     setTransform() {},
   };
@@ -29,6 +32,7 @@ function canvas(width: number, height: number) {
       getContext: () => context,
     } as unknown as HTMLCanvasElement,
     paints,
+    strokes,
   };
 }
 it("paints independent locked and active cells plus next geometry", () => {
@@ -71,4 +75,14 @@ it("keeps backing cells square when fractional CSS sizes would round axes differ
     new Game(() => 0.15).snapshot(),
   );
   expect(b.element.height).toBe(b.element.width * 2);
+});
+
+it("draws inset ghost outlines before active solid cells, including paused overlap", () => {
+  const b = canvas(300, 600), p = canvas(120, 120);
+  const g = new Game(() => .15); g.apply("hardDrop"); g.apply("pause");
+  const s = g.snapshot(); new Renderer(b.element, p.element).render(s);
+  const outline = b.strokes.filter(v => v.w === 26 && v.h === 26);
+  expect(outline).toHaveLength(4);
+  expect(outline[0]).toMatchObject({x:122,y:542,fillsBefore:1});
+  expect(b.paints.at(-4)).toMatchObject({x:121,y:541,w:28,h:28});
 });

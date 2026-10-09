@@ -58,7 +58,7 @@ export class Renderer {
     ctx.fillStyle = COLORS[kind];
     ctx.fillRect(x + 1, y + 1, size - 2, size - 2);
   }
-  /** Paint locked/active geometry and a centered preview from the supplied immutable observation. */
+  /** Paint locked cells, outlined ghost, then solid active geometry and a centered preview from the supplied immutable observation. */
   render(snapshot: Snapshot): void {
     const ctx = this.context,
       board = this.prepare(this.board, ctx, 2),
@@ -73,6 +73,12 @@ export class Renderer {
         const kind = snapshot.board[y]![x];
         if (kind) this.paint(ctx, x * size, y * size, size, kind);
       }
+    if (snapshot.ghost) {
+      ctx.strokeStyle = "#b9c5d5";
+      ctx.lineWidth = 2;
+      for (const { x, y } of snapshot.ghost)
+        ctx.strokeRect(x * size + 2, y * size + 2, size - 4, size - 4);
+    }
     if (snapshot.active)
       for (const { x, y } of snapshot.active.cells)
         this.paint(ctx, x * size, y * size, size, snapshot.active.kind);

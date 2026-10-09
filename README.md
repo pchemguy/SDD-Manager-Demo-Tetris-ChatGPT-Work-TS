@@ -21,7 +21,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Executable tasks](docs/dev/TASKS.md)
 - [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, arrow controls and Restart are present. The [modern-feature campaign](docs/dev/features/001_2606a72-modern-features/README.md) has accepted design, specification, plan and layout. [FEATURE-TASKS](docs/dev/FEATURE-TASKS.md) and its [conformance review](docs/dev/FEATURE-TASKS-REVIEW-REPORT.md) are prepared for task-list acceptance and implementation handoff. Feature implementation has not started. The controls below describe the implemented baseline.
+The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, arrow controls and Restart are present. The [modern-feature campaign](docs/dev/features/001_2606a72-modern-features/README.md) has accepted design, specification, plan and layout. [FEATURE-TASKS](docs/dev/FEATURE-TASKS.md) and its [conformance review](docs/dev/FEATURE-TASKS-REVIEW-REPORT.md) are accepted for full Phase 2 inline execution with GitHub tracking. Preparation is integrated and published as 71f6275; all 19 task associations are verified. Ghost and delayed hard drop are implemented on the feature branch; bag, hold and kicks remain pending.
 
 ## Development setup
 
@@ -40,7 +40,7 @@ npm run test:e2e
 
 Run dev or preview in its own terminal. Dev serves http://127.0.0.1:5173; preview serves http://127.0.0.1:4173.
 
-Arrow Left/Right move (hold to repeat), Arrow Up rotates clockwise, Arrow Down soft-drops (hold to repeat), and Space pauses/resumes after release. The most recent horizontal key wins. Focus loss/hidden page pauses; return requires Space. Restart starts fresh and clears held controls. Restart also works by Tab then Enter. The desktop layout adapts to viewport height and device pixel ratio. Serving requires HTTP (use dev/preview), rather than opening index.html directly. After build, dist is the complete static deployment directory; it requires no application backend. Vite binds loopback by default.
+Arrow Left/Right move (hold to repeat), Arrow Up rotates clockwise, Arrow Down soft-drops (hold to repeat), and Space hard-drops once per press and P pauses/resumes after release. The most recent horizontal key wins. Focus loss/hidden page pauses; return requires P. Restart starts fresh and clears held controls. Restart also works by Tab then Enter. The desktop layout adapts to viewport height and device pixel ratio. Serving requires HTTP (use dev/preview), rather than opening index.html directly. After build, dist is the complete static deployment directory; it requires no application backend. Vite binds loopback by default.
 
 Dependency versions are pinned in package.json/package-lock.json. Official requirements were checked in [Vite](https://vite.dev/guide/), [Vitest](https://vitest.dev/guide/), and [Playwright](https://playwright.dev/docs/browsers).
 
@@ -81,9 +81,11 @@ game.advance(1000); // Elapsed gameplay milliseconds.
 const snapshot = game.snapshot();
 ```
 
-`apply` accepts left, right, rotateClockwise, softDrop, pause, resume and restart. It returns whether observable state changed; collisions and O rotation return false. Restart returns true and takes two fresh draws from the current source. Supplied randomness must produce finite values in [0,1).
+`apply` accepts left, right, rotateClockwise, softDrop, hardDrop, pause, resume and restart. It returns whether observable state changed; collisions and O rotation return false. Restart returns true and takes two fresh draws from the current source. Supplied randomness must produce finite values in [0,1).
 
-`advance` accepts finite nonnegative milliseconds, preserves surplus time and lock/gravity ordering, and throws RangeError before mutation for invalid values in every lifecycle state. Pause preserves timer remainders; paused/game-over updates are ignored. `snapshot` returns detached board rows and active coordinates, next kind, status, score, lines, level and gravity interval.
+Hard drop adds two points per translated row and waits the full current gravity interval before locking. Ghost outlines predict the same landing; movement during the delay remains possible.
+
+`advance` accepts finite nonnegative milliseconds, preserves surplus time and lock/gravity ordering, and throws RangeError before mutation for invalid values in every lifecycle state. Pause preserves timer remainders; paused/game-over updates are ignored. `snapshot` returns detached board rows and active coordinates, ghost landing coordinates, next kind, status, score, lines, level and gravity interval.
 
 Browser modules own their external boundaries: Input exposes repeat deadlines; Controller consumes finite monotonic clock/event inputs and owns disposal; Renderer consumes snapshots and working 2D canvases; View updates textual state only when changed. None owns a second game-rule state.
 
