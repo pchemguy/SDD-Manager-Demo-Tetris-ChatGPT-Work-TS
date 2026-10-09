@@ -14,10 +14,11 @@ Intended implementation branch: `feature/001_2606a72-modern-features`; not creat
 
 - [PROJECT](../../PROJECT.md) identifies the feature scope and retained constraints.
 - [ARCHITECTURE](../../ARCHITECTURE.md) remains sufficient: engine rules, browser controller, and presentation keep their dependency direction.
-- [FEATURE_DECOMPOSITION](../../FEATURE_DECOMPOSITION.md) proposes affected components, interactions, behavior choices, and verification seams for design acceptance.
+- [FEATURE_DECOMPOSITION](../../FEATURE_DECOMPOSITION.md) records the accepted affected components, interactions, behavior choices, and verification seams.
+- [FEATURE-SPEC](../../FEATURE-SPEC.md) defines the exact behavior delta; its [review](../../FEATURE-SPEC-REVIEW-REPORT.md) assesses design conformance and readiness.
 - [SPEC](../../SPEC.md), [PLAN](../../PLAN.md), [layout](../../layout.md), and [TASKS](../../TASKS.md) own the completed baseline. They do not authorize these feature tasks.
 
-The campaign is open at feature design. Scope is authorized; the new behavior refinements are proposed and await acceptance. FEATURE-SPEC, FEATURE-PLAN, and FEATURE-TASKS have not been authored. No product implementation has started. Exact behavioral contracts and their conformance review follow design acceptance; delivery planning and task derivation follow their applicable readiness gates.
+The user accepted the feature design at a4185c2f586388171c4ef12314fb26e6a83ce8aa on 2026-10-09. FEATURE-SPEC and its conformance review are prepared; specification acceptance is pending. FEATURE-PLAN and FEATURE-TASKS have not been authored. No product implementation has started. Delivery planning and task derivation follow their applicable readiness gates.
 
 The request establishes the objective of implementing this feature set. Before execution, accepted preparation must be explicitly merged, checked, and published to the actual default branch; the implementation branch then starts from that checkpoint. Active FEATURE-TASKS will own feature execution. Complete implementation includes accepted document incorporation, verification, source archival in this package, and explicit integration/publication to main under SDD Manager.
 

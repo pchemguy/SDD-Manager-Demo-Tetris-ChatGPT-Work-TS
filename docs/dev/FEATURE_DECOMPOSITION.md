@@ -2,13 +2,13 @@
 
 ## Scope and decision state
 
-This proposed feature delta belongs to [campaign 001_2606a72-modern-features](features/001_2606a72-modern-features/README.md), based on `2606a7213d4ddcf18497fafabb6cc5c349a26178`. The five capabilities and retained full-interval locking rule are established by the project scope and the user's campaign instruction. Behavior choices below are recommendations for design acceptance, not accepted contracts or implemented results.
+This accepted feature design belongs to [campaign 001_2606a72-modern-features](features/001_2606a72-modern-features/README.md), based on `2606a7213d4ddcf18497fafabb6cc5c349a26178`. The user accepted the complete proposed design at `a4185c2f586388171c4ef12314fb26e6a83ce8aa` on 2026-10-09. The five capabilities, behavior policies below, and retained full-interval locking rule govern feature specification. Design acceptance does not establish implementation.
 
 The [main architecture](ARCHITECTURE.md) remains applicable. The engine owns rules and session state; browser control sends commands and elapsed time; presentation reads detached snapshots. This delta refines the affected [components](DECOMPOSITION.md). FEATURE-SPEC will own precise contracts and acceptance; FEATURE-PLAN and layout will own delivery order and physical allocation.
 
-## Proposed behavior
+## Accepted behavior
 
-| Capability | Recommended design |
+| Capability | Accepted design |
 | --- | --- |
 | Seven-bag selection | Shuffle the canonical seven kinds using Fisher–Yates and the supplied conforming random source. Consume each bag once before generating another. Retain the one-piece next preview; a fresh session starts a new bag without rewinding the random source. |
 | Hold | Store a kind, not its position or orientation. Permit one effective hold per active-piece lifecycle, re-enable after lock and successor spawn. Empty hold promotes next and obtains a replacement; occupied hold swaps kinds without consuming selection. Incoming pieces use canonical spawn geometry and fresh timers. Spawn obstruction ends play. |
@@ -17,7 +17,7 @@ The [main architecture](ARCHITECTURE.md) remains applicable. The engine owns rul
 | Hard drop | Move directly to the ghost landing and add two points per row moved. It does not lock immediately or repeatedly score an already grounded piece. First landing starts one full current gravity interval; an already running grounded countdown is retained. Movement and rotation remain available during the delay, and becoming airborne cancels it. |
 | Keyboard mapping | Retain arrow movement/clockwise rotation/soft drop and existing repeat schedules. Add C for hold and Space for hard drop; use P for pause/resume. Hold, hard drop, rotation, and pause are one-shot actions requiring release; prevent their browser defaults. Restart remains a keyboard-accessible button. |
 
-These recommendations trade exact SRS behavior for a small explicit kick policy and preserve the custom locking principle. A table-driven SRS-style clockwise policy is an alternative if rotation fidelity is desired; it would also introduce vertical kick behavior and additional piece/orientation contracts. Space hard drop/P pause follows familiar modern controls; retaining Space pause and assigning another drop key is an alternative if baseline key compatibility takes priority.
+The project-defined horizontal kick policy keeps rotation deterministic and bounded while preserving the custom locking principle. Space invokes hard drop and P invokes pause/resume. Vertical floor kicks, SRS fidelity, and the baseline Space-pause mapping are outside the accepted feature behavior.
 
 Scoring, progression, line clearing, pause/focus handling, snapshot isolation, chronological time, and supported desktop delivery remain governed by the baseline except for accepted explicit deltas. No added hold/rotation/drop action bypasses timer-before-command ordering. A hold replacement is a different active piece with fresh spawn timers; its availability remains consumed until lock. Successful kicks reconcile grounding through the existing engine rule.
 
@@ -40,4 +40,4 @@ Snapshot additions include held kind or null, hold availability, and ghost occup
 
 Inspection of the current Game, selection, piece geometry, input, and renderer confirms these changes fit their existing ownership. The bag is the only new selection state; hold is session state; projection is a pure query. Engine/browser dependency direction remains unchanged. No separate architecture overlay is needed. The design introduces no unrelated restructuring or new runtime dependencies.
 
-Design acceptance is pending for the recommended hold, shuffle, kick, scoring, and control policies. This review establishes a coherent proposed component arrangement; it does not establish specification readiness, implemented functionality, or browser compatibility.
+Design acceptance is established for the hold, shuffle, horizontal-kick, scoring, and control policies. [FEATURE-SPEC](FEATURE-SPEC.md) refines their contracts and acceptance conditions. This review establishes the accepted component arrangement; it does not establish specification readiness, implemented functionality, or browser compatibility.
