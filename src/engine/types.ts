@@ -18,6 +18,7 @@ export type Command =
   | "rotateClockwise"
   | "softDrop"
   | "hardDrop"
+  | "hold"
   | "pause"
   | "resume"
   | "restart";
@@ -26,6 +27,8 @@ export interface Snapshot {
   board: Board;
   active: (ActivePiece & { cells: Point[] }) | null;
   ghost: Point[] | null;
+  held: Kind | null;
+  canHold: boolean;
   next: Kind;
   score: number;
   lines: number;

@@ -43,3 +43,63 @@ it("timer expiry occurs before a command at the successor boundary", () => {
   expect(g.snapshot().active!.y).toBe(16);
   expect(occupied(g)).toBe(4);
 });
+import { Game } from "../../src/engine/game";
+import { bagSource } from "../helpers/random";
+import { TEST_BAG } from "../helpers/fixtures";
+it("empty and occupied hold use canonical fresh pieces, once per lock, with exact preview use", () => {
+  let draws=0; const source=bagSource(TEST_BAG);
+  const g=new Game(()=>{draws++;return source();});
+  expect(g.snapshot()).toMatchObject({held:null,canHold:true});
+  g.apply("right");g.apply("softDrop");g.advance(900);
+  expect(g.apply("hold")).toBe(true);
+  expect(g.snapshot()).toMatchObject({held:"O",canHold:false,active:{kind:"I",x:3,y:0,orientation:0},next:"T",score:1});
+  const before=g.snapshot();expect(g.apply("hold")).toBe(false);expect(g.snapshot()).toEqual(before);
+  g.advance(999);expect(g.snapshot().active!.y).toBe(0);
+  g.advance(1);expect(g.snapshot().active!.y).toBe(1);
+  g.apply("hardDrop");g.advance(1000);expect(g.snapshot().canHold).toBe(true);
+  const next=g.snapshot().next, calls=draws;
+  expect(g.apply("hold")).toBe(true);
+  expect(g.snapshot()).toMatchObject({held:"T",canHold:false,active:{kind:"O",x:4,y:0,orientation:0},next});
+  expect(draws).toBe(calls);
+  g.apply("restart");expect(g.snapshot()).toMatchObject({held:null,canHold:true});
+});
+it("hold availability follows lifecycle and a same-kind swap is effective", () => {
+  const g=bagGame();g.apply("pause");const before=g.snapshot();
+  expect(before.canHold).toBe(false);expect(g.apply("hold")).toBe(false);expect(g.snapshot()).toEqual(before);
+  g.apply("resume");expect(g.snapshot().canHold).toBe(true);g.apply("hold");
+  for(let i=0;i<6;i++){g.apply("hardDrop");g.advance(1000);}
+  expect(g.snapshot()).toMatchObject({active:{kind:"O"},held:"O",canHold:true});
+  const next=g.snapshot().next;expect(g.apply("hold")).toBe(true);
+  expect(g.snapshot()).toMatchObject({active:{kind:"O",y:0},held:"O",next,canHold:false});
+});
+
+import { EMPTY_HOLD_FAILURE, OCCUPIED_HOLD_FAILURE, GROUNDED_HOLD } from "../helpers/fixtures";
+import { ground } from "../helpers/scenarios";
+function trace(g: Game, steps: readonly {kind:string;orientation:number;x:number}[]) {
+  for(const step of steps){
+    expect(g.snapshot().active!.kind).toBe(step.kind);
+    for(let r=0;r<step.orientation;r++) expect(g.apply("rotateClockwise")).toBe(true);
+    moveTo(g,step.x);ground(g);g.advance(g.snapshot().gravityInterval);
+  }
+}
+it("empty and occupied hold obstruction retain outgoing held kind, next/progress/board and draw nothing", () => {
+  for(const occupiedHold of [false,true]){
+    let draws=0; const source=bagSource(TEST_BAG),g=new Game(()=>{draws++;return source();});
+    if(occupiedHold){expect(g.apply("hold")).toBe(true);trace(g,OCCUPIED_HOLD_FAILURE);}
+    else trace(g,EMPTY_HOLD_FAILURE);
+    const before=g.snapshot(),calls=draws;
+    expect(g.apply("hold")).toBe(true);
+    expect(g.snapshot()).toMatchObject({status:"gameOver",active:null,ghost:null,held:before.active!.kind,canHold:false,next:before.next,board:before.board,score:before.score,lines:before.lines,level:before.level});
+    expect(draws).toBe(calls);const failed=g.snapshot();
+    expect(g.apply("hold")).toBe(false);expect(g.snapshot()).toEqual(failed);
+  }
+});
+it("grounded-at-spawn held replacement starts a fresh complete interval and does not carry old timers", () => {
+  const g=bagGame();g.apply("hold");trace(g,GROUNDED_HOLD);
+  g.advance(900);expect(g.apply("hold")).toBe(true);
+  expect(g.snapshot().active).toMatchObject({kind:"O",x:4,y:0,orientation:0});
+  expect(g.snapshot().ghost).toEqual(g.snapshot().active!.cells);
+  const before=g.snapshot();g.advance(999);expect(g.snapshot().board).toEqual(before.board);
+  expect(g.snapshot().active?.kind).toBe("O");g.advance(1);
+  expect(g.snapshot().board).not.toEqual(before.board);
+});

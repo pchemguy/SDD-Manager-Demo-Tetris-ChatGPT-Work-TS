@@ -67,3 +67,67 @@ export const CLEAR_TOP_OUT_TRACE = [
   {"kind": "J", "orientation": 0, "x": 0, "cleared": 0},
   {"kind": "L", "orientation": 0, "x": 3, "cleared": 1}
 ] as const;
+
+/** Valid post-initial-hold placement trace for replacement failure/timing. */
+export const OCCUPIED_HOLD_FAILURE = [
+  {"kind": "I", "orientation": 1, "x": 7, "cleared": 0},
+  {"kind": "T", "orientation": 2, "x": 5, "cleared": 0},
+  {"kind": "S", "orientation": 3, "x": 8, "cleared": 0},
+  {"kind": "Z", "orientation": 0, "x": 1, "cleared": 0},
+  {"kind": "J", "orientation": 3, "x": 4, "cleared": 0},
+  {"kind": "L", "orientation": 1, "x": 6, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 0, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": 1, "cleared": 0},
+  {"kind": "T", "orientation": 0, "x": 7, "cleared": 0},
+  {"kind": "S", "orientation": 2, "x": 6, "cleared": 0},
+  {"kind": "Z", "orientation": 3, "x": 5, "cleared": 0},
+  {"kind": "J", "orientation": 1, "x": 6, "cleared": 0},
+  {"kind": "L", "orientation": 2, "x": 7, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 8, "cleared": 0},
+  {"kind": "I", "orientation": 0, "x": 3, "cleared": 0},
+  {"kind": "T", "orientation": 2, "x": 5, "cleared": 0}
+] as const;
+
+/** Valid post-initial-hold placement trace for replacement failure/timing. */
+export const GROUNDED_HOLD = [
+  {"kind": "I", "orientation": 3, "x": -1, "cleared": 0},
+  {"kind": "T", "orientation": 0, "x": 0, "cleared": 0},
+  {"kind": "S", "orientation": 3, "x": 3, "cleared": 0},
+  {"kind": "Z", "orientation": 0, "x": 2, "cleared": 0},
+  {"kind": "J", "orientation": 1, "x": 2, "cleared": 0},
+  {"kind": "L", "orientation": 1, "x": 3, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 1, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": 6, "cleared": 0},
+  {"kind": "T", "orientation": 3, "x": 4, "cleared": 0},
+  {"kind": "S", "orientation": 2, "x": 5, "cleared": 0},
+  {"kind": "Z", "orientation": 3, "x": 7, "cleared": 0},
+  {"kind": "J", "orientation": 1, "x": 4, "cleared": 0}
+] as const;
+
+/** Active S fits while visible next Z is obstructed before any lock. */
+export const EMPTY_HOLD_FAILURE = [
+  {"kind": "O", "orientation": 0, "x": 8, "cleared": 0},
+  {"kind": "I", "orientation": 0, "x": 2, "cleared": 0},
+  {"kind": "T", "orientation": 3, "x": 1, "cleared": 0},
+  {"kind": "S", "orientation": 3, "x": 4, "cleared": 0},
+  {"kind": "Z", "orientation": 2, "x": 5, "cleared": 0},
+  {"kind": "J", "orientation": 2, "x": 7, "cleared": 0},
+  {"kind": "L", "orientation": 0, "x": 4, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 3, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": 6, "cleared": 0},
+  {"kind": "T", "orientation": 2, "x": 6, "cleared": 0},
+  {"kind": "S", "orientation": 0, "x": 0, "cleared": 0},
+  {"kind": "Z", "orientation": 2, "x": 5, "cleared": 0},
+  {"kind": "J", "orientation": 3, "x": 0, "cleared": 0},
+  {"kind": "L", "orientation": 2, "x": 0, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 6, "cleared": 0},
+  {"kind": "I", "orientation": 1, "x": -2, "cleared": 0},
+  {"kind": "T", "orientation": 2, "x": 6, "cleared": 0},
+  {"kind": "S", "orientation": 0, "x": 2, "cleared": 0},
+  {"kind": "Z", "orientation": 2, "x": 2, "cleared": 0},
+  {"kind": "J", "orientation": 0, "x": 6, "cleared": 0},
+  {"kind": "L", "orientation": 2, "x": 1, "cleared": 0},
+  {"kind": "O", "orientation": 0, "x": 8, "cleared": 0},
+  {"kind": "I", "orientation": 2, "x": 3, "cleared": 0},
+  {"kind": "T", "orientation": 0, "x": 5, "cleared": 0}
+] as const;

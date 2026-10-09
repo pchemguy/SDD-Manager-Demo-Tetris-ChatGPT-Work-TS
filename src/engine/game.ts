@@ -17,6 +17,8 @@ export class Game {
   private board: Board = emptyBoard();
   private active: ActivePiece | null = null;
   private next: Kind = "I";
+  private held: Kind | null = null;
+  private holdUsed = false;
   private status: Status = "running";
   private score = 0;
   private lines = 0;
@@ -36,6 +38,8 @@ export class Game {
     this.lines = 0;
     this.level = 1;
     this.status = "running";
+    this.held = null;
+    this.holdUsed = false;
     this.bag.reset();
     this.active = spawn(this.bag.next());
     this.next = this.bag.next();
@@ -60,6 +64,7 @@ export class Game {
       return true;
     }
     if (this.status !== "running" || !this.active) return false;
+    if (command === "hold") return this.hold();
     if (command === "hardDrop") {
       const distance = landingDistance(this.board, this.active);
       if (distance === 0) return false;
@@ -91,12 +96,33 @@ export class Game {
         ? { ...this.active, cells: cells(this.active) }
         : null,
       ghost: this.active ? cells({ ...this.active, y: this.active.y + landingDistance(this.board, this.active) }) : null,
+      held: this.held,
+      canHold: this.status === "running" && this.active !== null && !this.holdUsed,
       next: this.next,
       score: this.score,
       lines: this.lines,
       level: this.level,
       gravityInterval: gravity(this.level),
     };
+  }
+  /** Replace active geometry once per lock. Store outgoing kind even if incoming spawn fails; draw a preview only after a successful empty-hold spawn. */
+  private hold(): boolean {
+    if (this.holdUsed || !this.active) return false;
+    const empty = this.held === null;
+    const incoming = spawn(this.held ?? this.next);
+    this.held = this.active.kind;
+    this.holdUsed = true;
+    this.gravityAge = 0;
+    this.lockRemaining = null;
+    if (!fits(this.board, cells(incoming))) {
+      this.active = null;
+      this.status = "gameOver";
+      return true;
+    }
+    this.active = incoming;
+    if (empty) this.next = this.bag.next();
+    this.updateGrounding();
+    return true;
   }
   /** Reconcile grounded transitions without refreshing a timer that is already running. */
   private updateGrounding(): void {
@@ -131,6 +157,7 @@ export class Game {
       return;
     }
     this.active = candidate;
+    this.holdUsed = false;
     this.next = this.bag.next();
     this.updateGrounding();
   }
