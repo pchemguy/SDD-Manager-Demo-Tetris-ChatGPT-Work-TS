@@ -82,6 +82,7 @@ it("grounded-at-spawn gets a full interval before top-out; blocked spawn draws n
   g.advance(1);
   expect(g.snapshot().status).toBe("gameOver");
   expect(g.snapshot().active).toBe(null);
+  expect(g.snapshot().ghost).toBe(null);
   expect(occupied(g)).toBe(40);
   expect(draws).toBe(11);
 });

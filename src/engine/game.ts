@@ -1,6 +1,7 @@
 /** Own one deterministic browser-independent session; browser code only sends commands/elapsed time. */
 import { emptyBoard, fits, place, clearRows } from "./board";
 import { cells, spawn } from "./pieces";
+import { landingDistance } from "./placement";
 import { select } from "./random";
 import { gravity, levelFor, lineAward } from "./progression";
 import type {
@@ -78,6 +79,7 @@ export class Game {
       active: this.active
         ? { ...this.active, cells: cells(this.active) }
         : null,
+      ghost: this.active ? cells({ ...this.active, y: this.active.y + landingDistance(this.board, this.active) }) : null,
       next: this.next,
       score: this.score,
       lines: this.lines,

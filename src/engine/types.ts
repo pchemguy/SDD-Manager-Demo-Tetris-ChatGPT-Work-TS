@@ -24,6 +24,7 @@ export interface Snapshot {
   status: Status;
   board: Board;
   active: (ActivePiece & { cells: Point[] }) | null;
+  ghost: Point[] | null;
   next: Kind;
   score: number;
   lines: number;

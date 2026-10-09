@@ -41,3 +41,17 @@ it("snapshots are detached from engine and later commands", () => {
   expect(retained.active?.x).toBe(3);
   expect(g.snapshot().active?.x).toBe(4);
 });
+it("provides nonmutating detached ghost cells in running and paused snapshots", () => {
+  let draws = 0;
+  const g = new Game(() => { draws++; return .15; });
+  const s = g.snapshot();
+  expect(s.ghost).toEqual([{x:4,y:18},{x:5,y:18},{x:4,y:19},{x:5,y:19}]);
+  s.ghost![0]!.x = 99;
+  expect(g.snapshot().ghost![0]!.x).toBe(4);
+  g.apply("pause");
+  const paused = g.snapshot();
+  expect(paused.ghost).toEqual(g.snapshot().ghost);
+  expect(draws).toBe(2);
+  g.advance(50000);
+  expect(g.snapshot()).toEqual(paused);
+});

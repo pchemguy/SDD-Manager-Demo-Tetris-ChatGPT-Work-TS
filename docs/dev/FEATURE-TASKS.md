@@ -14,11 +14,12 @@ Verification below is planned, not performed. Existing commands are `npm run typ
 
 - [ ] Phase 2 — Modern browser features
     - [ ] Milestone 2.1 — Ghost and delayed hard drop
-        - [ ] T-023 — Add shared landing projection and detached ghost snapshots
+        - [x] T-023 — Add shared landing projection and detached ghost snapshots
             Scope: planned src/engine/placement.ts and tests/engine/placement.test.ts; src/engine/game.ts/types.ts and affected typed unit/browser fixtures.
             Depends on: accepted published preparation, completed baseline T-022, and eligible phase activation. Contracts: F5–F6/FA5; retained collision/snapshot guarantees.
             Outcome: pure first-obstruction landing query; Game snapshots expose detached ghost cells without state, timer or random consumption. Keep existing consumers compiling and baseline behavior intact; hold fields belong to T-030.
             Evidence: npm test -- tests/engine/placement.test.ts tests/engine/game.test.ts; empty/stacked/uneven/grounded projection, paused/no-active state, retained/mutated snapshots and nonmutation; npm run typecheck and relevant regressions. No production scenario loader.
+            Verified: RED: missing ghost and zero-distance placeholder failed literal expectations after resolving the initial missing-module setup. GREEN/verification: npm test 59 passing; npm run typecheck passes. Empty/floor/uneven first obstruction, grounded distance, snapshot mutation, pause and game-over absence verified; source/projection docs reviewed. npm proxy-environment warning is unrelated to checks.
         - [ ] T-024 — Implement scored hard drop with the full grounded delay
             Scope: src/engine/game.ts/types.ts and planned tests/engine/features.test.ts, collaborating timing/progression tests.
             Depends on: T-023. Contracts: F5–F6/FA6–FA7, retained S4–S5.
