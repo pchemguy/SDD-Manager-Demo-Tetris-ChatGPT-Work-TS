@@ -13,7 +13,7 @@ Verification below is planned, not performed. Existing commands are `npm run typ
 ## Phase 2 — Modern browser features
 
 - [ ] Phase 2 — Modern browser features
-    - [ ] Milestone 2.1 — Ghost and delayed hard drop
+    - [x] Milestone 2.1 — Ghost and delayed hard drop
         - [x] T-023 — Add shared landing projection and detached ghost snapshots
             Scope: planned src/engine/placement.ts and tests/engine/placement.test.ts; src/engine/game.ts/types.ts and affected typed unit/browser fixtures.
             Depends on: accepted published preparation, completed baseline T-022, and eligible phase activation. Contracts: F5–F6/FA5; retained collision/snapshot guarantees.
