@@ -58,3 +58,20 @@ test("native clockwise wall kick rotates a vertical I from the left wall", async
   expect(points).toEqual([{x:0,y:2},{x:1,y:2},{x:2,y:2},{x:3,y:2}]);
   await page.screenshot({path:info.outputPath("wall-kick.png")});
 });
+test("native held C/Space cannot replay on the successor; arrows continue after hold/drop", async ({page}) => {
+  await page.clock.install({time:new Date("2026-10-09T12:00:00Z")});
+  await page.addInitScript((values)=>{let i=0;Math.random=()=>values[i++ % values.length]!;},drawsForBag(TEST_BAG));
+  await page.goto("/");await page.clock.pauseAt(new Date("2026-10-09T12:00:01Z"));
+  await page.keyboard.down("ArrowRight");await page.clock.runFor(100);await page.keyboard.down("c");
+  await page.keyboard.down("Space");await page.clock.runFor(50);
+  // Keyup advances to the exact repeat boundary before reading freshly drawn pixels.
+  await page.keyboard.up("ArrowRight");
+  const moved=await page.locator("#board").evaluate((c:HTMLCanvasElement)=>Array.from(c.getContext("2d")!.getImageData(c.width*.75,c.height*.975,1,1).data).slice(0,3));
+  expect(moved).toEqual([83,217,233]);
+  await page.clock.runFor(966);await expect(page.locator("#hold-availability")).toHaveText("Available · C");
+  await page.keyboard.down("C");await page.keyboard.down("Space");
+  await expect(page.locator("#held-kind")).toHaveText("O");await expect(page.locator("#next-kind")).toHaveText("S");
+  await expect(page.locator("#score")).toHaveText("36");
+  await page.keyboard.up("C");await page.keyboard.up("Space");await page.keyboard.press("C");
+  await expect(page.locator("#held-kind")).toHaveText("T");
+});

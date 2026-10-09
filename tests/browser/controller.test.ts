@@ -1,7 +1,7 @@
 /** Exercise the composed engine/controller through controlled clocks and browser event boundaries. */
 import { it, expect } from "vitest";
 import { Controller, type Clock } from "../../src/browser/controller";
-import { bagGame, placePiece, occupied, ground, playTrace, topOut } from "../helpers/scenarios";
+import { bagGame, placePiece, occupied, ground, playTrace, topOut, moveTo } from "../helpers/scenarios";
 export function harness() {
   let time = 0,
     callback: FrameRequestCallback = () => {},
@@ -36,6 +36,7 @@ export function harness() {
     visibility,
     snapshots,
     controller,
+    at: (at: number) => { time = at; },
     frame: (at: number) => {
       time = at;
       callback(at);
@@ -209,4 +210,40 @@ it("controlled C case holds once and later arrow repeats move the replacement", 
   expect(h.key("c").defaultPrevented).toBe(true);h.key("C");
   expect(h.game.snapshot()).toMatchObject({held:"O",canHold:false,active:{kind:"I",x:3},next:"T"});
   h.frame(150);expect(h.game.snapshot().active!.x).toBe(4);h.controller.dispose();
+});
+it("C and Space latches remain held across lock and require a physical release", () => {
+  const h=harness();h.key("c");h.key(" ");h.frame(1000);
+  expect(h.game.snapshot()).toMatchObject({active:{kind:"T",y:0},held:"O",canHold:true});
+  const before=h.game.snapshot();h.key("C");h.key(" ");
+  expect(h.game.snapshot()).toEqual(before);
+  h.release("C");h.key("C");expect(h.game.snapshot()).toMatchObject({active:{kind:"O"},held:"T",canHold:false});
+  h.controller.dispose();
+});
+it("advances lock expiry before an equal-time hold or drop key targets the successor", () => {
+  const h=harness();h.key(" ");h.release(" ");h.frame(999);
+  h.at(1000);h.key("c");
+  expect(h.game.snapshot()).toMatchObject({held:"I",active:{kind:"T",y:0},next:"S"});
+  expect(occupied(h.game)).toBe(4);h.key(" ");
+  expect(h.game.snapshot().active!.y).toBeGreaterThan(0);h.controller.dispose();
+});
+it("inactive C, Space and arrows cannot arm replay on manual resume or restart", () => {
+  const h=harness();h.key("p");h.key("c");h.key(" ");h.key("ArrowDown");h.frame(100000);
+  h.release("P");h.key("P");h.frame(100150);
+  expect(h.game.snapshot()).toMatchObject({held:null,score:0,active:{y:0}});
+  h.keys.dispatchEvent(new Event("blur"));h.key("P",true);expect(h.game.snapshot().status).toBe("paused");
+  h.restart.dispatchEvent(new Event("click"));h.frame(100300);
+  expect(h.game.snapshot()).toMatchObject({held:null,score:0,active:{y:0}});h.controller.dispose();
+});
+
+import { EMPTY_HOLD_FAILURE } from "../helpers/fixtures";
+it("a hold top-out clears repeats immediately and restart cannot replay them", () => {
+  const h=harness();
+  for(const step of EMPTY_HOLD_FAILURE){
+    for(let r=0;r<step.orientation;r++)h.game.apply("rotateClockwise");
+    moveTo(h.game,step.x);ground(h.game);h.game.advance(h.game.snapshot().gravityInterval);
+  }
+  h.key("ArrowRight");h.key("c");expect(h.game.snapshot().status).toBe("gameOver");
+  const before=h.game.snapshot();h.frame(10000);expect(h.game.snapshot()).toEqual(before);
+  h.restart.dispatchEvent(new Event("click"));h.frame(10150);
+  expect(h.game.snapshot()).toMatchObject({score:0,held:null,active:{x:4,y:0}});h.controller.dispose();
 });
