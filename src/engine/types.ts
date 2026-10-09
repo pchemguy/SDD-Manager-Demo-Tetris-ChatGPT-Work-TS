@@ -22,12 +22,15 @@ export type Command =
   | "pause"
   | "resume"
   | "restart";
+/** Detached observation. Ghost retains paused geometry; hold eligibility includes lifecycle state. */
 export interface Snapshot {
   status: Status;
   board: Board;
   active: (ActivePiece & { cells: Point[] }) | null;
+  /** First-obstruction landing cells, null exactly when active is absent. */
   ghost: Point[] | null;
   held: Kind | null;
+  /** Running, active and unused since the last successful lock/successor spawn. */
   canHold: boolean;
   next: Kind;
   score: number;

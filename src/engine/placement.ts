@@ -2,13 +2,13 @@
 import { fits } from "./board";
 import { cells } from "./pieces";
 import type { ActivePiece, Board } from "./types";
-/** Return the contiguous legal downward displacement for a fitting active piece. */
+/** Return the contiguous legal downward displacement for a fitting active piece and a valid 20×10 board. Stop at the first obstruction; never mutate inputs. */
 export function landingDistance(board: Board, piece: ActivePiece): number {
   let distance = 0;
   while (fits(board, cells({ ...piece, y: piece.y + distance + 1 }))) distance++;
   return distance;
 }
-/** Return the first fitting clockwise horizontal candidate, or null for O/all failed. */
+/** Return a detached first-fitting clockwise candidate in offset order 0,-1,+1,-2,+2 at unchanged y, or null for O/all failed. Timers and application belong to Game. */
 export function clockwiseCandidate(board: Board, piece: ActivePiece): ActivePiece | null {
   if (piece.kind === "O") return null;
   for (const offset of [0, -1, 1, -2, 2]) {
