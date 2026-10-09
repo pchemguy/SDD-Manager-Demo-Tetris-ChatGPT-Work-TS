@@ -56,7 +56,7 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Evidence: milestone 1.1 PLAN exits, passing engine/browser unit checks, typecheck/build and browser evidence; repair all required blockers; commit/push report and reconcile issue/milestone closure if active. Record usability/risk observations for human continue/amend/simplify/stop decisions.
             Report: docs/dev/reports/phases/1/1.1.md; include concise implemented features, checks/results, Findings/Blockers and TODO (None if empty).
             Verified: Read-only coherent core code review found no required milestone defect. All 32 unit tests, typecheck/build and built-page Chromium play smoke passed; native public-command rendering verified row clear and top-out. Report records intentional PLAN deferrals and pending final browser compatibility.
-    - [ ] Milestone 1.2 — Progression and complete engine contracts
+    - [x] Milestone 1.2 — Progression and complete engine contracts
         - [x] T-008 — Implement scoring, level thresholds, and gravity progression
             Scope: src/engine/progression.ts, game integration, tests/engine/progression.test.ts and integrated progression scenarios.
             Depends on: T-007. Contracts: S5 and G(L) in S4; A5 and level-dependent A3–A4.
