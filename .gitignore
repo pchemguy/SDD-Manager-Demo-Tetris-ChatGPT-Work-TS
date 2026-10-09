@@ -148,3 +148,8 @@ vite.config.ts.timestamp-*
 # Turbo Repo
 .turbo
 *.tkn
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/

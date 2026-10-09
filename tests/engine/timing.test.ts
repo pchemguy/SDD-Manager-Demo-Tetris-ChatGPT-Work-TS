@@ -1,0 +1,87 @@
+/** Explicit elapsed-time boundaries detect immediate-lock and remaining-tick substitutions. */
+import { it, expect } from "vitest";
+import { Game } from "../../src/engine/game";
+import {
+  repeatedO,
+  ground,
+  moveTo,
+  placeO,
+  occupied,
+} from "../helpers/scenarios";
+it("gravity retains residual milliseconds", () => {
+  const g = repeatedO();
+  g.advance(999);
+  expect(g.snapshot().active?.y).toBe(0);
+  g.advance(1);
+  expect(g.snapshot().active?.y).toBe(1);
+  g.advance(1500);
+  expect(g.snapshot().active?.y).toBe(2);
+  g.advance(500);
+  expect(g.snapshot().active?.y).toBe(3);
+});
+it("late-in-cycle landing receives a full independent interval", () => {
+  const g = repeatedO();
+  g.advance(900);
+  ground(g);
+  expect(g.snapshot().active?.y).toBe(18);
+  g.advance(999);
+  expect(occupied(g)).toBe(0);
+  expect(g.apply("softDrop")).toBe(false);
+  g.advance(1);
+  expect(occupied(g)).toBe(4);
+  expect(g.snapshot().active?.y).toBe(0);
+});
+it("grounded movement does not refresh the countdown", () => {
+  const g = repeatedO();
+  ground(g);
+  g.advance(900);
+  expect(g.apply("left")).toBe(true);
+  g.advance(100);
+  expect(occupied(g)).toBe(4);
+});
+it("becoming airborne cancels the old timer and re-grounding starts fresh", () => {
+  const g = repeatedO();
+  placeO(g, 4);
+  ground(g);
+  g.advance(900);
+  moveTo(g, 2);
+  g.advance(100);
+  expect(occupied(g)).toBe(4);
+  expect(g.snapshot().active?.y).toBe(17);
+  ground(g);
+  g.advance(999);
+  expect(occupied(g)).toBe(4);
+  g.advance(1);
+  expect(occupied(g)).toBe(8);
+});
+it("time partitioning remains equivalent across locks and spawns", () => {
+  const a = repeatedO(),
+    b = repeatedO();
+  a.advance(50000);
+  for (let i = 0; i < 100; i++) b.advance(500);
+  expect(a.snapshot()).toEqual(b.snapshot());
+  expect(occupied(a)).toBeGreaterThan(0);
+});
+it("row compaction and next spawn integrate through real commands", () => {
+  const g = repeatedO();
+  for (const x of [0, 2, 4, 6, 8]) placeO(g, x);
+  expect(g.snapshot().lines).toBe(2);
+  expect(occupied(g)).toBe(0);
+  expect(g.snapshot().score).toBe(390);
+});
+it("grounded-at-spawn gets a full interval before top-out; blocked spawn draws no replacement", () => {
+  let draws = 0;
+  const g = new Game(() => {
+    draws++;
+    return 0.15;
+  });
+  for (let i = 0; i < 9; i++) placeO(g, 4);
+  expect(g.snapshot().active?.y).toBe(0);
+  g.advance(999);
+  expect(g.snapshot().status).toBe("running");
+  g.advance(1);
+  expect(g.snapshot().status).toBe("gameOver");
+  expect(g.snapshot().active).toBe(null);
+  expect(occupied(g)).toBe(40);
+  expect(draws).toBe(11);
+});

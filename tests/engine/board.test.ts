@@ -1,0 +1,79 @@
+/** Board scenarios expose out-of-bounds, occupied-cell and row-order faults. */
+import { it, expect } from "vitest";
+import { emptyBoard, fits, place, clearRows } from "../../src/engine/board";
+it("allocates independent empty rows", () => {
+  const b = emptyBoard();
+  expect(b).toHaveLength(20);
+  expect(b.every((r) => r.length === 10 && r.every((c) => c === null))).toBe(
+    true,
+  );
+  b[0]![0] = "I";
+  expect(b[1]![0]).toBe(null);
+});
+it("checks occupied geometry rather than the bounding matrix", () => {
+  const b = emptyBoard();
+  b[0]![3] = "J";
+  expect(
+    fits(b, [
+      { x: 4, y: 0 },
+      { x: 3, y: 1 },
+      { x: 4, y: 1 },
+      { x: 5, y: 1 },
+    ]),
+  ).toBe(true);
+  b[0]![4] = "J";
+  expect(
+    fits(b, [
+      { x: 4, y: 0 },
+      { x: 3, y: 1 },
+      { x: 4, y: 1 },
+      { x: 5, y: 1 },
+    ]),
+  ).toBe(false);
+  expect(fits(emptyBoard(), [{ x: -1, y: 0 }])).toBe(false);
+  expect(fits(emptyBoard(), [{ x: 10, y: 0 }])).toBe(false);
+  expect(fits(emptyBoard(), [{ x: 0, y: 20 }])).toBe(false);
+});
+it("placement is detached and rejects overlap atomically", () => {
+  const b = emptyBoard();
+  const locked = place(
+    b,
+    [
+      { x: 4, y: 0 },
+      { x: 5, y: 0 },
+      { x: 4, y: 1 },
+      { x: 5, y: 1 },
+    ],
+    "O",
+  );
+  expect(locked[0]![4]).toBe("O");
+  expect(b[0]![4]).toBe(null);
+  expect(() =>
+    place(
+      locked,
+      [
+        { x: 4, y: 0 },
+        { x: 5, y: 0 },
+        { x: 4, y: 1 },
+        { x: 5, y: 1 },
+      ],
+      "O",
+    ),
+  ).toThrow(RangeError);
+  expect(locked[0]![4]).toBe("O");
+});
+for (const count of [1, 2, 3, 4])
+  it("compacts " + count + " complete rows simultaneously", () => {
+    const b = emptyBoard();
+    b[0]![0] = "J";
+    b[19 - count]![1] = "L";
+    for (let i = 20 - count; i < 20; i++) b[i]!.fill("I");
+    const r = clearRows(b);
+    expect(r.cleared).toBe(count);
+    expect(r.board[count]![0]).toBe("J");
+    expect(r.board[19]![1]).toBe("L");
+    expect(
+      r.board.slice(0, count).every((row) => row.every((x) => x === null)),
+    ).toBe(true);
+    expect(b[19]![0]).toBe("I");
+  });

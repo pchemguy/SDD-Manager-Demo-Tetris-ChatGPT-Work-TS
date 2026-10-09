@@ -1,0 +1,192 @@
+/** Exercise the composed engine/controller through controlled clocks and browser event boundaries. */
+import { it, expect } from "vitest";
+import { Controller, type Clock } from "../../src/browser/controller";
+import { repeatedO, placeO, occupied, ground } from "../helpers/scenarios";
+export function harness() {
+  let time = 0,
+    callback: FrameRequestCallback = () => {},
+    cancelled = false;
+  const keys = new EventTarget(),
+    restart = new EventTarget(),
+    visibility = Object.assign(new EventTarget(), { hidden: false }),
+    game = repeatedO();
+  const snapshots: ReturnType<typeof game.snapshot>[] = [];
+  const clock: Clock = {
+    now: () => time,
+    request: (fn) => {
+      callback = fn;
+      return 1;
+    },
+    cancel: () => {
+      cancelled = true;
+    },
+  };
+  const controller = new Controller(
+    game,
+    keys,
+    restart,
+    clock,
+    (s) => snapshots.push(s),
+    visibility,
+  );
+  return {
+    game,
+    keys,
+    restart,
+    visibility,
+    snapshots,
+    controller,
+    frame: (at: number) => {
+      time = at;
+      callback(at);
+    },
+    key: (key: string, repeat = false) => {
+      const event = new Event("keydown", { cancelable: true });
+      Object.assign(event, { key, repeat });
+      keys.dispatchEvent(event);
+      return event;
+    },
+    release: (key: string) => {
+      const event = new Event("keyup", { cancelable: true });
+      Object.assign(event, { key });
+      keys.dispatchEvent(event);
+    },
+    cancelled: () => cancelled,
+  };
+}
+it("composes initial rendering, timed gravity, discrete keys and restart", () => {
+  const h = harness();
+  expect(h.snapshots).toHaveLength(1);
+  h.frame(1000);
+  expect(h.game.snapshot().active!.y).toBe(1);
+  expect(h.key("ArrowLeft").defaultPrevented).toBe(true);
+  expect(h.game.snapshot().active!.x).toBe(3);
+  h.key("ArrowLeft", true);
+  expect(h.game.snapshot().active!.x).toBe(3);
+  h.key("ArrowDown");
+  expect(h.game.snapshot().score).toBe(1);
+  h.restart.dispatchEvent(new Event("click"));
+  expect(h.game.snapshot().score).toBe(0);
+  expect(h.game.snapshot().active!.y).toBe(0);
+  h.controller.dispose();
+  expect(h.cancelled()).toBe(true);
+});
+it("renders real public-command row clears and top out without a state loader", () => {
+  const h = harness();
+  for (const x of [0, 2, 4, 6, 8]) placeO(h.game, x);
+  h.frame(0);
+  expect(h.snapshots.at(-1)!.lines).toBe(2);
+  for (let i = 0; i < 10; i++) placeO(h.game, 4);
+  h.frame(0);
+  expect(h.snapshots.at(-1)!.status).toBe("gameOver");
+  expect(occupied(h.game)).toBe(40);
+  h.controller.dispose();
+});
+
+it("processes a foreground stall as chronological repeat deadlines, equivalent to small frames", () => {
+  const a = harness(),
+    b = harness();
+  a.key("ArrowDown");
+  b.key("ArrowDown");
+  a.frame(5000);
+  for (let t = 25; t <= 5000; t += 25) b.frame(t);
+  expect(a.game.snapshot()).toEqual(b.game.snapshot());
+  expect(a.game.snapshot().score).toBeGreaterThan(18);
+  a.controller.dispose();
+  b.controller.dispose();
+});
+it("locks before an equal-time horizontal repeat applies to the newly spawned piece", () => {
+  const h = harness();
+  ground(h.game);
+  h.frame(850);
+  h.key("ArrowRight");
+  h.frame(1000);
+  expect(h.game.snapshot().board[19]![5]).toBe("O");
+  expect(h.game.snapshot().active!.x).toBe(5);
+  h.controller.dispose();
+});
+it("releasing a held down key ends its repeat schedule", () => {
+  const h = harness();
+  h.key("ArrowDown");
+  h.frame(100);
+  const before = h.game.snapshot().score;
+  const e = new Event("keyup");
+  Object.assign(e, { key: "ArrowDown" });
+  h.keys.dispatchEvent(e);
+  h.frame(999);
+  expect(h.game.snapshot().score).toBe(before);
+  h.controller.dispose();
+});
+
+it("Space requires release across pause, excludes inactive time and retains engine remainders", () => {
+  const h = harness();
+  h.frame(900);
+  expect(h.key(" ").defaultPrevented).toBe(true);
+  expect(h.game.snapshot().status).toBe("paused");
+  h.frame(50000);
+  h.key(" ", true);
+  h.key(" ");
+  expect(h.game.snapshot().status).toBe("paused");
+  h.release(" ");
+  h.key(" ");
+  expect(h.game.snapshot().status).toBe("running");
+  h.frame(50099);
+  expect(h.game.snapshot().active!.y).toBe(0);
+  h.frame(50100);
+  expect(h.game.snapshot().active!.y).toBe(1);
+  h.controller.dispose();
+});
+it("blur and hidden transitions pause, clear holds and require explicit resume", () => {
+  const h = harness();
+  h.key("ArrowRight");
+  h.frame(100);
+  h.keys.dispatchEvent(new Event("blur"));
+  expect(h.game.snapshot().status).toBe("paused");
+  h.frame(10000);
+  h.keys.dispatchEvent(new Event("focus"));
+  expect(h.game.snapshot().status).toBe("paused");
+  h.key(" ");
+  h.frame(10149);
+  expect(h.game.snapshot().active!.x).toBe(5);
+  h.visibility.hidden = true;
+  h.visibility.dispatchEvent(new Event("visibilitychange"));
+  expect(h.game.snapshot().status).toBe("paused");
+  h.visibility.hidden = false;
+  h.visibility.dispatchEvent(new Event("visibilitychange"));
+  expect(h.game.snapshot().status).toBe("paused");
+  h.controller.dispose();
+});
+it("restart from pause clears holds and rebases elapsed time", () => {
+  const h = harness();
+  h.key("ArrowDown");
+  h.frame(100);
+  h.key(" ");
+  h.frame(50000);
+  h.restart.dispatchEvent(new Event("click"));
+  h.frame(50999);
+  expect(h.game.snapshot()).toMatchObject({
+    score: 0,
+    status: "running",
+    active: { y: 0 },
+  });
+  h.frame(51000);
+  expect(h.game.snapshot().active!.y).toBe(1);
+  h.controller.dispose();
+});
+it("repeated disposal removes every event subscription and stops even an already queued frame", () => {
+  const h = harness();
+  const before = h.game.snapshot(),
+    count = h.snapshots.length;
+  h.controller.dispose();
+  h.controller.dispose();
+  h.key("ArrowDown");
+  h.key(" ");
+  h.keys.dispatchEvent(new Event("blur"));
+  h.visibility.hidden = true;
+  h.visibility.dispatchEvent(new Event("visibilitychange"));
+  h.restart.dispatchEvent(new Event("click"));
+  h.frame(100000);
+  expect(h.game.snapshot()).toEqual(before);
+  expect(h.snapshots).toHaveLength(count);
+  expect(h.cancelled()).toBe(true);
+});

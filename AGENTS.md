@@ -8,7 +8,7 @@ Read [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md), [
 
 ## Current ownership
 
-The specification and PLAN/layout are accepted. TASKS is the sole baseline execution owner; the user accepted full Phase 1 inline execution with GitHub tracking. No product source tree, test suite, or active feature campaign exists. Modern features belong to a subsequent campaign.
+The specification and PLAN/layout are accepted. TASKS is the sole baseline execution owner; the user accepted full Phase 1 inline execution with GitHub tracking. The complete engine/browser baseline and stable-version acceptance are implemented; the final phase review is complete and T-022 owns final explicit integration/publication. Subsequent work requires a new authorized scope. No feature campaign exists. Modern features belong to a subsequent campaign.
 
 ## Workflow
 
@@ -16,4 +16,4 @@ Use SDD Manager's preparation, acceptance, verification, and Git publication pro
 
 Repository publication is already authorized; do not request repeated push permission. This does not settle unresolved product decisions or bypass readiness gates. Never commit credentials.
 
-Maintain current navigation and actual setup/check commands as the project develops. No product setup/build/test commands exist yet; do not claim planned checks have run. Consult closed campaign records only for a specific current need and leave them unchanged.
+Maintain current navigation and actual setup/check commands as the project develops. Declared commands are npm ci, npm run dev/typecheck/build/preview, npm test, npm run test:e2e, and npm run test:e2e:stable. Setup/typecheck/build and stable production browser acceptance are verified; engine/input/controller/presentation suites exercise progression, chronological repeat scheduling, lifecycle cleanup and rendering. Browser tests serve the production build; build before running them. Browser checks spawn their server in the same command/process tree because separate tool executions do not share loopback listeners. Stable acceptance uses externally provisioned official Chromium headless and unpatched Firefox/geckodriver executables; see README for paths and process-scoped sandbox environment. Bundled browsers do not establish stable-version acceptance. Consult closed campaign records only for a specific current need and leave them unchanged.
