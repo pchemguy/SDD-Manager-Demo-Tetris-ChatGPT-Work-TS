@@ -1,22 +1,34 @@
 /** Bridge browser events and elapsed time to the engine; rendering consumes snapshots. */
 import {Game} from '../engine/game';
-import type {Snapshot,Command} from '../engine/types';
+import type {Snapshot} from '../engine/types';
 export interface Clock {now():number;request(callback:FrameRequestCallback):number;cancel(id:number):void}
-const COMMANDS:Record<string,Command>={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'rotateClockwise',ArrowDown:'softDrop'};
+import {Input} from './input';
+const KEYS=new Set(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown']);
 /** Own the browser loop and discrete event subscriptions. */
 export class Controller {
   private last:number;
+  private readonly input=new Input();
   private frameId=0;
   private disposed=false;
   constructor(private readonly game:Game,private readonly keys:EventTarget,private readonly restart:EventTarget,private readonly clock:Clock,private readonly render:(s:Snapshot)=>void){
-    this.last=clock.now();keys.addEventListener('keydown',this.keydown);restart.addEventListener('click',this.reset);
+    this.last=clock.now();keys.addEventListener('keydown',this.keydown);keys.addEventListener('keyup',this.keyup);restart.addEventListener('click',this.reset);
     this.draw();this.frameId=clock.request(this.frame);
   }
   private draw=():void=>{this.render(this.game.snapshot());};
-  private tick(at:number):void{this.game.advance(Math.max(0,at-this.last));this.last=at;}
+  /** Segment foreground elapsed time at each repeat; engine timers always run first. */
+  private tick(at:number):void{
+    while(this.input.nextTime()<=at){
+      const due=this.input.nextTime();this.game.advance(Math.max(0,due-this.last));this.last=due;
+      if(this.game.snapshot().status==='gameOver'){this.input.clear();break;}
+      for(const action of this.input.take(due))this.game.apply(action);
+    }
+    this.game.advance(Math.max(0,at-this.last));this.last=at;
+    if(this.game.snapshot().status==='gameOver')this.input.clear();
+  }
   private frame:FrameRequestCallback=at=>{if(this.disposed)return;this.tick(at);this.draw();this.frameId=this.clock.request(this.frame);};
-  private keydown=(event:Event):void=>{const e=event as KeyboardEvent,command=COMMANDS[e.key];if(!command)return;e.preventDefault();if(e.repeat)return;this.tick(this.clock.now());this.game.apply(command);this.draw();};
-  private reset=():void=>{this.game.apply('restart');this.last=this.clock.now();this.draw();};
+  private keydown=(event:Event):void=>{const e=event as KeyboardEvent;if(!KEYS.has(e.key))return;e.preventDefault();if(e.repeat)return;const at=this.clock.now();this.tick(at);if(this.game.snapshot().status==='running')for(const action of this.input.press(e.key,at,e.repeat))if(action!=='togglePause')this.game.apply(action);this.draw();};
+  private keyup=(event:Event):void=>{const e=event as KeyboardEvent;if(!KEYS.has(e.key))return;e.preventDefault();const at=this.clock.now();this.tick(at);this.input.release(e.key,at);this.draw();};
+  private reset=():void=>{this.input.clear();this.game.apply('restart');this.last=this.clock.now();this.draw();};
   /** Cancel the loop and release subscriptions; repeated disposal is harmless. */
-  dispose():void{if(this.disposed)return;this.disposed=true;this.clock.cancel(this.frameId);this.keys.removeEventListener('keydown',this.keydown);this.restart.removeEventListener('click',this.reset);}
+  dispose():void{if(this.disposed)return;this.disposed=true;this.clock.cancel(this.frameId);this.keys.removeEventListener('keydown',this.keydown);this.keys.removeEventListener('keyup',this.keyup);this.input.clear();this.restart.removeEventListener('click',this.reset);}
 }

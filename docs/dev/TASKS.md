@@ -88,11 +88,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: initial actions, 150/50 ms horizontal and 50 ms down repeat, most-recent horizontal priority, release fallback delay, horizontal-before-down ties, and no native rotation/Space repeats.
             Evidence: npm test -- tests/browser/input.test.ts; controlled time/key events at each repeat boundary, simultaneous repeats, opposite-key release, one-shot controls; npm run typecheck. No engine rule duplication.
             Verified: Four behavioral RED tests became GREEN; repeat/priority tests and strict typecheck passed. Verified initial actions, horizontal 150/50 ms and down 50 ms deadlines, native/duplicate suppression, recent horizontal priority, release fallback delay, horizontal-before-down ties, one-shot release requirements and lifecycle schedule clearing. Controller integration follows in T-013.
-        - [ ] T-013 — Integrate repeat schedules with chronological browser time
+        - [x] T-013 — Integrate repeat schedules with chronological browser time
             Scope: src/browser/controller.ts, input integration, tests/browser/controller.test.ts.
             Depends on: T-012. Contracts: S4/S7 timer-before-command ordering and foreground elapsed-time handling; A3–A4/A8.
             Outcome: segment elapsed updates at scheduled repeat boundaries, advance timers before each command, process foreground frame delays without dropping/capping gameplay time, render consistent snapshots.
             Evidence: npm test -- tests/browser; compare controlled frame partitions, lock/repeat equal-time boundaries and delayed frames, plus engine regressions and npm run typecheck/build.
+            Verified: Two behavioral RED failures preceded integration. GREEN: all 49 unit tests, typecheck and build passed. A 5000 ms foreground stall equals 25 ms frame partitions across repeat/drop/lock/spawn; a lock/repeat tie applies the repeat to the new piece after locking. Key release stops its schedule, existing engine and presentation regressions pass.
         - [ ] T-014 — Complete pause, focus, restart input cleanup, and disposal
             Scope: src/browser/controller.ts/input.ts and focused controller/lifecycle tests.
             Depends on: T-013. Contracts: lifecycle/focus/resource obligations in S7; A8–A10.
