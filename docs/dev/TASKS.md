@@ -112,7 +112,7 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Evidence: milestone 1.3 exits and applicable A8–A10 pass; code review distinct from tests; report published; hosted closure reconciled if active.
             Report: docs/dev/reports/phases/1/1.3.md; include implemented features, usability/risk observations, Findings/Blockers and TODO.
             Verified: Read-only input/controller/engine integration review completed without required defects. All 53 unit tests, typecheck/build and four stable-Chromium production tests passed. S7 repeat/priority/chronology/lifecycle and disposal exits verified; report distinguishes native keys, browser-dispatched focus events and controlled hidden-state evidence.
-    - [ ] Milestone 1.4 — Desktop presentation and delivery
+    - [x] Milestone 1.4 — Desktop presentation and delivery
         - [x] T-017 — Complete responsive square-cell and high-DPI rendering
             Scope: src/browser/renderer.ts, styles and relevant view integration; focused tests/browser and tests/e2e visual/resize checks.
             Depends on: T-016. Contracts: rendering/size obligations of S8/A10.
