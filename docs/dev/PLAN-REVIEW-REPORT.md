@@ -2,11 +2,11 @@
 
 ## Current gate
 
-State: **Ready** for task derivation after human acceptance of PLAN/layout. This is PLAN/SPEC and layout conformance readiness, not an assertion that the plan is accepted or implementation is authorized.
+State: **Ready** for task derivation. The user accepted PLAN/layout on 2026-10-09. This review does not authorize implementation; current acceptance/navigation reconciliation is recorded in Revision 1.
 
 Reviewed scope: [PLAN](PLAN.md) and [layout](layout.md); no focused children. Governing inputs: accepted [SPEC](SPEC.md), [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), and [DECOMPOSITION](DECOMPOSITION.md). The accepted specification checkpoint is `04766e9d8dd21a1e7b6ef5cbab08c20f8ff4cff1`; pending upstream changes are acceptance/navigation only, as assessed in [SPEC review Revision 1](SPEC-REVIEW-REPORT.md#revision-1--acceptance-and-navigation-reconciliation).
 
-Exact reviewed/governing states (SHA-256):
+Initial reviewed/governing states (SHA-256):
 
 | File | Content identity |
 | --- | --- |
@@ -17,7 +17,7 @@ Exact reviewed/governing states (SHA-256):
 | `docs/dev/ARCHITECTURE.md` | `4ce927e133be43bdf2b40461bd11960340e76857314db629cc5b2687d4f7149b` |
 | `docs/dev/DECOMPOSITION.md` | `71cbbe32339eebceb926e09c328cd788f73301291855f307d37943db372ebd47` |
 
-Remaining conformance blockers: none. PLAN/layout acceptance remains pending. Hosted tracking is recommended but confirmation is pending; it does not block preparation. No TASKS, hosted projection, dependency install, or product implementation has been performed.
+Remaining conformance blockers: none. PLAN/layout acceptance is established. Hosted tracking confirmation is pending. TASKS preparation is in progress; no hosted projection, dependency install, or product implementation has occurred.
 
 ## Initial review
 
@@ -46,3 +46,16 @@ Layout review: every engine/browser component has a source/check home; compositi
 No confirmed QC finding was identified. Human acceptance and hosted-tracking choice remain distinct workflow decisions, not failed conformance findings. Early browser/toolchain availability is an execution risk with an explicit evidence/blocking route.
 
 Document checks passed: local Markdown targets, phase/milestone identities and count, exact source hash capture, and authored whitespace. Those checks are document evidence; no application build/unit/browser command ran.
+
+## Revision 1 — Acceptance and current-owner navigation
+
+The user accepted PLAN/layout at `3b9f97b554611b0bad5841361bd13b4e36d0aedd` on 2026-10-09. Updated acceptance statements and PROJECT/layout navigation to the new sole TASKS owner. Milestone outcomes, scope, dependency order, exits, physical source/check allocations, and S1–S8/A1–A11 are unchanged. Compared these differences with the initial review coverage; conformance/count/ownership evidence remains applicable. Rechecked local targets and exact current hashes. No confirmed issue or required strategy amendment arose. State: Ready.
+
+| Current source | SHA-256 |
+| --- | --- |
+| `docs/dev/PLAN.md` | `157a23397ac2977a899095751b8b805096f700e50a1191fad20d95437ee8a95b` |
+| `docs/dev/layout.md` | `ddbd7fd96c8fbb56a31a2ab9dfbc4466a1b1eec7b45c80921b384a69b1bbddf4` |
+| `docs/dev/SPEC.md` | `720af17025651563232a1dcc9a0daa46fc603b7d993fd69bb01b1a103f7f112f` |
+| `docs/dev/PROJECT.md` | `fb92cb94be795c4e5a4bf3e81b40c772f0c329fd24a7e12018110bb5a088e143` |
+| `docs/dev/ARCHITECTURE.md` | `4ce927e133be43bdf2b40461bd11960340e76857314db629cc5b2687d4f7149b` |
+| `docs/dev/DECOMPOSITION.md` | `71cbbe32339eebceb926e09c328cd788f73301291855f307d37943db372ebd47` |

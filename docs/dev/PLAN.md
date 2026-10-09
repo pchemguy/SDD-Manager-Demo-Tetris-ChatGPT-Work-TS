@@ -4,7 +4,7 @@
 
 Deliver the complete accepted baseline in [SPEC](SPEC.md), following [ARCHITECTURE](ARCHITECTURE.md) and [DECOMPOSITION](DECOMPOSITION.md). [PROJECT](PROJECT.md) establishes demonstration context and non-goals. The specification was accepted by the user on 2026-10-09; its [conformance review](SPEC-REVIEW-REPORT.md) is the planning prerequisite.
 
-This is a proposed delivery strategy awaiting acceptance. It contains capability outcomes and verification boundaries, not executable tasks or implementation status. [Physical layout](layout.md) assigns the corresponding source, check, and artifact ownership.
+The user accepted this delivery strategy on 2026-10-09. It contains capability outcomes and verification boundaries, not executable tasks or implementation status. [Physical layout](layout.md) assigns the corresponding source, check, and artifact ownership.
 
 ## Strategy
 
@@ -59,4 +59,4 @@ Git publication is authorized by the user. GitHub issue/label/milestone tracking
 - Scenarios for line-count thresholds/top-out may require valid deterministic fixtures. Keep fixture construction in tests and avoid a production state-mutation API solely for testing.
 - Setup/docs must support ordinary Node/npm use and Windows CMD. Do not hardcode PowerShell launch commands or change the user's preconfigured Python environment.
 
-No unresolved product requirement is delegated to TASKS. PLAN/layout acceptance, hosted-tracking choice, executable-range selection, and concrete toolchain/browser availability remain their respective preparation/execution gates.
+No unresolved product requirement is delegated to TASKS. TASKS acceptance, hosted-tracking choice, executable-range selection, and concrete toolchain/browser availability remain their respective preparation/execution gates.

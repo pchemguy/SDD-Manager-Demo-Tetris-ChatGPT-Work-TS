@@ -2,7 +2,7 @@
 
 ## Status and ownership
 
-This is the proposed physical allocation for the accepted [architecture](ARCHITECTURE.md), [components](DECOMPOSITION.md), and [delivery plan](PLAN.md). Only root repository records and the design/specification/planning documents exist at preparation time. Product/test/tooling paths below are planned; their mention does not claim implementation.
+This is the accepted physical allocation for the accepted [architecture](ARCHITECTURE.md), [components](DECOMPOSITION.md), and [delivery plan](PLAN.md). Only root repository records and the design/specification/planning documents exist at preparation time. Product/test/tooling paths below are planned; their mention does not claim implementation.
 
 ## Source and verification map
 
@@ -42,10 +42,10 @@ Root `README.md` owns product introduction, user controls, setup/build/test inst
 
 `docs/dev/PROJECT.md`, `ARCHITECTURE.md`, `DECOMPOSITION.md`, `SPEC.md`, `PLAN.md`, and `layout.md` are the canonical main owners. Adjacent SPEC/PLAN/TASKS review reports cover their roots and applicable children. No document children are needed for this scope.
 
-`docs/dev/TASKS.md` will own the full baseline phase/milestone/task hierarchy; do not maintain a second executable checklist. Main milestone reports belong at `docs/dev/reports/phases/1/<milestone-id>.md`; the phase report belongs at `docs/dev/reports/phases/1/PHASE-REPORT.md`; the final baseline report belongs at `docs/dev/reports/IMPLEMENTATION-REPORT.md`. Phase review milestone 1.5 produces the phase/final reports, not an additional delivery-milestone report.
+[TASKS](TASKS.md) owns the full baseline phase/milestone/task hierarchy; do not maintain a second executable checklist. Main milestone reports belong at `docs/dev/reports/phases/1/<milestone-id>.md`; the phase report belongs at `docs/dev/reports/phases/1/PHASE-REPORT.md`; the final baseline report belongs at `docs/dev/reports/IMPLEMENTATION-REPORT.md`. Phase review milestone 1.5 produces the phase/final reports, not an additional delivery-milestone report.
 
 A later feature campaign allocates its active root FEATURE documents and descriptive package/branch association under SDD Manager's feature conventions when that campaign starts. No speculative feature package is created now. Closed records remain unchanged and outside routine current validation.
 
 ## Placement gate
 
-Every significant logical component has a source/check home, and browser integration has one composition root. TASKS may choose bounded touched paths from this map; a genuine new ownership need requires a scoped layout amendment and affected conformance recheck. No placement choice blocks baseline task derivation once this layout is accepted.
+Every significant logical component has a source/check home, and browser integration has one composition root. TASKS may choose bounded touched paths from this map; a genuine new ownership need requires a scoped layout amendment and affected conformance recheck. No placement choice blocks baseline task derivation under the accepted layout.

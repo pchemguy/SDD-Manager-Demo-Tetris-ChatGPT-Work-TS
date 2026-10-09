@@ -18,5 +18,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Delivery plan](docs/dev/PLAN.md)
 - [Physical layout](docs/dev/layout.md)
 - [Plan conformance review](docs/dev/PLAN-REVIEW-REPORT.md)
+- [Executable tasks](docs/dev/TASKS.md)
+- [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The specification is accepted. PLAN/layout await human review; executable tasks follow their acceptance. No product build or test commands exist yet.
+The specification and PLAN/layout are accepted. TASKS awaits acceptance and execution-range selection. No product build or test commands exist yet.

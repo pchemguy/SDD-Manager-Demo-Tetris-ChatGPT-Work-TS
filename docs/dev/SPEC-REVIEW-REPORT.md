@@ -51,3 +51,7 @@ Rechecked exact source states, accepted scope, local links, and absence of behav
 | `docs/dev/PROJECT.md` | `ec3b0cc08783c044faa8f36e274cfa3a44cafc1009b92db0e6b87c5976f0b8ea` |
 | `docs/dev/ARCHITECTURE.md` | `4ce927e133be43bdf2b40461bd11960340e76857314db629cc5b2687d4f7149b` |
 | `docs/dev/DECOMPOSITION.md` | `71cbbe32339eebceb926e09c328cd788f73301291855f307d37943db372ebd47` |
+
+## Revision 2 — Current navigation equivalence
+
+PROJECT navigation links accepted PLAN/layout and planned TASKS. Its behavioral brief is unchanged; SPEC, ARCHITECTURE, and DECOMPOSITION are unchanged. Checked the navigation-only difference against the existing conformance coverage and local targets. Ready is retained. Current PROJECT SHA-256: `fb92cb94be795c4e5a4bf3e81b40c772f0c329fd24a7e12018110bb5a088e143`. No specification correction or implementation check was needed.
