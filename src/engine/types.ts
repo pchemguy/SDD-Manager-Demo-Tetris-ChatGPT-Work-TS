@@ -17,6 +17,7 @@ export type Command =
   | "right"
   | "rotateClockwise"
   | "softDrop"
+  | "hardDrop"
   | "pause"
   | "resume"
   | "restart";

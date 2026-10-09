@@ -40,7 +40,7 @@ export class Game {
     this.lockRemaining = null;
     this.updateGrounding();
   }
-  /** Apply an instantaneous command; collisions and ineffective commands report false. */
+  /** Apply an instantaneous command. Hard drop scores translation but only elapsed-time lock expiry commits it; ineffective commands report false. */
   apply(command: Command): boolean {
     if (command === "restart") {
       this.restart();
@@ -57,6 +57,14 @@ export class Game {
       return true;
     }
     if (this.status !== "running" || !this.active) return false;
+    if (command === "hardDrop") {
+      const distance = landingDistance(this.board, this.active);
+      if (distance === 0) return false;
+      this.active = { ...this.active, y: this.active.y + distance };
+      this.score += 2 * distance;
+      this.updateGrounding();
+      return true;
+    }
     const candidate = { ...this.active };
     if (command === "left") candidate.x--;
     else if (command === "right") candidate.x++;

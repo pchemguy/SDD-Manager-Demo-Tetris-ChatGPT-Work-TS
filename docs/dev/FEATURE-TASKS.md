@@ -20,11 +20,12 @@ Verification below is planned, not performed. Existing commands are `npm run typ
             Outcome: pure first-obstruction landing query; Game snapshots expose detached ghost cells without state, timer or random consumption. Keep existing consumers compiling and baseline behavior intact; hold fields belong to T-030.
             Evidence: npm test -- tests/engine/placement.test.ts tests/engine/game.test.ts; empty/stacked/uneven/grounded projection, paused/no-active state, retained/mutated snapshots and nonmutation; npm run typecheck and relevant regressions. No production scenario loader.
             Verified: RED: missing ghost and zero-distance placeholder failed literal expectations after resolving the initial missing-module setup. GREEN/verification: npm test 59 passing; npm run typecheck passes. Empty/floor/uneven first obstruction, grounded distance, snapshot mutation, pause and game-over absence verified; source/projection docs reviewed. npm proxy-environment warning is unrelated to checks.
-        - [ ] T-024 — Implement scored hard drop with the full grounded delay
+        - [x] T-024 — Implement scored hard drop with the full grounded delay
             Scope: src/engine/game.ts/types.ts and planned tests/engine/features.test.ts, collaborating timing/progression tests.
             Depends on: T-023. Contracts: F5–F6/FA6–FA7, retained S4–S5.
             Outcome: hardDrop translates to shared landing, scores two points per positive row, rejects zero/inactive drop, preserves gravity age and full independent lock countdown. No command-time lock/clear/spawn.
             Evidence: npm test -- tests/engine; positive/zero/inactive score/result atomicity, late-cycle landing, just-below/at G, grounded repeats, movement/airborne cancellation and successor timer ordering; npm run typecheck. Keep baseline line awards and soft-drop behavior verified.
+            Verified: RED: four feature assertions failed because hardDrop was ineffective. Verification: npm test -- tests/engine 45 passing; npm run typecheck passes. Positive/zero/paused drop, exact row points/ghost endpoint, late full interval, grounded retention, airborne cancellation/relanding and timer-before-successor command verified with progression regressions. Engine API docs reviewed; no immediate lock or source draw.
         - [ ] T-025 — Integrate Space hard drop and P pause without stale input
             Scope: src/browser/input.ts/controller.ts, index.html current instructions, focused browser unit tests and affected tests/e2e controls/accessibility fixtures.
             Depends on: T-024. Contracts: Space/P portions of F7/FA8; retained repeat/focus/resource obligations.
