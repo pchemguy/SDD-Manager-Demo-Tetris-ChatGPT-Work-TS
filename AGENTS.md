@@ -4,11 +4,11 @@
 
 This repository develops a single-player desktop browser Tetris game in TypeScript and demonstrates SDD Manager.
 
-Read [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md), and [DECOMPOSITION](docs/dev/DECOMPOSITION.md). Read applicable nested AGENTS.md files before changing selected paths. Explicitly load this file when the host does not discover it automatically.
+Read [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md), [DECOMPOSITION](docs/dev/DECOMPOSITION.md), [SPEC](docs/dev/SPEC.md), and its [review report](docs/dev/SPEC-REVIEW-REPORT.md). Read applicable nested AGENTS.md files before changing selected paths. Explicitly load this file when the host does not discover it automatically.
 
 ## Current ownership
 
-The project is in initial design preparation. No executable TASKS owner, product source tree, test suite, or active feature campaign exists. Specification, planning, and tasks must establish governing contracts before implementation. Modern features belong to a subsequent campaign.
+The project is in specification preparation. The specification refinements await human acceptance. No executable TASKS owner, product source tree, test suite, or active feature campaign exists. Specification, planning, and tasks must establish governing contracts before implementation. Modern features belong to a subsequent campaign.
 
 ## Workflow
 

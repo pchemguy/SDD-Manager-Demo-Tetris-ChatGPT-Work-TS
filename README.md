@@ -13,5 +13,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Project brief](docs/dev/PROJECT.md)
 - [Architecture](docs/dev/ARCHITECTURE.md)
 - [Component decomposition](docs/dev/DECOMPOSITION.md)
+- [Behavioral specification](docs/dev/SPEC.md)
+- [Specification conformance review](docs/dev/SPEC-REVIEW-REPORT.md)
 
-Specification, delivery planning, and executable tasks follow design preparation. No product build or test commands exist yet.
+The specification awaits human review. Delivery planning and executable tasks follow specification acceptance. No product build or test commands exist yet.
