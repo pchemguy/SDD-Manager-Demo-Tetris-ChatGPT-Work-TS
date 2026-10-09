@@ -82,11 +82,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Report: docs/dev/reports/phases/1/1.2.md; include implemented features, Findings/Blockers and TODO.
             Verified: Coherent S1-S6 engine/consumer code review completed; early-deadline finding repaired and rechecked. All 42 unit tests passed, with 38 engine tests; typecheck/build, production Chromium play smoke and native Level 2/pause-resume presentation passed. A1-A7 exits verified; report records later browser-control/compatibility gates.
     - [ ] Milestone 1.3 — Complete browser controls and lifecycle
-        - [ ] T-012 — Implement deterministic held-key repeat and directional priority
+        - [x] T-012 — Implement deterministic held-key repeat and directional priority
             Scope: src/browser/input.ts and tests/browser/input.test.ts; controller consumes its command schedule.
             Depends on: T-011. Contracts: repeat/priority portions of S7/A8.
             Outcome: initial actions, 150/50 ms horizontal and 50 ms down repeat, most-recent horizontal priority, release fallback delay, horizontal-before-down ties, and no native rotation/Space repeats.
             Evidence: npm test -- tests/browser/input.test.ts; controlled time/key events at each repeat boundary, simultaneous repeats, opposite-key release, one-shot controls; npm run typecheck. No engine rule duplication.
+            Verified: Four behavioral RED tests became GREEN; repeat/priority tests and strict typecheck passed. Verified initial actions, horizontal 150/50 ms and down 50 ms deadlines, native/duplicate suppression, recent horizontal priority, release fallback delay, horizontal-before-down ties, one-shot release requirements and lifecycle schedule clearing. Controller integration follows in T-013.
         - [ ] T-013 — Integrate repeat schedules with chronological browser time
             Scope: src/browser/controller.ts, input integration, tests/browser/controller.test.ts.
             Depends on: T-012. Contracts: S4/S7 timer-before-command ordering and foreground elapsed-time handling; A3–A4/A8.
