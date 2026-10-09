@@ -2,11 +2,11 @@
 
 ## Current gate
 
-State: **Ready for specification acceptance and subsequent planning**, subject to human acceptance of the proposed specification refinements. The design-conformance review passes; implementation is not authorized by this report.
+State: **Ready** for dependent planning. The user accepted the specification on 2026-10-09. The design-conformance review passes; implementation is not authorized by this report. Current source identities and acceptance reconciliation are recorded in Revision 1.
 
 Scope: [SPEC](SPEC.md), sections S1–S8 and A1–A11; no focused children. Governing sources: [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), [DECOMPOSITION](DECOMPOSITION.md), and the user's accepted baseline/lock-delay design. Source checkpoint before specification preparation: `3508a24819ae117a71d8d752941035980e204f32`. PROJECT's pending change is navigation only; its accepted product scope is unchanged.
 
-Exact reviewed/governing file states (SHA-256):
+Initial reviewed/governing file states (SHA-256):
 
 | File | Content identity |
 | --- | --- |
@@ -15,7 +15,7 @@ Exact reviewed/governing file states (SHA-256):
 | `docs/dev/ARCHITECTURE.md` | `4ce927e133be43bdf2b40461bd11960340e76857314db629cc5b2687d4f7149b` |
 | `docs/dev/DECOMPOSITION.md` | `71cbbe32339eebceb926e09c328cd788f73301291855f307d37943db372ebd47` |
 
-Remaining conformance blockers: none. Human acceptance of numeric/input/API refinements remains pending and is separate from this QC gate. PLAN authoring has not started. No product code, tests, or browser execution exists.
+Remaining conformance blockers: none. Specification acceptance is established. Product implementation and browser execution have not started.
 
 ## Initial review
 
@@ -38,3 +38,16 @@ No confirmed QC findings were identified. Numeric/API/input refinements are expl
 Document checks: local Markdown target existence, canonical section/acceptance identifiers, credential exclusion, and whitespace checks for authored changes passed. The unchanged bundled disclosure retains its original whitespace outside this checkpoint's edited paths. File hashes above identify the actual reviewed pending contents, not a future commit.
 
 Limitations: this establishes document conformance and assessable contracts, not executable correctness, browser compatibility, performance, or specification acceptance. Proposed browser targets and verification conditions still require implementation evidence.
+
+## Revision 1 — Acceptance and navigation reconciliation
+
+The user accepted the complete specification at source commit `04766e9d8dd21a1e7b6ef5cbab08c20f8ff4cff1` on 2026-10-09. sdd-manage/sdd-specify updated SPEC's acceptance paragraph and PROJECT's current navigation. S1–S8 and A1–A11 are unchanged; architecture and decomposition are unchanged. The initial conformance coverage remains applicable because these edits do not change behavior or structural responsibilities.
+
+Rechecked exact source states, accepted scope, local links, and absence of behavioral changes. No confirmed issue or new product decision was introduced. State: Ready for PLAN. No implementation evidence is claimed.
+
+| Current source | SHA-256 |
+| --- | --- |
+| `docs/dev/SPEC.md` | `720af17025651563232a1dcc9a0daa46fc603b7d993fd69bb01b1a103f7f112f` |
+| `docs/dev/PROJECT.md` | `ec3b0cc08783c044faa8f36e274cfa3a44cafc1009b92db0e6b87c5976f0b8ea` |
+| `docs/dev/ARCHITECTURE.md` | `4ce927e133be43bdf2b40461bd11960340e76857314db629cc5b2687d4f7149b` |
+| `docs/dev/DECOMPOSITION.md` | `71cbbe32339eebceb926e09c328cd788f73301291855f307d37943db372ebd47` |

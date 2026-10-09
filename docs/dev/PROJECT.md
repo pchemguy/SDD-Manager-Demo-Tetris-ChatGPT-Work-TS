@@ -24,4 +24,4 @@ A playable baseline must demonstrate coherent movement, rotation, gravity, locki
 
 ## Navigation
 
-[Architecture](ARCHITECTURE.md) defines major blocks; [decomposition](DECOMPOSITION.md) defines logical components. [SPEC](SPEC.md) owns the proposed behavioral contracts; PLAN and layout will own delivery order and physical organization; TASKS will own executable work. PLAN, layout, and TASKS are not present yet.
+[Architecture](ARCHITECTURE.md) defines major blocks; [decomposition](DECOMPOSITION.md) defines logical components. [SPEC](SPEC.md) owns behavioral contracts; [PLAN](PLAN.md) and [layout](layout.md) define proposed delivery order and physical organization; TASKS will own executable work and is not present yet.

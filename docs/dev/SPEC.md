@@ -4,7 +4,7 @@
 
 This specification defines the complete baseline browser game described in [PROJECT](PROJECT.md), using the boundaries in [ARCHITECTURE](ARCHITECTURE.md) and [DECOMPOSITION](DECOMPOSITION.md). It is independently readable as the behavioral contract for construction from scratch.
 
-The accepted design is preserved. Numeric scoring, gravity, geometry, input, and API refinements below are proposed specification decisions pending human review. Conformance readiness is distinct from acceptance and implementation authorization.
+The design and specification refinements are accepted by the user. This specification owns the baseline behavioral contracts. Acceptance and conformance readiness do not independently authorize implementation.
 
 The game is single-player, desktop, and keyboard operated. Hold, ghost projection, seven-bag selection, wall kicks, and hard drop are reserved for a subsequent feature campaign. Multiplayer, accounts, backend storage, leaderboards, touch controls, audio, and persisted high scores are outside this baseline. No exact commercial-standard conformance is claimed.
 
