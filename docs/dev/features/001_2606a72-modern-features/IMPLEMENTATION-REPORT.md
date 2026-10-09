@@ -18,4 +18,15 @@ None, aggregated from all four delivery reports and final review. No later campa
 
 ## Integration and publication receipt
 
-Status: verified feature review/incorporation boundary; target integration/publication pending. Working branch feature/001_2606a72-modern-features is persisted before integration. After review issue/milestone closure and remote readback, explicitly merge the verified tip into refreshed main with two parents, check the merged tree, publish and confirm remote containment. A branch push alone does not establish integrated completion. This section will record observed parent/merge SHAs and publication checks after they succeed.
+Status: **Complete — integrated and published on main.**
+
+| Observed boundary | Receipt |
+| --- | --- |
+| Refreshed target parent | `71f6275a7b77ed02e9e9f1e6f23762770866f1c5` |
+| Published verified feature parent | `b6293786cbf501041f57376a3748210329cdc3d5` |
+| Explicit two-parent main merge | `d8e6de2726efdff5bcbb23f044fc727c74688eae` |
+| Merged-state verification | Current document/link/ownership/preservation checks, strict typecheck, all 89 unit tests, production build, all 13 stable Chromium checks and both unpatched Firefox sessions pass. No conflict resolution or runtime change was required. |
+| GitHub readback | All 19 Phase 2 issues #23–#41 are closed/completed with verified markers/phase/milestone associations; all five Phase 2 milestones #6–#10 are closed. Baseline issues/reports remain closed/unchanged. |
+| Target publication | Push to origin/main succeeded; GitHub main ref was read back at the merge SHA. Verified feature tip is the merge's second parent and an ancestor of published main. |
+
+The subsequent T-041 receipt commit records these observed facts and reconciles current navigation and Phase 2's completion checkbox; it changes no product code or task definition. Both preparation/implementation branches are retained. All selected work is complete; no required blocker or pending hosted closure remains and no later campaign is started.

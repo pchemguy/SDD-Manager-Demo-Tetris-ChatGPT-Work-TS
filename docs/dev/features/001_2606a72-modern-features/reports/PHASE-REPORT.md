@@ -2,7 +2,7 @@
 
 ## Accepted and reviewed boundary
 
-Campaign 001_2606a72-modern-features implements T-023–T-041 inline with GitHub tracking. T-023–T-040 and delivery milestones 2.1–2.4 are published and closed/read back. The accepted preparation checkpoint is 71f6275a7b77ed02e9e9f1e6f23762770866f1c5; the working branch is feature/001_2606a72-modern-features, target main. This phase review covers the full prospective feature delta at bd2174d plus T-041 document incorporation/reporting. Target integration/publication is a separate final gate recorded in the [implementation receipt](../IMPLEMENTATION-REPORT.md).
+Campaign 001_2606a72-modern-features implements T-023–T-041 inline with GitHub tracking. T-023–T-041 and all five milestones 2.1–2.5 are published and closed/read back. The accepted preparation checkpoint is 71f6275a7b77ed02e9e9f1e6f23762770866f1c5; the working branch is feature/001_2606a72-modern-features, target main. This phase review covers the full prospective feature delta at bd2174d plus T-041 document incorporation/reporting. Target integration/publication is a separate final gate recorded in the [implementation receipt](../IMPLEMENTATION-REPORT.md).
 
 ## Cross-component code and dependency review
 
@@ -36,3 +36,18 @@ None remaining. Milestone 2.2 repaired MR22-01 (inherited action-map keys); 2.4 
 ## TODO aggregation
 
 None. Provenance: [2.1](2.1.md), [2.2](2.2.md), [2.3](2.3.md), [2.4](2.4.md) each reports TODO None; this cross-phase review introduces none. Integration/publication receipt is required workflow completion, not a deferred code TODO. No later campaign is selected.
+
+## Final publication receipt
+
+Status: **Complete — integrated and published on main.**
+
+| Observed boundary | Receipt |
+| --- | --- |
+| Refreshed target parent | `71f6275a7b77ed02e9e9f1e6f23762770866f1c5` |
+| Published verified feature parent | `b6293786cbf501041f57376a3748210329cdc3d5` |
+| Explicit two-parent main merge | `d8e6de2726efdff5bcbb23f044fc727c74688eae` |
+| Merged-state verification | Current document/link/ownership/preservation checks, strict typecheck, all 89 unit tests, production build, all 13 stable Chromium checks and both unpatched Firefox sessions pass. No conflict resolution or runtime change was required. |
+| GitHub readback | All 19 Phase 2 issues #23–#41 are closed/completed with verified markers/phase/milestone associations; all five Phase 2 milestones #6–#10 are closed. Baseline issues/reports remain closed/unchanged. |
+| Target publication | Push to origin/main succeeded; GitHub main ref was read back at the merge SHA. Verified feature tip is the merge's second parent and an ancestor of published main. |
+
+The subsequent T-041 receipt commit records these observed facts and reconciles current navigation and Phase 2's completion checkbox; it changes no product code or task definition. Both preparation/implementation branches are retained. All selected work is complete; no required blocker or pending hosted closure remains and no later campaign is started.

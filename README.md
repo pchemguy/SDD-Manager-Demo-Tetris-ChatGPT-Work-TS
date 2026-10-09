@@ -21,7 +21,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Executable tasks](docs/dev/TASKS.md)
 - [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The five modern features and current-stable desktop acceptance are verified. [TASKS](docs/dev/TASKS.md) is the sole executable owner of both phases. The [modern-feature package](docs/dev/features/001_2606a72-modern-features/README.md) preserves accepted sources/QC and implementation evidence. Final phase review/incorporation is in progress; main integration/publication is recorded by its [implementation receipt](docs/dev/features/001_2606a72-modern-features/IMPLEMENTATION-REPORT.md).
+The five modern features and current-stable desktop acceptance are verified. [TASKS](docs/dev/TASKS.md) is the sole executable owner of both phases. The [modern-feature package](docs/dev/features/001_2606a72-modern-features/README.md) preserves accepted sources/QC and implementation evidence. Both phases are complete and published on main; verified integration/publication is recorded by the feature [implementation receipt](docs/dev/features/001_2606a72-modern-features/IMPLEMENTATION-REPORT.md).
 
 ## Development setup
 

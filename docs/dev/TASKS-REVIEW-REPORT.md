@@ -2,7 +2,7 @@
 
 ## Current gate
 
-State: **Ready** for the complete current TASKS derivation/ownership gate. T-041 independently assessed incorporated main owners; archived feature Ready is historical only. The latest assessment is Revision 2. Accepted inline execution/publication authority remains separate from document conformance.
+State: **Ready** for the complete current TASKS derivation/ownership gate. T-041 independently assessed incorporated main owners; archived feature Ready is historical only. The latest assessment is Revision 3. Accepted inline execution/publication authority remains separate from document conformance.
 
 ## Initial gate (historical)
 
@@ -83,3 +83,9 @@ Confirmed incorporation corrections: stale F contract references in current PLAN
 T-041 review/incorporation result is verified and checked; the explicit integration/publication receipt remains the subsequent workflow boundary. Task definitions, IDs, associations, dependencies and conformance are unchanged. Owning TASKS SHA-256 after this evidence/status update: `9b7c012b3d105b503d9c35544a19b8538e45c6cac43bfbc82356ed97569739f7`.
 
 Milestone 2.5 review issue/native milestone closure is read back. Parent review status changes only; Phase 2 remains unchecked pending target publication. TASKS SHA-256: `2a04bccc5ee2c33e0cafcabe91ad020e9d74437537f48acff61fcf4d54bb854b`.
+
+## Revision 3 — Verified completion and target receipt reconciliation
+
+Date: 2026-10-09. Rechecked the current main hierarchy after published target integration: all 41 unique task entries, ten milestones and two phases are checked with durable evidence, actual merged checks and remote containment. No task definition, dependency, scope, issue association or canonical contract changed; Revision 2's full structural assessment remains applicable. T-041 target receipt is observed, not inferred from branch publication. Historical snapshots retain no executable authority. Local links/acceptance identities, authored whitespace and unchanged closed baseline reports are rechecked. Ready retained; no completion reassessment or hosted closure remains pending.
+
+Owning TASKS SHA-256 after final evidence/status reconciliation: `dab77f7bba44247d3d47cf564968d6136bf7827017ada9afcc454d5fb259bf1c`.
