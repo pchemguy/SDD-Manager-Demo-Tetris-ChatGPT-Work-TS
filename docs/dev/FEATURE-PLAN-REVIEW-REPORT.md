@@ -2,11 +2,11 @@
 
 ## Current gate
 
-State: **Ready for PLAN/layout acceptance**. FEATURE-PLAN conforms to accepted FEATURE-SPEC, and the focused physical layout supports the accepted design and delivery route. FPR-01 is resolved; no confirmed issue remains. User acceptance of this strategy/layout is pending, so FEATURE-TASKS derivation has not started. This report does not authorize product implementation or hosted projection.
+State: **Ready for dependent feature task derivation**. FEATURE-PLAN conforms to accepted FEATURE-SPEC, and the focused physical layout supports the accepted design and delivery route. FPR-01 is resolved; no confirmed issue remains. The user accepted PLAN/layout at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. Revision 2 records acceptance-only reconciliation and current source identities. This report does not authorize product implementation or hosted projection.
 
 Reviewed scope: [FEATURE-PLAN](FEATURE-PLAN.md) and [layout/modern-features](layout/modern-features.md); no plan children. The focused layout is an active feature delta, not an implicit rewrite of main layout. Campaign: [001_2606a72-modern-features](features/001_2606a72-modern-features/README.md); preparation checkpoint: `2999f0fbaaa46813c97e2fed035dfab3b1b279fc`. The user accepted FEATURE-SPEC at that checkpoint on 2026-10-09; [specification review Revision 1](FEATURE-SPEC-REVIEW-REPORT.md#revision-1--specification-acceptance) records acceptance-only reconciliation with unchanged F1–F8/FA1–FA10.
 
-Current reviewed/governing source identities (SHA-256):
+Revision 1 reviewed/governing source identities (SHA-256):
 
 | Source | Content identity |
 | --- | --- |
@@ -61,3 +61,12 @@ sdd-plan corrected FPR-01 in the feature layout and clarified the plan's code-re
 Rechecked the corrected layout against report ownership, the plan's final incorporation/closure route, and grouped F1–F8/FA1–FA10 coverage. Source hashes, local document targets, Phase 2/milestone identities, four delivery plus one review count, scoped edits and whitespace checks pass. FEATURE-SPEC's accepted contracts and all baseline product/governing/report contents are unchanged. Root/package navigation reflects accepted specification and pending plan/layout acceptance. FPR-01 is resolved; no remaining confirmed issue. Gate: Ready for PLAN/layout acceptance, then dependent task derivation after acceptance.
 
 No installs, tests, builds, browser execution, compatibility passes or hosted objects are claimed. Actual browser availability and feature evidence are execution gates. Tracking confirmation remains a separate implementation-handoff choice. Main document incorporation and affected QC occur on the feature branch before final merge; this preparation checkpoint neither performs that incorporation nor invalidates unchanged baseline review evidence.
+
+## Revision 2 — PLAN/layout acceptance
+
+The user accepted FEATURE-PLAN and its focused layout at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. Updated their authority/readiness paragraphs to record acceptance. Phase/milestone identities, outcomes, dependency order, exits, physical allocations, feature behavior and upstream inputs are unchanged. Compared the acceptance-only differences with initial/Revision 1 coverage; conformance, count and ownership evidence remains applicable. Rechecked exact current identities and local targets. FPR-01 remains resolved; no new issue. Ready for dependent FEATURE-TASKS derivation. Current source hashes are recorded below; implementation and hosted projection remain separate gates.
+
+| Current source | SHA-256 |
+| --- | --- |
+| `docs/dev/FEATURE-PLAN.md` | `1cef62149f13d5aa39e80a438c359ccb35b56b916cda54b986df35f884fd10b1` |
+| `docs/dev/layout/modern-features.md` | `b6e670f35495342c15f626d72dd184573e68f886073deefabd13ac2f9d4c9d73` |

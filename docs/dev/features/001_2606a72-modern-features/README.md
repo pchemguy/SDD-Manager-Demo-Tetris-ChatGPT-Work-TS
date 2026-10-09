@@ -16,10 +16,11 @@ Intended implementation branch: `feature/001_2606a72-modern-features`; not creat
 - [ARCHITECTURE](../../ARCHITECTURE.md) remains sufficient: engine rules, browser controller, and presentation keep their dependency direction.
 - [FEATURE_DECOMPOSITION](../../FEATURE_DECOMPOSITION.md) records the accepted affected components, interactions, behavior choices, and verification seams.
 - [FEATURE-SPEC](../../FEATURE-SPEC.md) defines the exact behavior delta; its [review](../../FEATURE-SPEC-REVIEW-REPORT.md) assesses design conformance and readiness.
-- [FEATURE-PLAN](../../FEATURE-PLAN.md), [feature layout](../../layout/modern-features.md), and [plan review](../../FEATURE-PLAN-REVIEW-REPORT.md) define the proposed delivery strategy and ownership.
+- [FEATURE-PLAN](../../FEATURE-PLAN.md), [feature layout](../../layout/modern-features.md), and [plan review](../../FEATURE-PLAN-REVIEW-REPORT.md) define the accepted delivery strategy and ownership.
+- [FEATURE-TASKS](../../FEATURE-TASKS.md) is the feature's sole executable task owner; its [review](../../FEATURE-TASKS-REVIEW-REPORT.md) assesses conformance to the accepted strategy.
 - [SPEC](../../SPEC.md), [PLAN](../../PLAN.md), [layout](../../layout.md), and [TASKS](../../TASKS.md) own the completed baseline. They do not authorize these feature tasks.
 
-The user accepted the feature design at a4185c2f586388171c4ef12314fb26e6a83ce8aa and FEATURE-SPEC at 2999f0fbaaa46813c97e2fed035dfab3b1b279fc on 2026-10-09. FEATURE-PLAN/layout and their conformance review are prepared; PLAN/layout acceptance is pending. FEATURE-TASKS has not been authored. No product implementation has started. Task derivation and execution follow their applicable readiness gates.
+The user accepted the feature design at a4185c2f586388171c4ef12314fb26e6a83ce8aa, FEATURE-SPEC at 2999f0fbaaa46813c97e2fed035dfab3b1b279fc, and FEATURE-PLAN/layout at 9d77973073110aaf07ed899685bbd931e8ed6657 on 2026-10-09. FEATURE-TASKS and its conformance review are prepared: T-023–T-041 are unchecked. Task-list acceptance and the implementation/tracking handoff are pending. No product implementation has started.
 
 The request establishes the objective of implementing this feature set. Before execution, accepted preparation must be explicitly merged, checked, and published to the actual default branch; the implementation branch then starts from that checkpoint. Active FEATURE-TASKS will own feature execution. Complete implementation includes accepted document incorporation, verification, source archival in this package, and explicit integration/publication to main under SDD Manager.
 

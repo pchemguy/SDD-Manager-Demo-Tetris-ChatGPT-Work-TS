@@ -2,7 +2,7 @@
 
 ## Scope and authority
 
-This proposed allocation supports accepted [FEATURE_DECOMPOSITION](../FEATURE_DECOMPOSITION.md), [FEATURE-SPEC](../FEATURE-SPEC.md), and the proposed [FEATURE-PLAN](../FEATURE-PLAN.md) for [campaign 001_2606a72](../features/001_2606a72-modern-features/README.md). It supplements [main layout](../layout.md) for active feature preparation; it does not silently incorporate feature scope into the main documents. PLAN/layout acceptance is pending. Existing paths below were inspected; new locations are labelled planned. Path allocation does not establish implementation.
+This accepted allocation supports [FEATURE_DECOMPOSITION](../FEATURE_DECOMPOSITION.md), [FEATURE-SPEC](../FEATURE-SPEC.md), and [FEATURE-PLAN](../FEATURE-PLAN.md) for [campaign 001_2606a72](../features/001_2606a72-modern-features/README.md). It supplements [main layout](../layout.md) for active feature preparation; it does not silently incorporate feature scope into the main documents. The user accepted PLAN/layout at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. Existing paths below were inspected; new locations are labelled planned. Path allocation does not establish implementation.
 
 ## Affected source and check homes
 
@@ -34,4 +34,4 @@ Eligible completed feature roots and adjacent QC reports are archived under the 
 
 ## Placement readiness
 
-Every affected engine/browser component, fixture, check, artifact and document has one physical owner. The focused query module supports localized work without exposing mutable session state. There is no ambiguous placement that blocks task derivation after PLAN/layout acceptance. FEATURE-TASKS may select concrete touched paths and propose a scoped amendment if implementation reveals a genuine ownership need.
+Every affected engine/browser component, fixture, check, artifact and document has one physical owner. The focused query module supports localized work without exposing mutable session state. There is no ambiguous placement that blocks task derivation. FEATURE-TASKS may select concrete touched paths and propose a scoped amendment if implementation reveals a genuine ownership need.
