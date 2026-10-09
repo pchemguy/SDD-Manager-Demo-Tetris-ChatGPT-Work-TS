@@ -1,6 +1,6 @@
 # Tetris — SDD Manager demonstration
 
-A greenfield browser game in TypeScript demonstrating practical use of SDD Manager. The accepted design covers a classic baseline MVP, followed by a separate modern-feature expansion. Product implementation has not started.
+A greenfield browser game in TypeScript demonstrating practical use of SDD Manager. The accepted design covers a classic baseline MVP, followed by a separate modern-feature expansion. The playable core is implemented; complete progression, held-key controls, lifecycle and desktop acceptance follow the accepted task list.
 
 The demonstration targets ChatGPT Work web with 6.1 Sol Medium and the standard ChatGPT cloud computer sandbox. These are requested conditions; the repository does not independently attest the active model configuration.
 
@@ -21,7 +21,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Executable tasks](docs/dev/TASKS.md)
 - [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. No product build or test commands exist yet.
+The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, discrete arrow controls and Restart are present.
 
 ## Development setup
 
@@ -38,7 +38,7 @@ npx playwright install chromium firefox
 npm run test:e2e
 ```
 
-The static setup is implemented; game modules and unit/browser suites are subsequent tasks. Unit tests are not claimed passing before suites exist. Vite binds loopback by default.
+Arrow Left/Right move, Arrow Up rotates clockwise and Arrow Down soft-drops. Restart starts fresh. Held-key repeat, Space pause/focus handling, responsive/DPI polish and current-stable browser acceptance are deferred to the remaining delivery milestones. Vite binds loopback by default.
 
 Dependency versions are pinned in package.json/package-lock.json. Official requirements were checked in [Vite](https://vite.dev/guide/), [Vitest](https://vitest.dev/guide/), and [Playwright](https://playwright.dev/docs/browsers).
 

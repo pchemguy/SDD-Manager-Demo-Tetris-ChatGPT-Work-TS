@@ -2,7 +2,7 @@
 
 ## Governing inputs and execution gate
 
-This is the sole executable owner of the full baseline hierarchy. It derives from accepted [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), [DECOMPOSITION](DECOMPOSITION.md), [SPEC](SPEC.md), [PLAN](PLAN.md), and [layout](layout.md). [TASKS review](TASKS-REVIEW-REPORT.md) assesses generation quality; all checkboxes are unchecked because no implementation has occurred.
+This is the sole executable owner of the full baseline hierarchy. It derives from accepted [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), [DECOMPOSITION](DECOMPOSITION.md), [SPEC](SPEC.md), [PLAN](PLAN.md), and [layout](layout.md). [TASKS review](TASKS-REVIEW-REPORT.md) assesses generation quality; task checkboxes below record verified implementation progress.
 
 PLAN/layout were accepted by the user on 2026-10-09 at `3b9f97b554611b0bad5841361bd13b4e36d0aedd`. The user accepted this list and selected full Phase 1 (T-001–T-022), inline execution, and GitHub tracking on 2026-10-09. The selected stopping boundary is complete baseline integration/publication; modern features remain outside this run. Phase activation is verified: phase label, five milestones and issues #1–#22 with exact task markers/associations. Working branch phase/1-baseline-browser-game starts at published preparation merge b3b3bfcba9fef0e67a45221049073743e6ed9caf.
 
@@ -44,11 +44,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: Canvas board/active piece and next preview, HTML score/lines/level/status, instructions, and Restart element reflect snapshots. Rule ownership remains in engine; final responsive/accessibility polish is deferred to 1.4.
             Evidence: focused renderer/view tests, npm run typecheck and npm run build; inspect actual initial/locked/game-over rendering. No fabricated gameplay state maintained by presentation.
             Verified: Two behavioral RED tests became GREEN; browser component tests, typecheck and production build passed. Native Chromium Canvas pixels verified active and locked O pieces, HTML game-over state, and screenshot inspection verified readable text after task-owned font configuration repair.
-        - [ ] T-006 — Compose the playable browser loop and discrete controls
+        - [x] T-006 — Compose the playable browser loop and discrete controls
             Scope: src/browser/controller.ts, src/main.ts, presentation integration, tests/browser and initial tests/e2e smoke scenarios, current README scope/controls.
             Depends on: T-005. Contracts: discrete S3/S7 controls and milestone 1.1 end-to-end exit.
             Outcome: live elapsed-time engine updates, initial keydown arrow controls, suppressed native repeats/default scrolling, Restart, and browser game-over display. Preserve lock chronology; explicitly identify repeat/pause/focus/resize compatibility deferrals in checkpoint documentation.
             Evidence: npm test -- tests/browser; npm run typecheck; npm run build; focused browser smoke and an actual playable spawn/move/rotate/drop/lock/new-spawn/restart path. Gather row-clear/top-out integrated evidence with deterministic test scenarios, without adding a production mutation hook.
+            Verified: Two controller RED tests became GREEN. Four browser unit tests, strict typecheck and build passed. Built-page Chromium smoke passed spawn/move/rotate/soft-drop/lock/new-spawn/Restart with no page errors; public-command controller scenarios verified two-row clearing and top-out. Missing Vite CSS declaration was repaired; pre-rebuild stale static output was not counted as acceptance.
         - [ ] T-007 — Review, test, and report milestone 1.1
             Depends on: T-001–T-006 complete and published.
             Scope: complete integrated MVP and dependencies; read-only code review through sdd-verify, required repairs through implementation, focused/full available regressions, demonstration of readable board/movement/full grounded delay, and explicit deferrals.
@@ -136,4 +137,4 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
 
 ## Progress and stopping boundary
 
-All 22 tasks are planned and unchecked. No task or milestone is active or complete. The accepted full-phase range controls execution; review tasks count toward next-N ranges. Partial ranges publish and pause on the phase branch. Full phase execution includes T-022's integration/publication boundary; it does not start the separate modern-feature campaign automatically.
+Milestone 1.1 implementation is active; verified task checkboxes and task commits are the current progress authority. The accepted full-phase range controls execution; review tasks count toward next-N ranges. Partial ranges publish and pause on the phase branch. Full phase execution includes T-022's integration/publication boundary; it does not start the separate modern-feature campaign automatically.
