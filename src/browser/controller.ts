@@ -12,14 +12,14 @@ export interface Clock {
   cancel(id: number): void;
 }
 import { Input } from "./input";
-const KEYS = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", " "]);
+const KEYS = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", " ", "p", "P"]);
 /** Own chronological input/frame scheduling and browser lifecycle subscriptions. The injected clock must be monotonic. */
 export class Controller {
   private last: number;
   private readonly input = new Input();
   private frameId = 0;
   private disposed = false;
-  private spaceHeld = false;
+  private pauseHeld = false;
   constructor(
     private readonly game: Game,
     private readonly keys: EventTarget,
@@ -66,11 +66,11 @@ export class Controller {
     const e = event as KeyboardEvent;
     if (!KEYS.has(e.key)) return;
     e.preventDefault();
-    if (e.repeat || (e.key === " " && this.spaceHeld)) return;
+    if (e.repeat || (e.key.toLowerCase() === "p" && this.pauseHeld)) return;
     const at = this.clock.now();
     this.tick(at);
-    if (e.key === " ") {
-      this.spaceHeld = true;
+    if (e.key.toLowerCase() === "p") {
+      this.pauseHeld = true;
       const status = this.game.snapshot().status;
       if (status === "running") this.game.apply("pause");
       else if (status === "paused") this.game.apply("resume");
@@ -88,7 +88,7 @@ export class Controller {
     e.preventDefault();
     const at = this.clock.now();
     this.tick(at);
-    if (e.key === " ") this.spaceHeld = false;
+    if (e.key.toLowerCase() === "p") this.pauseHeld = false;
     this.input.release(e.key, at);
     this.draw();
   };
@@ -98,7 +98,7 @@ export class Controller {
     this.tick(at);
     this.game.apply("pause");
     this.input.clear();
-    this.spaceHeld = false;
+    this.pauseHeld = false;
     this.last = at;
     this.draw();
   };
@@ -107,7 +107,7 @@ export class Controller {
   };
   private reset = (): void => {
     this.input.clear();
-    this.spaceHeld = false;
+    this.pauseHeld = false;
     this.game.apply("restart");
     this.last = this.clock.now();
     this.draw();

@@ -225,11 +225,11 @@ try {
       );
       assert.equal(await run("return scrollY"), 0);
       await keys([
-        { type: "keyDown", value: " " },
+        { type: "keyDown", value: "p" },
         { type: "pause", duration: 1200 },
-        { type: "keyDown", value: " " },
+        { type: "keyDown", value: "p" },
         { type: "pause", duration: 200 },
-        { type: "keyUp", value: " " },
+        { type: "keyUp", value: "p" },
       ]);
       assert.equal(await status(), "Paused");
       const before = await request(`${base}/screenshot`);
@@ -243,7 +243,7 @@ try {
         "Paused image must remain unchanged",
       );
       await screenshot("paused");
-      await press(" ");
+      await press("p");
       assert.equal(await status(), "Playing");
       // Switching actual Firefox tabs causes native blur/visibility, without synthetic events.
       const main = await request(`${base}/window`);
@@ -253,7 +253,7 @@ try {
       await request(`${base}/window`, { handle: main });
       assert.equal(await status(), "Paused");
       assert.equal(await run("return document.hidden"), false);
-      await press(" ");
+      await press("p");
       assert.equal(await status(), "Playing");
       await reset();
       await press("\uE015");

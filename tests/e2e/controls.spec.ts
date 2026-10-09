@@ -50,20 +50,20 @@ test("real holds, opposing priority and key release drive the visible piece", as
   await expect(page.locator("#score")).toHaveText(score!);
   expect(await page.evaluate(() => scrollY)).toBe(0);
 });
-test("Space hold stays paused, inactive wait stays unchanged and release resumes", async ({
+test("P hold stays paused, inactive wait stays unchanged and release resumes", async ({
   page,
 }) => {
-  await page.keyboard.down("Space");
+  await page.keyboard.down("p");
   await expect(page.locator("#status")).toHaveText("Paused");
   const before = await page.locator("#board").screenshot();
-  await page.keyboard.down("Space");
+  await page.keyboard.down("p");
   await page.clock.runFor(1200);
   await expect(page.locator("#status")).toHaveText("Paused");
   expect(
     Buffer.compare(before, await page.locator("#board").screenshot()),
   ).toBe(0);
-  await page.keyboard.up("Space");
-  await page.keyboard.press("Space");
+  await page.keyboard.up("p");
+  await page.keyboard.press("p");
   await expect(page.locator("#status")).toHaveText("Playing");
   expect(await page.evaluate(() => scrollY)).toBe(0);
 });
@@ -78,7 +78,7 @@ test("browser blur listener pauses with manual return and Restart clears held dr
   await page.clock.runFor(100);
   await expect(page.locator("#status")).toHaveText("Paused");
   await page.keyboard.up("ArrowDown");
-  await page.keyboard.press("Space");
+  await page.keyboard.press("p");
   await expect(page.locator("#status")).toHaveText("Playing");
   await page.keyboard.down("ArrowDown");
   await page.getByRole("button", { name: "Restart game" }).click();

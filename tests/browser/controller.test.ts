@@ -118,17 +118,17 @@ it("releasing a held down key ends its repeat schedule", () => {
   h.controller.dispose();
 });
 
-it("Space requires release across pause, excludes inactive time and retains engine remainders", () => {
+it("P requires release across pause, excludes inactive time and retains engine remainders", () => {
   const h = harness();
   h.frame(900);
-  expect(h.key(" ").defaultPrevented).toBe(true);
+  expect(h.key("p").defaultPrevented).toBe(true);
   expect(h.game.snapshot().status).toBe("paused");
   h.frame(50000);
-  h.key(" ", true);
-  h.key(" ");
+  h.key("P", true);
+  h.key("p");
   expect(h.game.snapshot().status).toBe("paused");
-  h.release(" ");
-  h.key(" ");
+  h.release("P");
+  h.key("p");
   expect(h.game.snapshot().status).toBe("running");
   h.frame(50099);
   expect(h.game.snapshot().active!.y).toBe(0);
@@ -145,7 +145,7 @@ it("blur and hidden transitions pause, clear holds and require explicit resume",
   h.frame(10000);
   h.keys.dispatchEvent(new Event("focus"));
   expect(h.game.snapshot().status).toBe("paused");
-  h.key(" ");
+  h.key("p");
   h.frame(10149);
   expect(h.game.snapshot().active!.x).toBe(5);
   h.visibility.hidden = true;
@@ -160,7 +160,7 @@ it("restart from pause clears holds and rebases elapsed time", () => {
   const h = harness();
   h.key("ArrowDown");
   h.frame(100);
-  h.key(" ");
+  h.key("p");
   h.frame(50000);
   h.restart.dispatchEvent(new Event("click"));
   h.frame(50999);
@@ -180,7 +180,7 @@ it("repeated disposal removes every event subscription and stops even an already
   h.controller.dispose();
   h.controller.dispose();
   h.key("ArrowDown");
-  h.key(" ");
+  h.key("p");
   h.keys.dispatchEvent(new Event("blur"));
   h.visibility.hidden = true;
   h.visibility.dispatchEvent(new Event("visibilitychange"));
@@ -189,4 +189,18 @@ it("repeated disposal removes every event subscription and stops even an already
   expect(h.game.snapshot()).toEqual(before);
   expect(h.snapshots).toHaveLength(count);
   expect(h.cancelled()).toBe(true);
+});
+
+it("Space drops once without changing arrow repeat deadlines or pausing", () => {
+  const h = harness(); h.key("ArrowRight"); h.frame(100);
+  expect(h.key(" ").defaultPrevented).toBe(true);
+  expect(h.game.snapshot()).toMatchObject({ status: "running", score: 36, active: { y: 18, x: 5 } });
+  h.key(" "); h.key(" ", true);
+  expect(h.game.snapshot().score).toBe(36);
+  h.frame(150); expect(h.game.snapshot().active!.x).toBe(6);
+  h.key("p"); h.key("P");
+  expect(h.game.snapshot().status).toBe("paused");
+  h.key(" "); h.release("P"); h.key("P");
+  expect(h.game.snapshot().status).toBe("running");
+  h.controller.dispose();
 });

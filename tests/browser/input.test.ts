@@ -40,10 +40,19 @@ it("rotation and Space require release, and clear removes old held schedules", (
   expect(i.press("ArrowUp", 10)).toEqual([]);
   i.release("ArrowUp", 20);
   expect(i.press("ArrowUp", 30)).toEqual(["rotateClockwise"]);
-  expect(i.press(" ", 40)).toEqual(["togglePause"]);
+  expect(i.press(" ", 40)).toEqual(["hardDrop"]);
   expect(i.press(" ", 50, true)).toEqual([]);
   i.press("ArrowDown", 60);
   i.clear();
   expect(i.nextTime()).toBe(Infinity);
   expect(i.press("ArrowDown", 80)).toEqual(["softDrop"]);
+});
+
+it("P case variants share one physical latch and never create repeat deadlines", () => {
+  const i = new Input();
+  expect(i.press("p", 0)).toEqual(["togglePause"]);
+  expect(i.press("P", 10)).toEqual([]);
+  i.release("P", 20);
+  expect(i.press("p", 30)).toEqual(["togglePause"]);
+  expect(i.nextTime()).toBe(Infinity);
 });

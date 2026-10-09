@@ -18,10 +18,10 @@ test("text instructions, named keyboard Restart and explicit lifecycle labels", 
   await expect(restart).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("#score")).toHaveText("0");
-  await page.keyboard.press("Space");
+  await page.keyboard.press("p");
   await expect(page.getByRole("status")).toHaveText("Paused");
   await page.screenshot({ path: info.outputPath("paused.png") });
-  await page.keyboard.press("Space");
+  await page.keyboard.press("p");
   await page.keyboard.down("ArrowDown");
   await page.clock.runFor(20000);
   await expect(page.getByRole("status")).toHaveText("Game over", {
