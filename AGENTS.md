@@ -8,7 +8,7 @@ Read [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md), [
 
 ## Current ownership
 
-The specification and PLAN/layout are accepted. TASKS is the sole baseline execution owner; the user accepted full Phase 1 inline execution with GitHub tracking. The complete engine/browser baseline, phase review and T-022 integration/publication are finished on main. No task range is active. Subsequent work requires a new authorized scope. No feature campaign exists. Modern features belong to a subsequent campaign.
+The complete baseline and T-022 integration/publication are finished on main. TASKS records completed baseline work. [Modern-feature campaign 001_2606a72](docs/dev/features/001_2606a72-modern-features/README.md) covers hold, ghost, seven-bag selection, wall kicks, and hard drop. Preparation is on design-docs/001_2606a72-modern-features, based on 2606a7213d4ddcf18497fafabb6cc5c349a26178; the target is main. [FEATURE_DECOMPOSITION](docs/dev/FEATURE_DECOMPOSITION.md), [FEATURE-SPEC](docs/dev/FEATURE-SPEC.md), [FEATURE-PLAN](docs/dev/FEATURE-PLAN.md), and [feature layout](docs/dev/layout/modern-features.md) are accepted; adjacent SPEC/PLAN reviews record readiness. [FEATURE-TASKS](docs/dev/FEATURE-TASKS.md) is the sole feature executable owner with T-023–T-041 unchecked; its [review](docs/dev/FEATURE-TASKS-REVIEW-REPORT.md) assesses derivation quality. TASKS and full Phase 2 inline execution with GitHub tracking are accepted; preparation integration and phase activation precede task work. Read the active package before feature work and preserve full-gravity-interval locking. The selected range is T-023–T-041, stopping after verified incorporation and publication to main.
 
 ## Workflow
 
