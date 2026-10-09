@@ -13,13 +13,13 @@ export class Renderer {
     this.context=context;this.previewContext=previewContext;
   }
   /** Measure CSS size each frame, including display/DPI changes, and draw in CSS coordinates. */
-  private prepare(canvas:HTMLCanvasElement,ctx:CanvasRenderingContext2D):{width:number;height:number}{
+  private prepare(canvas:HTMLCanvasElement,ctx:CanvasRenderingContext2D,aspect?:number):{width:number;height:number}{
     const rect=canvas.getBoundingClientRect(),ratio=this.pixelRatio();
-    const width=rect.width,height=rect.height;
-    const backingWidth=Math.round(width*ratio),backingHeight=Math.round(height*ratio);
+    const width=rect.width,height=aspect?rect.width*aspect:rect.height;
+    const backingWidth=Math.round(width*ratio),backingHeight=aspect?backingWidth*aspect:Math.round(height*ratio);
     if(canvas.width!==backingWidth)canvas.width=backingWidth;
     if(canvas.height!==backingHeight)canvas.height=backingHeight;
-    ctx.setTransform(ratio,0,0,ratio,0,0);
+    ctx.setTransform(backingWidth/width,0,0,backingHeight/height,0,0);
     return {width,height};
   }
   /** Paint one piece cell with a small inset that makes neighboring squares legible. */
@@ -28,7 +28,7 @@ export class Renderer {
   }
   /** Paint locked/active geometry and a centered preview from the supplied immutable observation. */
   render(snapshot:Snapshot):void{
-    const ctx=this.context,board=this.prepare(this.board,ctx),size=board.width/10;
+    const ctx=this.context,board=this.prepare(this.board,ctx,2),size=board.width/10;
     ctx.fillStyle='#101c2b';ctx.fillRect(0,0,board.width,board.height);
     ctx.strokeStyle='#223044';ctx.lineWidth=1;
     for(let y=0;y<20;y++)for(let x=0;x<10;x++){

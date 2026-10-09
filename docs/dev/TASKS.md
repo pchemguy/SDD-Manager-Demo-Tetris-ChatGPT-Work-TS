@@ -125,11 +125,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: all statistics/status/instructions are readable and consistent; Restart is focusable/named and operates from keyboard; game-over/paused state is explicit without relying on Canvas interpretation.
             Evidence: focused view tests, keyboard/accessible-name browser checks, visible status in all lifecycle states, layout inspection and npm run typecheck/build.
             Verified: Observed unchanged-live-status rewrite RED; GREEN: 17 browser unit tests, typecheck/build and seven stable-Chromium production checks passed. Verified named/focused Restart with Tab/Enter, readable Space/hold/focus instructions, text next kind, polite explicit Playing/Paused/Game-over status and no unchanged per-frame announcements. Screenshots inspected; setter typing repaired before rebuilt-page acceptance.
-        - [ ] T-019 — Establish supported-browser and production-static acceptance
+        - [x] T-019 — Establish supported-browser and production-static acceptance
             Scope: tests/e2e, Playwright/static-server configuration, dependency/browser evidence, targeted repairs to app integration.
             Depends on: T-018. Contracts: S8/A10–A11 and complete baseline browser regression.
             Outcome: production output is served without a backend and verified against accepted current-stable desktop Chromium/Firefox targets; record versions, method and availability. A different bundled engine is not silently presented as the accepted target.
             Evidence: npm run build and npm run test:e2e against static production output; full control/lifecycle/rendering smoke and required browser acceptance. Required browser/version/access gaps block completion until resolved under accepted scope.
+            Verified: All 56 unit tests, typecheck/build and npm run test:e2e:stable passed: seven Playwright production checks on official stable Chromium 155.0.8059.39 headless desktop engine, plus two unpatched stable Firefox 157.0.1/geckodriver 0.37.1 sessions covering native controls/tab visibility, restart/top-out/rotation/lock/spawn and DPR 1/2 resize/pixels. Inspected Firefox screenshot. Fractional-axis rounding RED repaired to preserve backing ratio; viewport driver geometry corrected. README records version sources, methods and full-Chrome sandbox limit.
         - [ ] T-020 — Verify reproducible delivery and finalize setup/API documentation
             Scope: package/lock/scripts where needed, README/AGENTS, source API/docstrings, and clean build/check workflow.
             Depends on: T-019. Contracts: S6/S8/A11; delivery/documentation exits in PLAN.

@@ -42,4 +42,26 @@ Arrow Left/Right move (hold to repeat), Arrow Up rotates clockwise, Arrow Down s
 
 Dependency versions are pinned in package.json/package-lock.json. Official requirements were checked in [Vite](https://vite.dev/guide/), [Vitest](https://vitest.dev/guide/), and [Playwright](https://playwright.dev/docs/browsers).
 
-In the demonstration sandbox, the Chromium CDN returned HTML rather than a ZIP. A separately provisioned packaged Chromium 153.0.8010.0 loaded the static page in two successive contexts. Playwright Firefox 157.0 downloaded and launched, but its first page crashed; Firefox page verification is pending. This is setup evidence, not accepted current-stable compatibility. The package extraction avoids archive ownership operations unsupported by the sandbox. An externally provisioned Chromium can be selected through TETRIS_CHROMIUM_EXECUTABLE; its fonts/shared libraries must be configured by that environment. Firefox remains the Playwright-provided engine.
+## Browser verification
+
+Production static acceptance was verified on 2026-10-09 against the official current-stable versions:
+
+| Target | Actual runtime | Method |
+| --- | --- | --- |
+| Chromium | 155.0.8059.39 | Official Chrome for Testing Stable headless shell, Playwright; seven production checks, DPR 1/2 and desktop resize. |
+| Firefox | 157.0.1 | Unpatched Mozilla release, geckodriver 0.37.1/W3C WebDriver; native keys/tab visibility, two sessions, DPR 1/2 and desktop resize. |
+
+Version sources: [Chrome for Testing stable metadata](https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json), [Mozilla product details](https://product-details.mozilla.org/1.0/firefox_versions.json). [Mozilla geckodriver guidance](https://firefox-source-docs.mozilla.org/testing/geckodriver/Usage.html) explains testing an unpatched Firefox release; Playwright's bundled Firefox is a separate engine.
+
+The sandbox rejects Unix sockets required by full Chrome's ProcessSingleton, so Chromium acceptance uses the official stable headless desktop engine. It does not attest Chrome browser-chrome/UI integration or graphical OS focus. Native Firefox tab switching verifies actual blur/visibility behavior. Bundled Playwright engines are useful additional checks, not substitutes for current-stable acceptance.
+
+For current-stable checks, provision those official browser binaries and geckodriver. Set TETRIS_CHROMIUM_EXECUTABLE, TETRIS_FIREFOX_EXECUTABLE and TETRIS_GECKODRIVER to absolute executable paths, then run:
+
+```text
+npm run build
+npm run test:e2e:stable
+```
+
+The stable runner fails if Firefox/driver paths are missing; it does not skip compatibility checks. It serves the production build itself and writes ignored screenshots/logs to test-results. On Windows CMD use `set VARIABLE=C:\path\to\binary.exe`; on a POSIX terminal use `export VARIABLE=/path/to/binary`. Browser provisioning is external to npm ci.
+
+In this sandbox only, Firefox needs process-scoped MOZ_DISABLE_CONTENT_SANDBOX=1, MOZ_DISABLE_RDD_SANDBOX=1 and MOZ_DISABLE_GPU_SANDBOX=1 because user-namespace sandbox operations are unavailable. Chromium uses process-scoped FONTCONFIG_PATH pointing to an owned font configuration with installed DejaVu fonts. Initial Chromium CDN downloads returned HTML; older packaged Chromium 153 and Playwright Firefox 157 probes were diagnostic setup evidence and are not the final accepted versions. No global Python or font environment was modified.
