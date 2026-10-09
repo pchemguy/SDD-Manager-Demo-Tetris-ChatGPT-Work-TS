@@ -3,12 +3,12 @@
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tetris — SDD demonstration</title></head>
 <body>
 <main class="game-shell" id="app">
-  <header class="masthead"><div><span class="eyebrow">THE CLASSIC BLOCK GAME</span><h1>Tetris<span class="title-dot">.</span></h1></div><p id="status" class="status">Playing</p></header>
+  <header class="masthead"><div><span class="eyebrow">THE CLASSIC BLOCK GAME</span><h1>Tetris<span class="title-dot">.</span></h1></div><p id="status" class="status" role="status" aria-live="polite" aria-atomic="true">Playing</p></header>
   <section class="game-layout" aria-label="Tetris game">
-    <div class="board-frame"><canvas id="board" width="300" height="600" aria-label="Tetris board"></canvas></div>
-    <aside class="sidebar"><section class="card next"><h2>Up next</h2><canvas id="preview" width="120" height="120" aria-label="Next piece"></canvas></section>
+    <div class="board-frame"><canvas id="board" width="300" height="600" aria-label="Tetris board" aria-describedby="instructions"></canvas></div>
+    <aside class="sidebar"><section class="card next"><h2>Up next <span id="next-kind"></span></h2><canvas id="preview" width="120" height="120" aria-label="Next piece"></canvas></section>
       <section class="card stats"><div><span>Score</span><strong id="score">0</strong></div><div><span>Lines</span><strong id="lines">0</strong></div><div><span>Level</span><strong id="level">1</strong></div></section>
-      <section class="card controls"><h2>Your move</h2><p><kbd>←</kbd> <kbd>→</kbd> Move</p><p><kbd>↑</kbd> Rotate</p><p><kbd>↓</kbd> Soft drop</p></section>
+      <section id="instructions" class="card controls"><h2>Your move</h2><p><kbd>←</kbd> <kbd>→</kbd> Move</p><p><kbd>↑</kbd> Rotate</p><p><kbd>↓</kbd> Soft drop</p><p><kbd>Space</kbd> Pause / resume</p><p class="control-note">Hold arrows to repeat. Focus loss pauses; Space resumes.</p></section>
       <button id="restart" type="button">Restart game <span aria-hidden="true">↻</span></button>
     </aside>
   </section><footer>Make room. Find your rhythm.</footer>

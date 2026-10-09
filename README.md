@@ -38,7 +38,7 @@ npx playwright install chromium firefox
 npm run test:e2e
 ```
 
-Arrow Left/Right move (hold to repeat), Arrow Up rotates clockwise, Arrow Down soft-drops (hold to repeat), and Space pauses/resumes after release. The most recent horizontal key wins. Focus loss/hidden page pauses; return requires Space. Restart starts fresh and clears held controls. Responsive/DPI polish and current-stable production acceptance remain milestone 1.4 gates. Vite binds loopback by default.
+Arrow Left/Right move (hold to repeat), Arrow Up rotates clockwise, Arrow Down soft-drops (hold to repeat), and Space pauses/resumes after release. The most recent horizontal key wins. Focus loss/hidden page pauses; return requires Space. Restart starts fresh and clears held controls. Restart also works by Tab then Enter. The desktop layout adapts to viewport height and device pixel ratio. Supported-target production acceptance is the remaining delivery gate. Vite binds loopback by default.
 
 Dependency versions are pinned in package.json/package-lock.json. Official requirements were checked in [Vite](https://vite.dev/guide/), [Vitest](https://vitest.dev/guide/), and [Playwright](https://playwright.dev/docs/browsers).
 

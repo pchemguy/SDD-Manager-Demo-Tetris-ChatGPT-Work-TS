@@ -119,11 +119,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: full board/preview remain correctly scaled, sharp and unclipped at 1024 × 768 and larger/resized desktop viewports; occupied geometry matches snapshots.
             Evidence: browser screenshots/inspection and geometric assertions at minimum/resized viewports and device pixel ratios, renderer unit checks where meaningful, npm run typecheck/build. Record actual observations rather than claiming visual correctness from build success.
             Verified: Observed backing-size RED before DPR implementation. GREEN: 16 browser unit tests, typecheck/build and six stable-Chromium production tests passed. Pixel/geometry assertions and inspected screenshots verified all 200 cells, four active cells, square 1:2 board, unclipped controls and measured backing dimensions at 1024x768/1440x1000 and DPR 1/2.
-        - [ ] T-018 — Complete accessible status, controls, and user instructions
+        - [x] T-018 — Complete accessible status, controls, and user instructions
             Scope: index.html, src/browser/view.ts/styles, README controls, tests/browser/view.test.ts and browser accessibility checks.
             Depends on: T-017. Contracts: textual/status/accessibility obligations in S8/A10.
             Outcome: all statistics/status/instructions are readable and consistent; Restart is focusable/named and operates from keyboard; game-over/paused state is explicit without relying on Canvas interpretation.
             Evidence: focused view tests, keyboard/accessible-name browser checks, visible status in all lifecycle states, layout inspection and npm run typecheck/build.
+            Verified: Observed unchanged-live-status rewrite RED; GREEN: 17 browser unit tests, typecheck/build and seven stable-Chromium production checks passed. Verified named/focused Restart with Tab/Enter, readable Space/hold/focus instructions, text next kind, polite explicit Playing/Paused/Game-over status and no unchanged per-frame announcements. Screenshots inspected; setter typing repaired before rebuilt-page acceptance.
         - [ ] T-019 — Establish supported-browser and production-static acceptance
             Scope: tests/e2e, Playwright/static-server configuration, dependency/browser evidence, targeted repairs to app integration.
             Depends on: T-018. Contracts: S8/A10–A11 and complete baseline browser regression.
