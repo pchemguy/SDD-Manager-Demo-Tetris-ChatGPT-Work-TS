@@ -100,7 +100,7 @@ Verification below is planned, not performed. Existing commands are `npm run typ
             Evidence: npm test, npm run typecheck/build and relevant built-page checks pass; demonstrate kick success/failure and full-delay cancellation/retention with actual input. Final supported-target/presentation completion remains 2.4; reconcile managed closures when active.
             Report: docs/dev/features/001_2606a72-modern-features/reports/2.3.md; implemented interactions, usability/timing findings, Findings/Blockers and TODO.
             Verified: Inline code/dependency review at b2075d4 and current test delta found no blocking issue. Fresh verification: 89 unit tests, strict build and all 12 production Chromium checks pass. Added native grounded-kick cancellation and floor-failure timer-retention evidence; wall-kick screenshot inspected. Milestone 2.3 exits/FA4-FA8 pass; final presentation/current-stable Firefox/reproducibility remain 2.4. Report reports/2.3.md has Findings/Blockers None and TODO None.
-    - [ ] Milestone 2.4 — Desktop acceptance and reproducible delivery
+    - [x] Milestone 2.4 — Desktop acceptance and reproducible delivery
         - [x] T-037 — Complete held/ghost desktop rendering and accessible state
             Scope: src/browser/renderer.ts/view.ts, index.html/styles, focused renderer/view tests and production presentation/accessibility/feature checks.
             Depends on: T-036. Contracts: F8/FA9; retained S8/A10.
