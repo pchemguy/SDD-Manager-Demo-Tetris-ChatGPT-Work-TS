@@ -2,6 +2,7 @@
 import {emptyBoard,fits,place,clearRows} from './board';
 import {cells,spawn} from './pieces';
 import {select} from './random';
+import {gravity,levelFor,lineAward} from './progression';
 import type {ActivePiece,Board,Command,Kind,Snapshot,Status} from './types';
 /** Encapsulate session rules and provide detached observable snapshots. */
 export class Game {
@@ -42,21 +43,21 @@ export class Game {
   }
   /** Return fresh board rows, piece metadata, and occupied coordinates detached from engine state. */
   snapshot():Snapshot {
-    return {status:this.status,board:this.board.map(row=>[...row]),active:this.active?{...this.active,cells:cells(this.active)}:null,next:this.next,score:this.score,lines:this.lines,level:this.level,gravityInterval:1000};
+    return {status:this.status,board:this.board.map(row=>[...row]),active:this.active?{...this.active,cells:cells(this.active)}:null,next:this.next,score:this.score,lines:this.lines,level:this.level,gravityInterval:gravity(this.level)};
   }
   /** Reconcile grounded transitions without refreshing a timer that is already running. */
   private updateGrounding():void {
     if(!this.active){this.lockRemaining=null;return;}
     const grounded=!fits(this.board,cells({...this.active,y:this.active.y+1}));
     if(!grounded)this.lockRemaining=null;
-    else if(this.lockRemaining===null)this.lockRemaining=1000;
+    else if(this.lockRemaining===null)this.lockRemaining=gravity(this.level);
   }
   /** Commit one piece, compact rows, then spawn or top out before later timer events. */
   private lock():void {
     if(!this.active)return;
     const compacted=clearRows(place(this.board,cells(this.active),this.active.kind));
-    this.board=compacted.board;this.lines+=compacted.cleared;
-    this.score+=([0,100,300,500,800][compacted.cleared]??0);
+    this.board=compacted.board;this.score+=lineAward(compacted.cleared,this.level);
+    this.lines+=compacted.cleared;this.level=levelFor(this.lines);
     const candidate=spawn(this.next);
     this.gravityAge=0;this.lockRemaining=null;
     if(!fits(this.board,cells(candidate))){this.active=null;this.status='gameOver';return;}
@@ -67,12 +68,12 @@ export class Game {
     if(!(elapsed>0)||this.status!=='running')return;
     let remaining=elapsed;
     while(remaining>0&&this.status==='running'&&this.active){
-      const step=Math.min(remaining,1000-this.gravityAge,this.lockRemaining??Infinity);
+      const step=Math.min(remaining,gravity(this.level)-this.gravityAge,this.lockRemaining??Infinity);
       remaining-=step;this.gravityAge+=step;
       if(this.lockRemaining!==null)this.lockRemaining-=step;
       // A lock/gravity tie belongs to the outgoing piece's lock, never a descent of its successor.
       if(this.lockRemaining!==null&&this.lockRemaining<=1e-7){this.lock();continue;}
-      if(this.gravityAge>=1000-1e-7){
+      if(this.gravityAge>=gravity(this.level)-1e-7){
         this.gravityAge=0;
         const candidate={...this.active,y:this.active.y+1};
         if(fits(this.board,cells(candidate)))this.active=candidate;

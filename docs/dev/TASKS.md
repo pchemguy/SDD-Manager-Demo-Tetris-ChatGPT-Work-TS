@@ -57,11 +57,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Report: docs/dev/reports/phases/1/1.1.md; include concise implemented features, checks/results, Findings/Blockers and TODO (None if empty).
             Verified: Read-only coherent core code review found no required milestone defect. All 32 unit tests, typecheck/build and built-page Chromium play smoke passed; native public-command rendering verified row clear and top-out. Report records intentional PLAN deferrals and pending final browser compatibility.
     - [ ] Milestone 1.2 — Progression and complete engine contracts
-        - [ ] T-008 — Implement scoring, level thresholds, and gravity progression
+        - [x] T-008 — Implement scoring, level thresholds, and gravity progression
             Scope: src/engine/progression.ts, game integration, tests/engine/progression.test.ts and integrated progression scenarios.
             Depends on: T-007. Contracts: S5 and G(L) in S4; A5 and level-dependent A3–A4.
             Outcome: exact pre-clear-level line awards, successful-row soft-drop points, cumulative lines, ten-line level thresholds, and fractional/minimum gravity intervals for new pieces. Retain row-clear and gameplay behavior.
             Evidence: npm test -- tests/engine; verify 1–4 clear awards, 9→10 and multi-row threshold crossings, failed-drop score stability, pre/post-clear level ordering, gravity minimum; npm run typecheck.
+            Verified: Three behavioral RED failures preceded formulas/integration. GREEN: 31 engine tests and strict typecheck passed, covering 0-4-row pre-clear awards, threshold crossings, fractional/floored gravity, real ten/twelve-line sessions, failed soft-drop scoring and full level-2 lock delay. Corrected an incomplete row fixture to place its first O at column zero.
         - [ ] T-009 — Complete engine lifecycle, command outcomes, and invalid-time contracts
             Scope: src/engine/game.ts/types and focused lifecycle/error tests.
             Depends on: T-008. Contracts: S2/S3/S6; A6–A7.
