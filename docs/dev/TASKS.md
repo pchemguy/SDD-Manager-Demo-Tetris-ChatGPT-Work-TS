@@ -63,11 +63,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: exact pre-clear-level line awards, successful-row soft-drop points, cumulative lines, ten-line level thresholds, and fractional/minimum gravity intervals for new pieces. Retain row-clear and gameplay behavior.
             Evidence: npm test -- tests/engine; verify 1–4 clear awards, 9→10 and multi-row threshold crossings, failed-drop score stability, pre/post-clear level ordering, gravity minimum; npm run typecheck.
             Verified: Three behavioral RED failures preceded formulas/integration. GREEN: 31 engine tests and strict typecheck passed, covering 0-4-row pre-clear awards, threshold crossings, fractional/floored gravity, real ten/twelve-line sessions, failed soft-drop scoring and full level-2 lock delay. Corrected an incomplete row fixture to place its first O at column zero.
-        - [ ] T-009 — Complete engine lifecycle, command outcomes, and invalid-time contracts
+        - [x] T-009 — Complete engine lifecycle, command outcomes, and invalid-time contracts
             Scope: src/engine/game.ts/types and focused lifecycle/error tests.
             Depends on: T-008. Contracts: S2/S3/S6; A6–A7.
             Outcome: pause/resume preserve timers, inactive sessions reject gameplay, restart resets progress/timers, effective/ineffective command results match SPEC, invalid elapsed values raise RangeError before mutation in all states.
             Evidence: npm test -- tests/engine; finite/nonnegative/zero boundaries, unchanged paused/game-over sessions, restart randomness, retained snapshot integrity, and API/documentation consistency; npm run typecheck.
+            Verified: Observed pause outcome and invalid-time RED failures. GREEN: 35 engine tests and typecheck passed; pause/resume preserve independent remainders, inactive commands fail atomically, restart clears pending timers/progress, and negative/nonfinite elapsed raises RangeError before mutation in running/paused/game-over states.
         - [ ] T-010 — Verify timing boundaries across lifecycle and progression integration
             Scope: focused tests/engine timing/integration scenarios and bounded engine fixes if failures expose violations.
             Depends on: T-009. Contracts: S4–S6; A3–A7.

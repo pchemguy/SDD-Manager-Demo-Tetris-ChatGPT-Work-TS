@@ -26,6 +26,8 @@ export class Game {
   /** Apply an instantaneous command; collisions and ineffective commands report false. */
   apply(command:Command):boolean {
     if(command==='restart'){this.restart();return true;}
+    if(command==='pause'){if(this.status!=='running')return false;this.status='paused';return true;}
+    if(command==='resume'){if(this.status!=='paused')return false;this.status='running';return true;}
     if(this.status!=='running'||!this.active)return false;
     const candidate={...this.active};
     if(command==='left')candidate.x--;
@@ -63,9 +65,10 @@ export class Game {
     if(!fits(this.board,cells(candidate))){this.active=null;this.status='gameOver';return;}
     this.active=candidate;this.next=select(this.random);this.updateGrounding();
   }
-  /** Advance chronological gameplay time, retaining residual time across gravity, lock and spawn. */
+  /** Advance finite nonnegative gameplay milliseconds; invalid input throws before any mutation, including when inactive. Paused/game-over time is ignored. */
   advance(elapsed:number):void {
-    if(!(elapsed>0)||this.status!=='running')return;
+    if(!Number.isFinite(elapsed)||elapsed<0)throw new RangeError('Elapsed time must be finite and nonnegative');
+    if(elapsed===0||this.status!=='running')return;
     let remaining=elapsed;
     while(remaining>0&&this.status==='running'&&this.active){
       const step=Math.min(remaining,gravity(this.level)-this.gravityAge,this.lockRemaining??Infinity);
