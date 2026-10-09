@@ -137,11 +137,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: current documented install/dev/build/preview/type/unit/e2e commands work; lockfile pins reproducible setup; generated outputs and secrets are ignored; disclosure/demo-context statements remain accurate. Support Windows CMD instructions without PowerShell requirements.
             Evidence: npm ci, npm run typecheck, npm test, npm run build and required browser checks using documented commands; inspect engine/browser API documentation and local links. Record environment-specific setup limits and do not modify the user's preconfigured Python environment.
             Verified: Clean npm ci, typecheck, 56 unit tests and production build passed. Documented test:e2e passed 14 checks (stable Chromium plus bundled Firefox); test:e2e:stable passed seven stable-Chromium checks and two stable Firefox 157.0.1 sessions. Reproducibility audit repaired Firefox fixture preloading/realm access after a forced-I rotation assertion failed. Module/API documentation, local links, CMD-compatible setup and ignored outputs/credentials verified; code formatting preserves behavior and no Python environment was changed.
-        - [ ] T-021 — Review, test, and report milestone 1.4
+        - [x] T-021 — Review, test, and report milestone 1.4
             Depends on: T-017–T-020 complete and published; earlier delivery milestones complete/closed if hosted.
             Scope: complete desktop/static baseline, supported-browser evidence, packaging/documentation and regressions; code review and required repairs.
             Evidence: milestone 1.4 exits, full applicable unit/type/build/browser checks and visual inspection pass; report committed/pushed; managed task/milestone closure confirmed if active.
             Report: docs/dev/reports/phases/1/1.4.md; include implemented features, delivery/browser limits, Findings/Blockers and TODO.
+            Verified: Coherent desktop/rendering/tooling/documentation/browser-harness review found no unresolved required defect. Clean install, 56 unit tests, typecheck/build, 14 standard Playwright checks, seven stable-Chromium checks and two stable Firefox sessions passed. Screenshots/pixels verified desktop/DPR and accessible controls. Report resolves rounding/fixture findings and records headless/full-Chrome environment limits.
     - [ ] Milestone 1.5 — Phase review
         - [ ] T-022 — Review, test, and report phase 1 and baseline completion
             Depends on: all delivery milestones 1.1–1.4 complete, reviewed, published, and closed if hosted; not on closure of its own 1.5 milestone.
