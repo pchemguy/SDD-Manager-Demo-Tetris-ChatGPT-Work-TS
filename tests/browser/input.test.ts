@@ -61,3 +61,9 @@ it("C case variants invoke hold once per release and preserve arrow schedules", 
   expect(i.press("c",100)).toEqual(["hold"]);expect(i.press("C",110)).toEqual([]);
   expect(i.nextTime()).toBe(150);i.release("C",120);expect(i.press("c",130)).toEqual(["hold"]);
 });
+it("unrecognized keys cannot resolve inherited action-map properties", () => {
+  const i=new Input();
+  for(const key of ["x","Tab","toString","constructor","__proto__"])
+    expect(i.press(key,0)).toEqual([]);
+  expect(i.nextTime()).toBe(Infinity);
+});

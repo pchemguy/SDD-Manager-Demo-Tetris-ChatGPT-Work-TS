@@ -19,6 +19,7 @@ export class Input {
   /** Return initial actions only for a fresh recognized keydown. */
   press(key: string, at: number, repeat = false): InputAction[] {
     key = key.length === 1 ? key.toLowerCase() : key;
+    if (!Object.hasOwn(ACTIONS, key)) return [];
     const action = ACTIONS[key];
     if (!action || repeat || this.held.has(key)) return [];
     this.held.add(key);
