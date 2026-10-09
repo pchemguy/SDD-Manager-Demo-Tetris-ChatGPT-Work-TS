@@ -26,11 +26,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: all seven kinds/orientations/spawn offsets; occupied-cell collisions; placement and simultaneous full-row removal with stable remaining-row order. Board operations own no browser or session lifecycle state.
             Evidence: npm test -- tests/engine/pieces.test.ts tests/engine/board.test.ts; verify four-rotation identity, O stability, empty matrix cells, bounds/collisions, and 1–4 row compaction; npm run typecheck.
             Verified: Observed geometry/allocation behavioral RED, then isolated board RED with six assertion failures after fixing fixture allocation. GREEN: 16 geometry/board tests and strict typecheck passed; S1 geometry, occupied-cell collisions, detached atomic placement and 1-4-row stable compaction verified. Module/API documentation inspected.
-        - [ ] T-003 — Implement selection, session commands, restart, and isolated snapshots
+        - [x] T-003 — Implement selection, session commands, restart, and isolated snapshots
             Scope: src/engine/random.ts, game.ts, types.ts, corresponding tests/engine and test-only fixtures under tests/helpers.
             Depends on: T-002. Contracts: S2–S3, snapshot obligations in S6; A1–A2, restart/snapshot portions of A6–A7.
             Outcome: independent active/next draws; valid/blocked horizontal, clockwise, and soft-drop commands; fresh restart; snapshots isolated from engine mutation. Establish stable concrete engine API names without changing logical contracts.
             Evidence: npm test -- tests/engine/random.test.ts tests/engine/game.test.ts; deterministic draw order/repeated kinds, collision rejection, restart draws, retained/modified snapshots; npm run typecheck. No production test-state loader.
+            Verified: Five behavioral RED failures observed before implementation. GREEN: 21 engine tests and strict typecheck passed; independent draws, fresh restart order, atomic movement/rotation/drop rejection, soft-drop scoring and detached retained/mutable snapshots verified. Geometry/board regressions passed; chronological advance remains T-004 scope.
         - [ ] T-004 — Integrate chronological gravity, full-delay locks, row clears, and top-out
             Scope: src/engine/game.ts and focused timing/lock/session tests, collaborating board/selection contracts; level-1 score calculation only within milestone 1.1.
             Depends on: T-003. Contracts: S4 and baseline portions of S2/S5; A3–A6 within MVP scope.
