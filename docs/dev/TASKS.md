@@ -113,11 +113,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Report: docs/dev/reports/phases/1/1.3.md; include implemented features, usability/risk observations, Findings/Blockers and TODO.
             Verified: Read-only input/controller/engine integration review completed without required defects. All 53 unit tests, typecheck/build and four stable-Chromium production tests passed. S7 repeat/priority/chronology/lifecycle and disposal exits verified; report distinguishes native keys, browser-dispatched focus events and controlled hidden-state evidence.
     - [ ] Milestone 1.4 — Desktop presentation and delivery
-        - [ ] T-017 — Complete responsive square-cell and high-DPI rendering
+        - [x] T-017 — Complete responsive square-cell and high-DPI rendering
             Scope: src/browser/renderer.ts, styles and relevant view integration; focused tests/browser and tests/e2e visual/resize checks.
             Depends on: T-016. Contracts: rendering/size obligations of S8/A10.
             Outcome: full board/preview remain correctly scaled, sharp and unclipped at 1024 × 768 and larger/resized desktop viewports; occupied geometry matches snapshots.
             Evidence: browser screenshots/inspection and geometric assertions at minimum/resized viewports and device pixel ratios, renderer unit checks where meaningful, npm run typecheck/build. Record actual observations rather than claiming visual correctness from build success.
+            Verified: Observed backing-size RED before DPR implementation. GREEN: 16 browser unit tests, typecheck/build and six stable-Chromium production tests passed. Pixel/geometry assertions and inspected screenshots verified all 200 cells, four active cells, square 1:2 board, unclipped controls and measured backing dimensions at 1024x768/1440x1000 and DPR 1/2.
         - [ ] T-018 — Complete accessible status, controls, and user instructions
             Scope: index.html, src/browser/view.ts/styles, README controls, tests/browser/view.test.ts and browser accessibility checks.
             Depends on: T-017. Contracts: textual/status/accessibility obligations in S8/A10.
