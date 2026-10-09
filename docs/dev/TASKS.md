@@ -32,11 +32,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: independent active/next draws; valid/blocked horizontal, clockwise, and soft-drop commands; fresh restart; snapshots isolated from engine mutation. Establish stable concrete engine API names without changing logical contracts.
             Evidence: npm test -- tests/engine/random.test.ts tests/engine/game.test.ts; deterministic draw order/repeated kinds, collision rejection, restart draws, retained/modified snapshots; npm run typecheck. No production test-state loader.
             Verified: Five behavioral RED failures observed before implementation. GREEN: 21 engine tests and strict typecheck passed; independent draws, fresh restart order, atomic movement/rotation/drop rejection, soft-drop scoring and detached retained/mutable snapshots verified. Geometry/board regressions passed; chronological advance remains T-004 scope.
-        - [ ] T-004 — Integrate chronological gravity, full-delay locks, row clears, and top-out
+        - [x] T-004 — Integrate chronological gravity, full-delay locks, row clears, and top-out
             Scope: src/engine/game.ts and focused timing/lock/session tests, collaborating board/selection contracts; level-1 score calculation only within milestone 1.1.
             Depends on: T-003. Contracts: S4 and baseline portions of S2/S5; A3–A6 within MVP scope.
             Outcome: explicit-time gravity, immediate grounded detection, independent full lock countdown, no grounded reset/soft-drop lock exception, airborne cancellation, lock-before-gravity tie order, row clear/new spawn/top-out, residual time across spawns. Keep level at 1 in this milestone while displaying correct level-1/soft-drop awards.
             Evidence: npm test -- tests/engine; exercise late-in-gravity-cycle grounding, just-before/at lock expiry, grounded movement, blocked down, airborne transitions, row clearing/top-out, and time partitioning; npm run typecheck. Verify engine runs without browser globals.
+            Verified: Seven timing/integration behavioral RED failures observed. GREEN: 28 engine tests and strict typecheck passed. Verified late-cycle full lock delay, grounded movement/no drop reset, airborne cancellation/re-grounding, residual-time partitioning, two-row clear through real commands, grounded-at-spawn delay, top-out and no replacement draw on blocked spawn. Level-1 MVP progression remains explicitly bounded.
         - [ ] T-005 — Render the real engine board, preview, and statistics
             Scope: src/browser/renderer.ts, view.ts, index.html/styles, focused tests/browser presentation checks.
             Depends on: T-004. Contracts: initial presentation subset of S8/A10.
