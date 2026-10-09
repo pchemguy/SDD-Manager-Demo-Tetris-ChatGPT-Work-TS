@@ -268,6 +268,30 @@ try {
         await run("return document.querySelector('#score').textContent"),
         "0",
       );
+      // Clear two rows through native movement/drop/lock events in the built app.
+      await reset();
+      for (const x of [0, 2, 4, 6, 8]) {
+        const horizontal = x < 4 ? "\uE012" : "\uE014";
+        await keys(
+          Array.from({ length: Math.abs(x - 4) }, () => [
+            { type: "keyDown", value: horizontal },
+            { type: "keyUp", value: horizontal },
+          ]).flat(),
+        );
+        await keys([
+          ...Array.from({ length: 20 }, () => [
+            { type: "keyDown", value: "\uE015" },
+            { type: "keyUp", value: "\uE015" },
+          ]).flat(),
+          { type: "pause", duration: 1050 },
+        ]);
+      }
+      assert.equal(
+        await run("return document.querySelector('#lines').textContent"),
+        "2",
+      );
+      await screenshot("row-clear");
+      await reset();
       await hold("\uE015", 20000);
       assert.equal(await status(), "Game over");
       await screenshot("game-over");
@@ -305,7 +329,7 @@ try {
       ratio,
       checks:
         ratio === 1
-          ? "production load, native controls/repeat/priority/release, pause/wait/resume, native tab visibility, keyboard restart, top-out, rotation/lock/spawn, resize/pixels"
+          ? "production load, native controls/repeat/priority/release, pause/wait/resume, native tab visibility, keyboard restart, native row clear, top-out, rotation/lock/spawn, resize/pixels"
           : "second independent session, minimum/resized desktop, square board/preview, DPR backing/pixels",
     });
     socket.close();

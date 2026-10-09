@@ -60,3 +60,32 @@ it("clears a row before checking a differently shaped obstructed next spawn", ()
   expect(g.snapshot().board[1]![6]).toBe("O");
   expect(draw).toBe(15);
 });
+
+it("partitions one elapsed update through a line-clear level transition and successor gravity", () => {
+  const a = repeatedO(),
+    b = repeatedO();
+  for (const g of [a, b]) {
+    for (let n = 0; n < 4; n++) for (const x of [0, 2, 4, 6, 8]) placeO(g, x);
+    for (const x of [0, 2, 4, 6]) placeO(g, x);
+    moveTo(g, 8);
+    ground(g);
+    g.advance(900);
+    expect(g.snapshot()).toMatchObject({ lines: 8, level: 1 });
+  }
+  a.advance(2500);
+  for (let n = 0; n < 25; n++) b.advance(100);
+  expect(a.snapshot()).toEqual(b.snapshot());
+  expect(a.snapshot()).toMatchObject({
+    lines: 10,
+    level: 2,
+    gravityInterval: 800,
+    active: { y: 3 },
+  });
+  a.advance(799);
+  b.advance(799);
+  expect(a.snapshot()).toEqual(b.snapshot());
+  a.advance(1);
+  b.advance(1);
+  expect(a.snapshot().active!.y).toBe(4);
+  expect(a.snapshot()).toEqual(b.snapshot());
+});
