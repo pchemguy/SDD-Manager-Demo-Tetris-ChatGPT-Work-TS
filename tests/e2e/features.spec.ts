@@ -42,3 +42,19 @@ test("native C hold shows empty, consumed, swap and paused states with bag-backe
   await page.screenshot({path:info.outputPath("held-paused.png")});
   await page.getByRole("button",{name:"Restart game"}).click();await expect(page.locator("#held-kind")).toHaveText("Empty");
 });
+test("native clockwise wall kick rotates a vertical I from the left wall", async ({page},info) => {
+  await page.clock.install({time:new Date("2026-10-09T12:00:00Z")});
+  await page.addInitScript((values)=>{let i=0;Math.random=()=>values[i++ % values.length]!;},drawsForBag(TEST_BAG));
+  await page.goto("/");await page.clock.pauseAt(new Date("2026-10-09T12:00:01Z"));
+  await page.keyboard.press("c");await page.keyboard.press("ArrowUp");
+  for(let n=0;n<5;n++)await page.keyboard.press("ArrowLeft");
+  await page.keyboard.press("ArrowUp");
+  const points=await page.locator("#board").evaluate((c:HTMLCanvasElement)=>{
+    const points=[];for(let y=0;y<5;y++)for(let x=0;x<10;x++){
+      const data=c.getContext("2d")!.getImageData((x+.5)*c.width/10,(y+.5)*c.height/20,1,1).data;
+      if(data[0]===83)points.push({x,y});
+    }return points;
+  });
+  expect(points).toEqual([{x:0,y:2},{x:1,y:2},{x:2,y:2},{x:3,y:2}]);
+  await page.screenshot({path:info.outputPath("wall-kick.png")});
+});

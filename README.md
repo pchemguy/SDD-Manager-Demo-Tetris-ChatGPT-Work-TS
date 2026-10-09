@@ -21,7 +21,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Executable tasks](docs/dev/TASKS.md)
 - [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, arrow controls and Restart are present. The [modern-feature campaign](docs/dev/features/001_2606a72-modern-features/README.md) has accepted design, specification, plan and layout. [FEATURE-TASKS](docs/dev/FEATURE-TASKS.md) and its [conformance review](docs/dev/FEATURE-TASKS-REVIEW-REPORT.md) are accepted for full Phase 2 inline execution with GitHub tracking. Preparation is integrated and published as 71f6275; all 19 task associations are verified. Ghost, delayed hard drop, seven-bag selection and hold are implemented on the feature branch; kicks remain pending.
+The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, arrow controls and Restart are present. The [modern-feature campaign](docs/dev/features/001_2606a72-modern-features/README.md) has accepted design, specification, plan and layout. [FEATURE-TASKS](docs/dev/FEATURE-TASKS.md) and its [conformance review](docs/dev/FEATURE-TASKS-REVIEW-REPORT.md) are accepted for full Phase 2 inline execution with GitHub tracking. Preparation is integrated and published as 71f6275; all 19 task associations are verified. Ghost, delayed hard drop, seven-bag selection and hold and horizontal wall kicks are implemented on the feature branch; full interaction and final acceptance work remain.
 
 ## Development setup
 
@@ -86,6 +86,8 @@ const snapshot = game.snapshot();
 Each instance shuffles `[I,O,T,S,Z,J,L]` with descending Fisher–Yates (six source calls per bag), consumes it forward and refills lazily. Tests use conforming selected bag permutations and public-command placement traces, including clearing, progression and blocked next spawn; constant randomness cannot yield unlimited O pieces.
 
 Hold stores a kind and replaces the active piece at canonical spawn with fresh timers. Empty hold promotes next; occupied hold swaps without consuming the bag. Availability returns only after lock and successful successor spawn. Obstructed replacement retains outgoing held kind, board/progress and visible next, draws no replacement, and ends play.
+
+Clockwise rotation tests horizontal offsets `0, -1, +1, -2, +2` and accepts the first fit at the same y. O rotation and all-failed/floor-only attempts are ineffective. There are no vertical kicks or exact commercial rotation-standard claims.
 
 Hard drop adds two points per translated row and waits the full current gravity interval before locking. Ghost outlines predict the same landing; movement during the delay remains possible.
 

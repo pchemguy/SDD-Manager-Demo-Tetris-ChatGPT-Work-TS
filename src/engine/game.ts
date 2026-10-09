@@ -1,7 +1,7 @@
 /** Own one deterministic browser-independent session; browser code only sends commands/elapsed time. */
 import { emptyBoard, fits, place, clearRows } from "./board";
 import { cells, spawn } from "./pieces";
-import { landingDistance } from "./placement";
+import { landingDistance, clockwiseCandidate } from "./placement";
 import { Bag } from "./random";
 import { gravity, levelFor, lineAward } from "./progression";
 import type {
@@ -73,13 +73,14 @@ export class Game {
       this.updateGrounding();
       return true;
     }
-    const candidate = { ...this.active };
+    let candidate = { ...this.active };
     if (command === "left") candidate.x--;
     else if (command === "right") candidate.x++;
     else if (command === "softDrop") candidate.y++;
     else if (command === "rotateClockwise") {
-      if (candidate.kind === "O") return false;
-      candidate.orientation = (candidate.orientation + 1) % 4;
+      const rotated = clockwiseCandidate(this.board, this.active);
+      if (!rotated) return false;
+      candidate = rotated;
     } else return false;
     if (!fits(this.board, cells(candidate))) return false;
     this.active = candidate;

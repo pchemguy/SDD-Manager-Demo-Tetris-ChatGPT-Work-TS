@@ -23,7 +23,7 @@ it("moves only valid cells and blocked actions preserve state", () => {
   expect(g.snapshot().score).toBe(1);
   expect(g.apply("rotateClockwise")).toBe(false);
 });
-it("rotates a T through four orientations without wall kicks", () => {
+it("rotates a T through four orientations in open space", () => {
   const g = new Game(bagSource(["T","I","O","S","Z","J","L"]));
   for (let i = 0; i < 4; i++) expect(g.apply("rotateClockwise")).toBe(true);
   expect(g.snapshot().active?.orientation).toBe(0);

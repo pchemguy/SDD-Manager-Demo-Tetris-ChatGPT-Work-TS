@@ -14,3 +14,24 @@ it("projects to floor or the first uneven obstruction without tunneling", () => 
   expect(b).toEqual(before);
   expect(p).toEqual(spawn("O"));
 });
+import { clockwiseCandidate } from "../../src/engine/placement";
+it("chooses fixed-y first-fit kicks on both walls and around stacked cells", () => {
+  const b=emptyBoard();
+  expect(clockwiseCandidate(b,{kind:"I",x:-2,y:4,orientation:1})).toEqual({kind:"I",x:0,y:4,orientation:2});
+  expect(clockwiseCandidate(b,{kind:"I",x:7,y:4,orientation:1})).toEqual({kind:"I",x:6,y:4,orientation:2});
+  expect(clockwiseCandidate(b,spawn("T"))).toEqual({...spawn("T"),orientation:1});
+  b[2]![4]="I";
+  expect(clockwiseCandidate(b,spawn("T"))).toEqual({...spawn("T"),x:2,orientation:1});
+  b[2]![3]="I";
+  expect(clockwiseCandidate(b,spawn("T"))).toEqual({...spawn("T"),x:4,orientation:1});
+  b[2]![5]="I";
+  expect(clockwiseCandidate(b,spawn("T"))).toEqual({...spawn("T"),x:1,orientation:1});
+});
+it("rejects O, floor-only failures and all five blocked translations without mutation", () => {
+  const b=emptyBoard();for(let x=3;x<=7;x++)b[13]![x]="O";
+  const before=structuredClone(b), p={kind:"I" as const,x:3,y:10,orientation:0};
+  expect(clockwiseCandidate(b,p)).toBe(null);expect(b).toEqual(before);
+  expect(p.orientation).toBe(0);
+  expect(clockwiseCandidate(emptyBoard(),{...spawn("I"),y:18})).toBe(null);
+  expect(clockwiseCandidate(emptyBoard(),spawn("O"))).toBe(null);
+});

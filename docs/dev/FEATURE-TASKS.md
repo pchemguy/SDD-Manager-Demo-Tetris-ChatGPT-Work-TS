@@ -76,11 +76,12 @@ Verification below is planned, not performed. Existing commands are `npm run typ
             Report: docs/dev/features/001_2606a72-modern-features/reports/2.2.md; implemented features, fixture/draw-state risks, Findings/Blockers and TODO.
             Verified: Inline milestone review found MR22-01: inherited action-map properties could be accepted by Input.press. RED reproduced the function action; own-property guard repairs it. Fresh verification: 77 unit tests, strict build and nine production Chromium tests pass. Milestone 2.2 exits and valid bag/hold failure/timing/native paths verified; inspected held screenshots reused. Report reports/2.2.md records repaired findings, honest final-target deferrals and TODO None.
     - [ ] Milestone 2.3 — Wall kicks and complete interactions
-        - [ ] T-033 — Apply first-fitting clockwise horizontal wall kicks
+        - [x] T-033 — Apply first-fitting clockwise horizontal wall kicks
             Scope: src/engine/placement.ts/game.ts, tests/engine/placement.test.ts/features.test.ts and affected rotation consumers.
             Depends on: T-032. Contracts: F4/FA4 and grounding portions of FA7.
             Outcome: ordered offsets 0,-1,+1,-2,+2 with fixed y, first-fit atomic rotation and O/all-failed rejection. Reuse board collision/geometry; preserve gravity age and reconcile grounding exactly.
             Evidence: focused placement/session tests and engine regressions; both walls, stacked cells, precedence, all-candidate/floor failure, O, retained grounded countdown and airborne/new-grounding behavior; npm run typecheck/build and actual browser wall-rotation demonstration.
+            Verified: RED: fitting wall-candidate and public I wall-rotation assertions failed. Verification: 81 unit tests and strict build pass; all three production Chromium feature paths pass. Placement checks cover every ordered offset, both walls, stacked precedence, O/all-five/floor rejection and nonmutation. Public rotations verify grounded retention, rejected-action atomicity and kicked airborne cancellation/new full grounding. Native keys and literal pixels demonstrate a +2 I kick from the left wall. API/user rotation policy documented.
         - [ ] T-034 — Verify complete engine interactions across locks, holds and progression
             Scope: tests/engine/features.test.ts and existing timing/boundaries/lifecycle/progression/game suites and test helpers; targeted engine repairs if required.
             Depends on: T-033. Contracts: complete F2–F6/FA1–FA7; unchanged engine A1–A7 portions.

@@ -103,3 +103,19 @@ it("grounded-at-spawn held replacement starts a fresh complete interval and does
   expect(g.snapshot().active?.kind).toBe("O");g.advance(1);
   expect(g.snapshot().board).not.toEqual(before.board);
 });
+const iGame=()=>new Game(bagSource(["I","O","T","S","Z","J","L"]));
+it("applies a fitting kick atomically and cancels grounding when it becomes airborne", () => {
+  const g=iGame();g.apply("rotateClockwise");moveTo(g,-2);g.apply("hardDrop");g.advance(900);
+  expect(g.apply("rotateClockwise")).toBe(true);
+  expect(g.snapshot().active).toMatchObject({kind:"I",x:0,y:16,orientation:2});
+  g.advance(100);expect(occupied(g)).toBe(0);expect(g.snapshot().active!.y).toBe(17);
+  g.advance(999);expect(occupied(g)).toBe(0);g.advance(1);expect(occupied(g)).toBe(4);
+});
+it("successful grounded rotation retains its countdown; a floor failure is atomic", () => {
+  const g=new Game(bagSource(["T","I","O","S","Z","J","L"]));
+  g.apply("rotateClockwise");g.apply("hardDrop");g.advance(900);
+  expect(g.apply("rotateClockwise")).toBe(true);g.advance(100);expect(occupied(g)).toBe(4);
+  const i=iGame();i.apply("hardDrop");i.advance(900);const before=i.snapshot();
+  expect(i.apply("rotateClockwise")).toBe(false);expect(i.snapshot()).toEqual(before);
+  i.advance(100);expect(occupied(i)).toBe(4);
+});
