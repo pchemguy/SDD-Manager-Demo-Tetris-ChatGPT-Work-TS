@@ -1,10 +1,12 @@
 # Modern-feature plan and layout review
 
+> Historical snapshot archived by T-041 on 2026-10-09. Current authority is [main TASKS](../../TASKS.md), [SPEC](../../SPEC.md), [PLAN](../../PLAN.md) and [layout](../../layout.md). Archived checkboxes are not executable owners or current completion claims.
+
 ## Current gate
 
 State: **Ready for dependent feature task derivation**. FEATURE-PLAN conforms to accepted FEATURE-SPEC, and the focused physical layout supports the accepted design and delivery route. FPR-01 is resolved; no confirmed issue remains. The user accepted PLAN/layout at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. Revision 2 records acceptance-only reconciliation and current source identities. This report does not authorize product implementation or hosted projection.
 
-Reviewed scope: [FEATURE-PLAN](FEATURE-PLAN.md) and [layout/modern-features](layout/modern-features.md); no plan children. The focused layout is an active feature delta, not an implicit rewrite of main layout. Campaign: [001_2606a72-modern-features](features/001_2606a72-modern-features/README.md); preparation checkpoint: `2999f0fbaaa46813c97e2fed035dfab3b1b279fc`. The user accepted FEATURE-SPEC at that checkpoint on 2026-10-09; [specification review Revision 1](FEATURE-SPEC-REVIEW-REPORT.md#revision-1--specification-acceptance) records acceptance-only reconciliation with unchanged F1–F8/FA1–FA10.
+Reviewed scope: [FEATURE-PLAN](FEATURE-PLAN.md) and [layout/modern-features](modern-features.md); no plan children. The focused layout is an active feature delta, not an implicit rewrite of main layout. Campaign: [001_2606a72-modern-features](README.md); preparation checkpoint: `2999f0fbaaa46813c97e2fed035dfab3b1b279fc`. The user accepted FEATURE-SPEC at that checkpoint on 2026-10-09; [specification review Revision 1](FEATURE-SPEC-REVIEW-REPORT.md#revision-1--specification-acceptance) records acceptance-only reconciliation with unchanged F1–F8/FA1–FA10.
 
 Revision 1 reviewed/governing source identities (SHA-256):
 

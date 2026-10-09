@@ -2,26 +2,22 @@
 
 ## Purpose and audience
 
-Build a playable single-player Tetris game for desktop browser users while demonstrating a greenfield SDD Manager workflow in ChatGPT Work. The demonstration targets TypeScript, ChatGPT Work web with 6.1 Sol Medium, and the standard cloud sandbox. This is a learning-by-doing development demonstration; design-stage documents do not establish implemented maturity.
+Build a playable single-player desktop browser Tetris game while demonstrating SDD Manager in ChatGPT Work. The demonstration targets TypeScript, ChatGPT Work web with 6.1 Sol Medium and the standard cloud sandbox. Requested model/platform conditions are context, not independently attested runtime facts.
 
-## Accepted baseline
+## Product scope
 
-The baseline has a 10 × 20 playable board, seven tetrominoes, independent random selection, a one-piece preview, keyboard movement, clockwise rotation without wall kicks, gravity, soft drop, line clearing, scoring, level progression, pause, restart, and game over.
+The game has a 10 × 20 board, seven tetrominoes, seven-bag selection, one-piece next preview, once-per-lock hold, outlined ghost projection, keyboard movement, clockwise horizontal wall kicks, gravity, soft drop, delayed hard drop, simultaneous line clearing, scoring, level progression, pause/focus handling, Restart and game over.
 
-A grounded piece receives one full gravity interval before locking. Grounded movement and rotation do not reset that timer; becoming airborne cancels it. Soft drop cannot force early locking. Every ten cleared lines increases the level and gravity speed. Arrow keys control movement, rotation, and soft drop; Space pauses. A Restart button starts a fresh game. Loss of browser focus pauses play.
-
-## Subsequent feature campaign
-
-After the baseline MVP, a separate SDD feature expansion adds hold, ghost piece, seven-bag randomization, wall kicks, and hard drop. The full-gravity-interval locking principle remains a feature-design constraint. Exact added behavior is settled in that campaign's accepted contracts.
+A grounded piece gets one full current gravity interval before locking, including after hard drop. Grounded movement/rotation retain the timer; becoming airborne cancels it. Hard drop moves to the first-obstruction landing and scores two points per row without immediately locking. Hold replaces geometry at canonical spawn with fresh timers; availability returns only after lock and successful successor spawn. Every ten cleared lines increases level and gravity speed. Arrow keys move/rotate/soft-drop, C holds, Space hard-drops and P pauses/resumes. Focus return requires manual P; Restart starts fresh.
 
 ## Constraints and non-goals
 
-Use a browser-independent TypeScript engine, Canvas board rendering, HTML controls/statistics, and deterministic engine verification. The baseline is desktop and keyboard oriented. Multiplayer, accounts, backend services, online leaderboards, mobile touch controls, and exact conformance to a named commercial rule standard are outside scope.
+Use a browser-independent TypeScript engine, Canvas board/next/held rendering, HTML controls/statistics and deterministic verification. Support keyboard desktop viewports from 1024 × 768, resizing/DPI and current stable desktop Chromium/Firefox at verification time. Deliver static HTTP output without an application backend. Multiplayer, accounts, online leaderboards, touch controls, audio, persistence, expanded next queues, counterclockwise rotation, vertical floor kicks, spin/combo bonuses and exact commercial-rule-standard conformance are outside scope.
 
 ## Success evidence
 
-A playable baseline must demonstrate coherent movement, rotation, gravity, locking, line clearing, scoring, pause, restart, and game over. Deterministic engine tests and browser checks provide evidence. Design acceptance does not establish implementation completion.
+Public command/time scenarios and production native keyboard paths must demonstrate coherent bag/hold/ghost/kicks/drop, full-delay locks, clearing/progression, lifecycle/top-out and Restart. Unit/type/build checks, recorded supported browser versions and inspected desktop/DPI presentation establish acceptance. Reports distinguish implemented capabilities, verified branch state and published target integration.
 
 ## Navigation
 
-[Architecture](ARCHITECTURE.md) defines major blocks; [decomposition](DECOMPOSITION.md) defines logical components. [SPEC](SPEC.md) owns behavioral contracts; [PLAN](PLAN.md) and [layout](layout.md) define accepted delivery order and physical organization; [TASKS](TASKS.md) owns planned executable work.
+[Architecture](ARCHITECTURE.md) defines blocks; [decomposition](DECOMPOSITION.md) defines components. [SPEC](SPEC.md) owns complete behavior; [PLAN](PLAN.md) and [layout](layout.md) define delivery/physical ownership; [TASKS](TASKS.md) is the sole executable task owner. The [modern-feature package](features/001_2606a72-modern-features/README.md) retains accepted source history and feature implementation evidence.

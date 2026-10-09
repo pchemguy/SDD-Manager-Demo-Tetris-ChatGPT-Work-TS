@@ -1,8 +1,10 @@
 # Modern-feature physical layout delta
 
+> Historical snapshot archived by T-041 on 2026-10-09. Current authority is [main TASKS](../../TASKS.md), [SPEC](../../SPEC.md), [PLAN](../../PLAN.md) and [layout](../../layout.md). Archived checkboxes are not executable owners or current completion claims.
+
 ## Scope and authority
 
-This accepted allocation supports [FEATURE_DECOMPOSITION](../FEATURE_DECOMPOSITION.md), [FEATURE-SPEC](../FEATURE-SPEC.md), and [FEATURE-PLAN](../FEATURE-PLAN.md) for [campaign 001_2606a72](../features/001_2606a72-modern-features/README.md). It supplements [main layout](../layout.md) for active feature preparation; it does not silently incorporate feature scope into the main documents. The user accepted PLAN/layout at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. Existing paths below were inspected; new locations are labelled planned. Path allocation does not establish implementation.
+This accepted allocation supports [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md), [FEATURE-SPEC](FEATURE-SPEC.md), and [FEATURE-PLAN](FEATURE-PLAN.md) for [campaign 001_2606a72](README.md). It supplements [main layout](../../layout.md) for active feature preparation; it does not silently incorporate feature scope into the main documents. The user accepted PLAN/layout at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. Existing paths below were inspected; new locations are labelled planned. Path allocation does not establish implementation.
 
 ## Affected source and check homes
 

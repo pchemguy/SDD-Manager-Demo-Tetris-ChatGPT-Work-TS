@@ -21,7 +21,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Executable tasks](docs/dev/TASKS.md)
 - [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The [modern-feature campaign](docs/dev/features/001_2606a72-modern-features/README.md) is executing the accepted Phase 2 range T-023–T-041 inline with GitHub tracking. All five capabilities and current-stable desktop acceptance are verified on the feature branch; the final review, document incorporation and main publication remain. [FEATURE-TASKS](docs/dev/FEATURE-TASKS.md) records current progress; its [conformance review](docs/dev/FEATURE-TASKS-REVIEW-REPORT.md) records accepted derivation quality.
+The five modern features and current-stable desktop acceptance are verified. [TASKS](docs/dev/TASKS.md) is the sole executable owner of both phases. The [modern-feature package](docs/dev/features/001_2606a72-modern-features/README.md) preserves accepted sources/QC and implementation evidence. Final phase review/incorporation is in progress; main integration/publication is recorded by its [implementation receipt](docs/dev/features/001_2606a72-modern-features/IMPLEMENTATION-REPORT.md).
 
 ## Development setup
 

@@ -2,6 +2,10 @@
 
 ## Current gate
 
+State: **Ready** for the complete current TASKS derivation/ownership gate. T-041 independently assessed incorporated main owners; archived feature Ready is historical only. The latest assessment is Revision 2. Accepted inline execution/publication authority remains separate from document conformance.
+
+## Initial gate (historical)
+
 State: **Ready** under TASKS/PLAN conformance and decomposition criteria. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. Implementation also requires accepted-preparation integration/publication and the phase tracking decision/activation gate.
 
 Scope: sole [TASKS](TASKS.md) root, Phase 1/milestones 1.1–1.5/T-001–T-022; no child or active feature list. Governing inputs: accepted [PLAN](PLAN.md), [layout](layout.md), [SPEC](SPEC.md), [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), and [DECOMPOSITION](DECOMPOSITION.md). Upstream readiness: [PLAN review Revision 1](PLAN-REVIEW-REPORT.md#revision-1--acceptance-and-current-owner-navigation) and [SPEC review](SPEC-REVIEW-REPORT.md); acceptance/navigation-only edits preserve reviewed contracts. Accepted PLAN/layout checkpoint: `3b9f97b554611b0bad5841361bd13b4e36d0aedd`.
@@ -53,3 +57,27 @@ No confirmed QC finding was identified. Numeric shape alone is not treated as a 
 ## Revision 1 — Accepted execution scope
 
 The user accepted TASKS and full Phase 1 inline execution with GitHub tracking. Only acceptance/tracking metadata changed; contracts, milestones, task definitions and physical allocation are unchanged. Inspected those differences; earlier conformance coverage remains applicable. Ready is retained. Current owner SHA-256: `68c8f77c3b23470fc6bb1073fe649f4b2e0771f807958acb2d26f344e81fcddb`. Preparation integration and provider activation remain separate gates; no task is completed by this decision.
+
+## Revision 2 — Complete feature incorporation and main-owner reassessment
+
+Date: 2026-10-09. Reviewer: implementing agent applying focused SDD assessment criteria; separate inline document review, no independent-agent claim. Accepted source checkpoints and original cycles above remain historical evidence. Reviewed actual complete pending roots after incorporation, not just the feature overlay or hashes.
+
+Compared the complete hierarchy with accepted current PLAN/layout/SPEC/design, and inspected every transferred task scope/dependency/evidence/report path. Stable IDs T-001–T-041 remain unique and ordered: exactly 41 live entries, two phase parents and ten milestone parents, with four-space hierarchy and no tabs. Phase 1 preserves 17 delivery tasks plus five reviews (22); Phase 2 has 14 delivery tasks plus five reviews (19): 2.1 four delivery tasks + T-027 review; 2.2 four + T-032; 2.3 three + T-036; 2.4 three + T-040; 2.5 only T-041. Overall 31 delivery + ten review tasks. Counts are justified by bounded query/drop/control, bag/session/hold/consumers, kicks/engine/browser interactions, desktop/stable/reproducibility seams, not numerical compliance alone.
+
+No dependency cycle/self-dependent final review or milestone mismatch is introduced. Current S1–S8/FA1–FA10 and retained baseline obligations have concrete tasks and evidence. Historical baseline Verified observations remain labelled; affected current acceptance is reassessed through conforming fixtures and Phase 2 evidence, without reopening unchanged closed objects. Phase 2 IDs/statuses/verified issue associations/report provenance transfer exactly once into main TASKS. The archived source has a historical marker and is not an executable owner; T-041 retains its sole live owner before archival. All selected roots/evidence dispositions are in scope. T-041 is the intentional single phase-review/integration task and remains unchecked until its verified review result is persisted; target receipt remains an explicit subsequent workflow gate. No task was silently added/deleted to evade a blocker.
+
+Confirmed incorporation corrections: stale F contract references in current PLAN/TASKS and a duplicate S3 range in SPEC were mapped to complete current owners; no accepted behavior changed. Current navigation, local targets, stable identities, historical markers, ownership and authored whitespace are checked. No remaining confirmed conformance finding, unresolved product decision or placement gap. Ready is based on this complete reassessment. Completion status/verification bookkeeping changes alone retain this structural gate; record subsequent status hashes with their actual check.
+
+| Source | SHA-256 |
+| --- | --- |
+| `TASKS.md` | `4968b7f6e910d9188428fb03d7bf0fb1cdf4851871439d209a2b23278ee3ae0b` |
+| `PLAN.md` | `072c70fe7e6718ea69c2f0cb299f3037ff9c6b0717bfae4ebd6101620a134617` |
+| `layout.md` | `89ea5b60aa9eafaa6869870475510ac103f787dcb1c204fd3c046b7f5ae064bc` |
+| `SPEC.md` | `a6066686bfdbabef400580fc4db61490d82e0d15988bc8679b15622bdc734683` |
+| `PROJECT.md` | `b4c8d05b88d93c2ddac7000d360fcb589fc5f2fe17347ad457658469cf5a2a05` |
+| `ARCHITECTURE.md` | `626aada524f8c9aa1dc391035a73b5046df0c61bcd931a8a603a03b428e31032` |
+| `DECOMPOSITION.md` | `d69ef96f1ad8f3d0fbfeaf084d1e6155c5e24dd8345fcf2537da6e22ca7fd8e1` |
+
+### Completion-status reconciliation
+
+T-041 review/incorporation result is verified and checked; the explicit integration/publication receipt remains the subsequent workflow boundary. Task definitions, IDs, associations, dependencies and conformance are unchanged. Owning TASKS SHA-256 after this evidence/status update: `9b7c012b3d105b503d9c35544a19b8538e45c6cac43bfbc82356ed97569739f7`.

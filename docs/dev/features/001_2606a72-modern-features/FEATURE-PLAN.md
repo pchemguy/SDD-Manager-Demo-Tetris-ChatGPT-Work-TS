@@ -1,10 +1,12 @@
 # Modern-feature delivery plan
 
+> Historical snapshot archived by T-041 on 2026-10-09. Current authority is [main TASKS](../../TASKS.md), [SPEC](../../SPEC.md), [PLAN](../../PLAN.md) and [layout](../../layout.md). Archived checkboxes are not executable owners or current completion claims.
+
 ## Objective and readiness
 
-Deliver the five capabilities in accepted [FEATURE-SPEC](FEATURE-SPEC.md), with [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md) and the retained main architecture. Specification acceptance at `2999f0fbaaa46813c97e2fed035dfab3b1b279fc` and [specification review Revision 1](FEATURE-SPEC-REVIEW-REPORT.md#revision-1--specification-acceptance) establish the inputs. The user accepted this plan and its [physical layout delta](layout/modern-features.md) at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09; [plan review](FEATURE-PLAN-REVIEW-REPORT.md) assesses their conformance.
+Deliver the five capabilities in accepted [FEATURE-SPEC](FEATURE-SPEC.md), with [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md) and the retained main architecture. Specification acceptance at `2999f0fbaaa46813c97e2fed035dfab3b1b279fc` and [specification review Revision 1](FEATURE-SPEC-REVIEW-REPORT.md#revision-1--specification-acceptance) establish the inputs. The user accepted this plan and its [physical layout delta](modern-features.md) at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09; [plan review](FEATURE-PLAN-REVIEW-REPORT.md) assesses their conformance.
 
-Campaign: [001_2606a72-modern-features](features/001_2606a72-modern-features/README.md). The complete baseline remains a required working dependency. This scoped plan adds project-wide Phase 2; it does not renumber or reopen baseline Phase 1. FEATURE-TASKS will own executable feature work until accepted task reconciliation. The [main PLAN](PLAN.md) retains unaffected baseline strategy; accepted feature incorporation will produce a coherent complete project plan.
+Campaign: [001_2606a72-modern-features](README.md). The complete baseline remains a required working dependency. This scoped plan adds project-wide Phase 2; it does not renumber or reopen baseline Phase 1. FEATURE-TASKS will own executable feature work until accepted task reconciliation. The [main PLAN](../../PLAN.md) retains unaffected baseline strategy; accepted feature incorporation will produce a coherent complete project plan.
 
 ## Strategy and earliest useful increment
 

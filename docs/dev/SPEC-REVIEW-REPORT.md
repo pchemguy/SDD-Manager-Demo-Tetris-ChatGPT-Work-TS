@@ -2,6 +2,10 @@
 
 ## Current gate
 
+State: **Ready** for the complete current SPEC design/contract gate. T-041 independently assessed incorporated main owners; archived feature Ready is historical only. The latest assessment is Revision 3. Accepted inline execution/publication authority remains separate from document conformance.
+
+## Initial gate (historical)
+
 State: **Ready** for dependent planning. The user accepted the specification on 2026-10-09. The design-conformance review passes; implementation is not authorized by this report. Current source identities and acceptance reconciliation are recorded in Revision 1.
 
 Scope: [SPEC](SPEC.md), sections S1–S8 and A1–A11; no focused children. Governing sources: [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), [DECOMPOSITION](DECOMPOSITION.md), and the user's accepted baseline/lock-delay design. Source checkpoint before specification preparation: `3508a24819ae117a71d8d752941035980e204f32`. PROJECT's pending change is navigation only; its accepted product scope is unchanged.
@@ -55,3 +59,18 @@ Rechecked exact source states, accepted scope, local links, and absence of behav
 ## Revision 2 — Current navigation equivalence
 
 PROJECT navigation links accepted PLAN/layout and planned TASKS. Its behavioral brief is unchanged; SPEC, ARCHITECTURE, and DECOMPOSITION are unchanged. Checked the navigation-only difference against the existing conformance coverage and local targets. Ready is retained. Current PROJECT SHA-256: `fb92cb94be795c4e5a4bf3e81b40c772f0c329fd24a7e12018110bb5a088e143`. No specification correction or implementation check was needed.
+
+## Revision 3 — Complete feature incorporation and main-owner reassessment
+
+Date: 2026-10-09. Reviewer: implementing agent applying focused SDD assessment criteria; separate inline document review, no independent-agent claim. Accepted source checkpoints and original cycles above remain historical evidence. Reviewed actual complete pending roots after incorporation, not just the feature overlay or hashes.
+
+Compared PROJECT scope/non-goals, architecture dependency/rule ownership and decomposition seams against every S1–S8 contract. S1 geometry/occupied-cell bounds remains; S2 precisely owns six-draw descending shuffles, lazy forward consumption/reset and session isolation; S3 precisely owns canonical/fresh/once-per-lock holds with no-draw failures, ordered fixed-y kicks, first-obstruction projection and effective/ineffective 2d delayed drop; S4/S5 retain full G, chronology, invalid/rejected atomicity, compaction and pre-clear-level progression; S6 defines typed commands/detached added fields; S7 defines case/latches/repeat-preservation/cleanup/manual return; S8 defines readable/DPR/native-keyboard/static/current-stable delivery. No superseded independent-selection, no-kick or Space-pause contract remains. A1–A11 and FA1–FA10 are objective and cover accepted failures/timing/data/resource interactions; current specification is independently readable and contains no executable checklist. No task/count assessment is inferred at SPEC level.
+
+Confirmed incorporation corrections: stale F contract references in current PLAN/TASKS and a duplicate S3 range in SPEC were mapped to complete current owners; no accepted behavior changed. Current navigation, local targets, stable identities, historical markers, ownership and authored whitespace are checked. No remaining confirmed conformance finding, unresolved product decision or placement gap. Ready is based on this complete reassessment. Completion status/verification bookkeeping changes alone retain this structural gate; record subsequent status hashes with their actual check.
+
+| Source | SHA-256 |
+| --- | --- |
+| `SPEC.md` | `a6066686bfdbabef400580fc4db61490d82e0d15988bc8679b15622bdc734683` |
+| `PROJECT.md` | `b4c8d05b88d93c2ddac7000d360fcb589fc5f2fe17347ad457658469cf5a2a05` |
+| `ARCHITECTURE.md` | `626aada524f8c9aa1dc391035a73b5046df0c61bcd931a8a603a03b428e31032` |
+| `DECOMPOSITION.md` | `d69ef96f1ad8f3d0fbfeaf084d1e6155c5e24dd8345fcf2537da6e22ca7fd8e1` |

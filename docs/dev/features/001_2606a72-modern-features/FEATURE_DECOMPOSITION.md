@@ -1,10 +1,12 @@
 # Modern-feature component design
 
+> Historical snapshot archived by T-041 on 2026-10-09. Current authority is [main TASKS](../../TASKS.md), [SPEC](../../SPEC.md), [PLAN](../../PLAN.md) and [layout](../../layout.md). Archived checkboxes are not executable owners or current completion claims.
+
 ## Scope and decision state
 
-This accepted feature design belongs to [campaign 001_2606a72-modern-features](features/001_2606a72-modern-features/README.md), based on `2606a7213d4ddcf18497fafabb6cc5c349a26178`. The user accepted the complete proposed design at `a4185c2f586388171c4ef12314fb26e6a83ce8aa` on 2026-10-09. The five capabilities, behavior policies below, and retained full-interval locking rule govern feature specification. Design acceptance does not establish implementation.
+This accepted feature design belongs to [campaign 001_2606a72-modern-features](README.md), based on `2606a7213d4ddcf18497fafabb6cc5c349a26178`. The user accepted the complete proposed design at `a4185c2f586388171c4ef12314fb26e6a83ce8aa` on 2026-10-09. The five capabilities, behavior policies below, and retained full-interval locking rule govern feature specification. Design acceptance does not establish implementation.
 
-The [main architecture](ARCHITECTURE.md) remains applicable. The engine owns rules and session state; browser control sends commands and elapsed time; presentation reads detached snapshots. This delta refines the affected [components](DECOMPOSITION.md). FEATURE-SPEC will own precise contracts and acceptance; FEATURE-PLAN and layout will own delivery order and physical allocation.
+The [main architecture](../../ARCHITECTURE.md) remains applicable. The engine owns rules and session state; browser control sends commands and elapsed time; presentation reads detached snapshots. This delta refines the affected [components](../../DECOMPOSITION.md). FEATURE-SPEC will own precise contracts and acceptance; FEATURE-PLAN and layout will own delivery order and physical allocation.
 
 ## Accepted behavior
 
