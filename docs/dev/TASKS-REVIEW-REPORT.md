@@ -81,3 +81,5 @@ Confirmed incorporation corrections: stale F contract references in current PLAN
 ### Completion-status reconciliation
 
 T-041 review/incorporation result is verified and checked; the explicit integration/publication receipt remains the subsequent workflow boundary. Task definitions, IDs, associations, dependencies and conformance are unchanged. Owning TASKS SHA-256 after this evidence/status update: `9b7c012b3d105b503d9c35544a19b8538e45c6cac43bfbc82356ed97569739f7`.
+
+Milestone 2.5 review issue/native milestone closure is read back. Parent review status changes only; Phase 2 remains unchecked pending target publication. TASKS SHA-256: `2a04bccc5ee2c33e0cafcabe91ad020e9d74437537f48acff61fcf4d54bb854b`.
