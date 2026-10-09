@@ -20,12 +20,12 @@ Intended implementation branch: `feature/001_2606a72-modern-features`; not creat
 - [FEATURE-TASKS](../../FEATURE-TASKS.md) is the feature's sole executable task owner; its [review](../../FEATURE-TASKS-REVIEW-REPORT.md) assesses conformance to the accepted strategy.
 - [SPEC](../../SPEC.md), [PLAN](../../PLAN.md), [layout](../../layout.md), and [TASKS](../../TASKS.md) own the completed baseline. They do not authorize these feature tasks.
 
-The user accepted the feature design at a4185c2f586388171c4ef12314fb26e6a83ce8aa, FEATURE-SPEC at 2999f0fbaaa46813c97e2fed035dfab3b1b279fc, and FEATURE-PLAN/layout at 9d77973073110aaf07ed899685bbd931e8ed6657 on 2026-10-09. FEATURE-TASKS and its conformance review are prepared: T-023–T-041 are unchecked. Task-list acceptance and the implementation/tracking handoff are pending. No product implementation has started.
+The user accepted the feature design at a4185c2f586388171c4ef12314fb26e6a83ce8aa, FEATURE-SPEC at 2999f0fbaaa46813c97e2fed035dfab3b1b279fc, and FEATURE-PLAN/layout at 9d77973073110aaf07ed899685bbd931e8ed6657 on 2026-10-09. FEATURE-TASKS and its conformance review are prepared: T-023–T-041 are unchecked. TASKS at a29696df319f3763fd547cb082ff3a7bf36b99b2 and full Phase 2 inline execution with GitHub tracking are accepted on 2026-10-09. No product implementation has started.
 
 The request establishes the objective of implementing this feature set. Before execution, accepted preparation must be explicitly merged, checked, and published to the actual default branch; the implementation branch then starts from that checkpoint. Active FEATURE-TASKS will own feature execution. Complete implementation includes accepted document incorporation, verification, source archival in this package, and explicit integration/publication to main under SDD Manager.
 
 ## Retained scope and boundaries
 
-Repository publication authorization remains active; do not request repeated push permission. Existing GitHub tracking belongs to the completed baseline phase. Recommend GitHub tracking for the feature during its implementation handoff; do not project feature objects before scope confirmation and eligible-phase activation.
+Repository publication authorization remains active; do not request repeated push permission. Existing GitHub tracking belongs to the completed baseline phase. GitHub tracking is confirmed for Phase 2; project its objects only after preparation integration and eligible-phase activation.
 
 Keep the completed baseline reports and closed tracking records unchanged. Preserve its gameplay, deterministic engine boundary, desktop support, static delivery, and disclosures except for explicitly accepted feature deltas. Multiplayer, touch controls, audio, persistence, expanded previews, counterclockwise rotation, spin/combo bonuses, and exact conformance to a commercial rule standard are outside this campaign.

@@ -2,7 +2,7 @@
 
 ## Current gate
 
-State: **Ready for task-list acceptance and implementation handoff**. Conformance, hierarchy, dependencies and decomposition pass; no confirmed issue remains. Task-list acceptance, executable range/method and feature tracking confirmation remain pending. This review completes preparation QC only; it does not establish preparation integration, phase activation, implemented features or verified task completion.
+State: **Ready for implementation handoff; TASKS accepted**. Conformance, hierarchy, dependencies and decomposition pass; no confirmed issue remains. Full Phase 2 inline execution with GitHub tracking is accepted. This review completes preparation QC only; it does not establish preparation integration, phase activation, implemented features or verified task completion.
 
 Reviewed owner: [FEATURE-TASKS](FEATURE-TASKS.md), Phase 2/milestones 2.1–2.5/T-023–T-041, with no children. Campaign: [001_2606a72-modern-features](features/001_2606a72-modern-features/README.md). The user accepted [FEATURE-PLAN](FEATURE-PLAN.md)/[feature layout](layout/modern-features.md) at `9d77973073110aaf07ed899685bbd931e8ed6657` on 2026-10-09. [Plan review Revision 2](FEATURE-PLAN-REVIEW-REPORT.md#revision-2--planlayout-acceptance) reconciles acceptance-only edits with unchanged strategy/allocation. [Specification review](FEATURE-SPEC-REVIEW-REPORT.md) and accepted [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md) supply current upstream conformance.
 
@@ -54,3 +54,7 @@ Performed document checks verify source hashes, local links/anchors, parent/name
 No confirmed QC/conformance finding was identified, so no correction/recheck Revision section is fabricated. No task count requires an exceptional 1–2 or 10+ assessment, and no dependency/placement/product decision is delegated into tasks. Actual scenario reachability, browser provisioning and command results require implementation evidence; preparation does not claim them passed.
 
 The remaining workflow decisions are task-list acceptance, selected execution boundary/method, and whether GitHub tracking is enabled for this feature. Recommend full Phase 2 inline with tracking; a partial milestone/task range is also supported and pauses on the feature branch. Existing push authorization remains active. No hosted object is created by this review. Before any execution, accepted preparation must be integrated/verified/published to main and current phase readiness established through SDD Manager.
+
+## Revision 1 — Task-list acceptance
+
+The user accepted a29696df319f3763fd547cb082ff3a7bf36b99b2 on 2026-10-09 and selected T-023–T-041 inline with tracking through main publication. Acceptance/navigation metadata alone changed; task scope, dependencies, hierarchy, contracts and layout remain identical to the initial review. All 19 tasks remain unchecked. FEATURE-TASKS SHA-256: `be2b27e9a9d7c833044a16a49512f88b1a39d79b40fe8b9ee2770197d25f59fd`. Current upstream hashes still match the initial review. No new finding; preparation integration and phase activation remain separate gates.
