@@ -75,3 +75,19 @@ test("native held C/Space cannot replay on the successor; arrows continue after 
   await page.keyboard.up("C");await page.keyboard.up("Space");await page.keyboard.press("C");
   await expect(page.locator("#held-kind")).toHaveText("T");
 });
+test("native grounded kick cancels the old timer while rejected floor rotation retains it", async ({page},info) => {
+  await page.clock.install({time:new Date("2026-10-09T12:00:00Z")});
+  await page.addInitScript((values)=>{let i=0;Math.random=()=>values[i++ % values.length]!;},drawsForBag(TEST_BAG));
+  await page.goto("/");await page.clock.pauseAt(new Date("2026-10-09T12:00:01Z"));
+  await page.keyboard.press("c");await page.keyboard.press("ArrowUp");
+  for(let n=0;n<5;n++)await page.keyboard.press("ArrowLeft");
+  await page.keyboard.press("Space");await page.clock.runFor(900);await page.keyboard.press("ArrowUp");
+  await page.clock.runFor(500);await expect(page.locator("#next-kind")).toHaveText("T");
+  await page.screenshot({path:info.outputPath("kick-airborne-delay.png")});
+  await page.clock.runFor(700);await expect(page.locator("#next-kind")).toHaveText("S");
+  await page.getByRole("button",{name:"Restart game"}).click();await page.keyboard.press("c");
+  await page.keyboard.press("Space");await page.clock.runFor(900);
+  const before=await page.locator("#board").screenshot();await page.keyboard.press("ArrowUp");
+  expect(Buffer.compare(before,await page.locator("#board").screenshot())).toBe(0);
+  await page.clock.runFor(117);await expect(page.locator("#next-kind")).toHaveText("S");
+});
