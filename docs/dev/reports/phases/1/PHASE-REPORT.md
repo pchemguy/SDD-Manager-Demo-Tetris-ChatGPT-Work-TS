@@ -34,8 +34,16 @@ Chromium acceptance uses Google's official current-Stable headless desktop engin
 
 ## Findings / Blockers
 
-None unresolved. All required phase acceptance conditions are verified; final target integration/publication is the remaining workflow action after this report is committed.
+None unresolved. All required phase acceptance conditions and final target integration/publication are verified; see the integration recheck below.
 
 ## TODO
 
 None. Milestone 1.1–1.4 TODO sections are empty; resolved IDs/provenance are retained above. Modern features are outside this baseline, not deferred required defects. Stop after verified main publication; do not start their separate campaign automatically.
+
+## Integration recheck — 2026-10-09
+
+The preintegration review above is retained as the acceptance history. Explicit two-parent merge [29d247b](https://github.com/pchemguy/SDD-Manager-Demo-Tetris-ChatGPT-Work-TS/commit/29d247b742885d225fa71fedeb2c60aeeaa8a935) integrated the complete phase into actual main without conflicts. Its first parent is preparation/main b3b3bfcba9fef0e67a45221049073743e6ed9caf; its second parent is verified phase tip efc625a6254a3222383cdd6fba78082bbf723b82. The phase branch is retained.
+
+On the prospective merged tree, npm test passed all 57 tests in 12 suites; npm run typecheck and npm run build passed; npm run test:e2e:stable passed seven Chromium production checks and two native Firefox sessions. These are the same documented headless desktop methods and limits described above. No source changes followed those merged checks.
+
+The merge was committed and pushed to main; GitHub's main reference was read back as 29d247b742885d225fa71fedeb2c60aeeaa8a935. All 22 managed tasks and five milestones are closed with verified evidence. This documentation follow-up records the publication receipt under T-022. Baseline workflow complete; remaining work: None. The separate modern-feature campaign remains unstarted.

@@ -1,6 +1,6 @@
 # Tetris — SDD Manager demonstration
 
-A greenfield browser game in TypeScript demonstrating practical use of SDD Manager. The accepted design covers a classic baseline MVP, followed by a separate modern-feature expansion. The classic desktop baseline is implemented with progression, held-key controls, pause/focus handling, Restart and DPI-aware Canvas presentation. The phase review verifies the complete baseline; its explicit main merge and remote publication establish final integration.
+A greenfield browser game in TypeScript demonstrating practical use of SDD Manager. The accepted design covers a classic baseline MVP, followed by a separate modern-feature expansion. The classic desktop baseline is implemented with progression, held-key controls, pause/focus handling, Restart and DPI-aware Canvas presentation. The complete baseline is verified and published on main; the final implementation report records its integration evidence.
 
 The demonstration targets ChatGPT Work web with 6.1 Sol Medium and the standard ChatGPT cloud computer sandbox. These are requested conditions; the repository does not independently attest the active model configuration.
 

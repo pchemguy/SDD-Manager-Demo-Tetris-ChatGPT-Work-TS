@@ -21,3 +21,9 @@ Preparation was explicitly merged/published to main at b3b3bfcba9fef0e67a4522104
 The browser method is headless Linux automation. Full Chrome browser UI/graphical OS focus was not tested because of the sandbox's Unix-socket restriction; the tested Chromium runtime is the official current-Stable desktop engine. Browser provisioning/process-scoped flags and requested Work/model context are recorded in README. No global Python environment was modified.
 
 Hold, ghost, seven-bag, kicks and hard drop remain a separate future campaign. No such campaign was started by this baseline run.
+
+## Published result — 2026-10-09
+
+The baseline is complete on main. Explicit merge [29d247b](https://github.com/pchemguy/SDD-Manager-Demo-Tetris-ChatGPT-Work-TS/commit/29d247b742885d225fa71fedeb2c60aeeaa8a935) has preparation/main b3b3bfcba9fef0e67a45221049073743e6ed9caf and verified phase tip efc625a6254a3222383cdd6fba78082bbf723b82 as its two parents. Integration had no conflicts. All 57 unit tests, typecheck/build and the documented stable Chromium/Firefox acceptance passed on the merged tree before commit. The pushed main reference was confirmed through GitHub readback.
+
+All 22 task issues and five milestones are closed. The retained phase branch preserves incremental evidence; this T-022 documentation follow-up records final publication. No baseline action or unresolved TODO remains. See the phase report's integration recheck for the complete receipt.
