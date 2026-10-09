@@ -106,11 +106,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: real key handling/default suppression, sustained/opposing movement, pause/focus and restart are verified against the built working game; retain engine/control separation and earlier play path.
             Evidence: npm run test:e2e with focused scenarios and recorded actual engine versions; browser demonstration of hold/release, inactive wait, explicit resume and clean restart. Unit/type/build regressions pass. Missing required target evidence remains visible for 1.4 completion.
             Verified: All 53 unit tests, typecheck/build and four production browser tests passed on official stable Chromium 155.0.8059.39 headless runtime. Native keys verified holds/opposing release, scoring, Space hold/pause/wait/resume/default suppression and clean Restart. Browser-dispatched blur/focus verified listener integration; controlled controller tests cover hidden transitions and disposal. Full stable Firefox production acceptance remains T-019.
-        - [ ] T-016 — Review, test, and report milestone 1.3
+        - [x] T-016 — Review, test, and report milestone 1.3
             Depends on: T-012–T-015 complete and published; earlier delivery milestones complete/closed if hosted.
             Scope: browser timing/input/lifecycle code and engine interactions; functional/usability demonstration and regression checks; required blocker repairs.
             Evidence: milestone 1.3 exits and applicable A8–A10 pass; code review distinct from tests; report published; hosted closure reconciled if active.
             Report: docs/dev/reports/phases/1/1.3.md; include implemented features, usability/risk observations, Findings/Blockers and TODO.
+            Verified: Read-only input/controller/engine integration review completed without required defects. All 53 unit tests, typecheck/build and four stable-Chromium production tests passed. S7 repeat/priority/chronology/lifecycle and disposal exits verified; report distinguishes native keys, browser-dispatched focus events and controlled hidden-state evidence.
     - [ ] Milestone 1.4 — Desktop presentation and delivery
         - [ ] T-017 — Complete responsive square-cell and high-DPI rendering
             Scope: src/browser/renderer.ts, styles and relevant view integration; focused tests/browser and tests/e2e visual/resize checks.
