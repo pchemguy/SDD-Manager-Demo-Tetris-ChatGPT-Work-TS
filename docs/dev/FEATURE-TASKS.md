@@ -75,7 +75,7 @@ Verification below is planned, not performed. Existing commands are `npm run typ
             Evidence: FA1–FA3, relevant FA5–FA9 and retained baseline assertions pass; demonstrate usable hold/next/drop and exact no-draw failure semantics. Reconcile managed closures when active.
             Report: docs/dev/features/001_2606a72-modern-features/reports/2.2.md; implemented features, fixture/draw-state risks, Findings/Blockers and TODO.
             Verified: Inline milestone review found MR22-01: inherited action-map properties could be accepted by Input.press. RED reproduced the function action; own-property guard repairs it. Fresh verification: 77 unit tests, strict build and nine production Chromium tests pass. Milestone 2.2 exits and valid bag/hold failure/timing/native paths verified; inspected held screenshots reused. Report reports/2.2.md records repaired findings, honest final-target deferrals and TODO None.
-    - [ ] Milestone 2.3 — Wall kicks and complete interactions
+    - [x] Milestone 2.3 — Wall kicks and complete interactions
         - [x] T-033 — Apply first-fitting clockwise horizontal wall kicks
             Scope: src/engine/placement.ts/game.ts, tests/engine/placement.test.ts/features.test.ts and affected rotation consumers.
             Depends on: T-032. Contracts: F4/FA4 and grounding portions of FA7.
