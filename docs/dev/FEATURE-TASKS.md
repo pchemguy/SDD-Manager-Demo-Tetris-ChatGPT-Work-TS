@@ -45,11 +45,12 @@ Verification below is planned, not performed. Existing commands are `npm run typ
             Report: docs/dev/features/001_2606a72-modern-features/reports/2.1.md; concise implemented features, Findings/Blockers and TODO (None when empty).
             Verified: Inline integrated code review at b4e5c82 found no blocking defect. Unchanged T-026 evidence reused: 66 unit tests, strict build and eight production Chromium checks pass; ghost screenshot inspected. Milestone 2.1 exits verified with bag/hold/kicks/final Firefox explicitly pending. Published report reports/2.1.md has Findings/Blockers None and TODO None.
     - [ ] Milestone 2.2 — Seven-bag and usable hold
-        - [ ] T-028 — Build per-game seven-bag selection and controlled shuffle helpers
+        - [x] T-028 — Build per-game seven-bag selection and controlled shuffle helpers
             Scope: src/engine/random.ts, tests/engine/random.test.ts and planned tests/helpers/random.ts.
             Depends on: T-027. Contracts: F2/FA1.
             Outcome: instance-owned selector with descending Fisher–Yates, exact six-value shuffle, forward/lazy consumption and reset without rewinding caller randomness. Add test-only sources for chosen valid bag permutations. Do not activate bag selection in Game until its consumers are reconciled by T-029.
             Evidence: npm test -- tests/engine/random.test.ts; loop/draw counts, deterministic permutations, rollover/boundary duplicates, reset and isolated selectors; npm run typecheck and relevant regressions. Transitional independent selection remains internal baseline behavior, not an exported product mode.
+            Verified: RED: two literal bag assertions failed on the I-only placeholder. Verification: npm test 68 passing; npm run typecheck passes. Exact descending six-draw shuffle, forward/lazy consumption, legal boundary duplicate, reset without rewind and selector isolation verified. Test-only helper emits conforming chosen permutations; Game activation intentionally remains T-029. Milestone 2.1 closure was verified as native milestone 6; preceding reconciliation commit subject mistakenly says 1.1, but its diff and readback concern 2.1 only.
         - [ ] T-029 — Activate bag-backed sessions and reconcile affected fixtures atomically
             Scope: src/engine/game.ts/random.ts, tests/helpers/scenarios.ts/random.ts, affected tests/engine and tests/browser fixtures, tests/e2e suites and stable-firefox.mjs preload/source scenarios.
             Depends on: T-028. Contracts: F2/FA1, FA10 fixture obligation; retained A1–A11 portions.
