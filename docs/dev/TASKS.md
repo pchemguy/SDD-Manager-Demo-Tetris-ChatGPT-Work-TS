@@ -13,7 +13,7 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
 ## Phase 1 — Baseline browser game
 
 - [ ] Phase 1 — Baseline browser game
-    - [ ] Milestone 1.1 — Playable end-to-end core
+    - [x] Milestone 1.1 — Playable end-to-end core
         - [x] T-001 — Establish the strict TypeScript static-app and check toolchain
             Scope: package manifest/lock, TypeScript/static-build/unit/browser configuration as needed, minimal entry page/composition, generated-output ignores, README and AGENTS setup/check commands.
             Depends on: accepted published preparation and phase activation; no prior task.
