@@ -44,7 +44,7 @@ Verification below is planned, not performed. Existing commands are `npm run typ
             Evidence: npm test, npm run typecheck/build and relevant production checks pass; report scoped functionality, usability/timing risks and honest 2.2–2.4 deferrals. Reconcile issue/milestone closure if tracking is active.
             Report: docs/dev/features/001_2606a72-modern-features/reports/2.1.md; concise implemented features, Findings/Blockers and TODO (None when empty).
             Verified: Inline integrated code review at b4e5c82 found no blocking defect. Unchanged T-026 evidence reused: 66 unit tests, strict build and eight production Chromium checks pass; ghost screenshot inspected. Milestone 2.1 exits verified with bag/hold/kicks/final Firefox explicitly pending. Published report reports/2.1.md has Findings/Blockers None and TODO None.
-    - [ ] Milestone 2.2 — Seven-bag and usable hold
+    - [x] Milestone 2.2 — Seven-bag and usable hold
         - [x] T-028 — Build per-game seven-bag selection and controlled shuffle helpers
             Scope: src/engine/random.ts, tests/engine/random.test.ts and planned tests/helpers/random.ts.
             Depends on: T-027. Contracts: F2/FA1.
