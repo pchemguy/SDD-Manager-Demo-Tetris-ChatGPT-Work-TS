@@ -38,11 +38,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: explicit-time gravity, immediate grounded detection, independent full lock countdown, no grounded reset/soft-drop lock exception, airborne cancellation, lock-before-gravity tie order, row clear/new spawn/top-out, residual time across spawns. Keep level at 1 in this milestone while displaying correct level-1/soft-drop awards.
             Evidence: npm test -- tests/engine; exercise late-in-gravity-cycle grounding, just-before/at lock expiry, grounded movement, blocked down, airborne transitions, row clearing/top-out, and time partitioning; npm run typecheck. Verify engine runs without browser globals.
             Verified: Seven timing/integration behavioral RED failures observed. GREEN: 28 engine tests and strict typecheck passed. Verified late-cycle full lock delay, grounded movement/no drop reset, airborne cancellation/re-grounding, residual-time partitioning, two-row clear through real commands, grounded-at-spawn delay, top-out and no replacement draw on blocked spawn. Level-1 MVP progression remains explicitly bounded.
-        - [ ] T-005 — Render the real engine board, preview, and statistics
+        - [x] T-005 — Render the real engine board, preview, and statistics
             Scope: src/browser/renderer.ts, view.ts, index.html/styles, focused tests/browser presentation checks.
             Depends on: T-004. Contracts: initial presentation subset of S8/A10.
             Outcome: Canvas board/active piece and next preview, HTML score/lines/level/status, instructions, and Restart element reflect snapshots. Rule ownership remains in engine; final responsive/accessibility polish is deferred to 1.4.
             Evidence: focused renderer/view tests, npm run typecheck and npm run build; inspect actual initial/locked/game-over rendering. No fabricated gameplay state maintained by presentation.
+            Verified: Two behavioral RED tests became GREEN; browser component tests, typecheck and production build passed. Native Chromium Canvas pixels verified active and locked O pieces, HTML game-over state, and screenshot inspection verified readable text after task-owned font configuration repair.
         - [ ] T-006 — Compose the playable browser loop and discrete controls
             Scope: src/browser/controller.ts, src/main.ts, presentation integration, tests/browser and initial tests/e2e smoke scenarios, current README scope/controls.
             Depends on: T-005. Contracts: discrete S3/S7 controls and milestone 1.1 end-to-end exit.
