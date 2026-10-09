@@ -101,11 +101,12 @@ Verification below is planned, not performed. Existing commands are `npm run typ
             Report: docs/dev/features/001_2606a72-modern-features/reports/2.3.md; implemented interactions, usability/timing findings, Findings/Blockers and TODO.
             Verified: Inline code/dependency review at b2075d4 and current test delta found no blocking issue. Fresh verification: 89 unit tests, strict build and all 12 production Chromium checks pass. Added native grounded-kick cancellation and floor-failure timer-retention evidence; wall-kick screenshot inspected. Milestone 2.3 exits/FA4-FA8 pass; final presentation/current-stable Firefox/reproducibility remain 2.4. Report reports/2.3.md has Findings/Blockers None and TODO None.
     - [ ] Milestone 2.4 — Desktop acceptance and reproducible delivery
-        - [ ] T-037 — Complete held/ghost desktop rendering and accessible state
+        - [x] T-037 — Complete held/ghost desktop rendering and accessible state
             Scope: src/browser/renderer.ts/view.ts, index.html/styles, focused renderer/view tests and production presentation/accessibility/feature checks.
             Depends on: T-036. Contracts: F8/FA9; retained S8/A10.
             Outcome: full board/next/held panels, ghost/active layering, kind/empty/availability text, all instructions/status and named keyboard Restart are coherent and unclipped at minimum/resized/DPR desktop geometry.
             Evidence: focused unit checks, npm run typecheck/build and production screenshots/pixels/geometric assertions at 1024x768 and larger/resized viewports with DPR 1/2; paused/game-over/empty/full/overlapping-ghost states and Tab/Enter Restart. Inspect readable output, not merely DOM presence.
+            Verified: Production accessibility and DPR 1/2 presentation checks pass at 1024×768 and 1440×1000; 30 browser unit tests and strict type checking pass. Paused hold text exposed a seven-pixel footer clip, repaired by reducing control spacing. The controlled-clock resize fixture now advances a render frame. Inspected minimum-size paused/held and larger overlap screenshots: readable labels, complete controls/footer, solid active piece over the ghost.
         - [ ] T-038 — Establish current-stable production browser feature acceptance
             Scope: tests/e2e including stable-firefox.mjs, production server/browser configuration as needed, targeted integration repairs and README recorded methods/versions.
             Depends on: T-037. Contracts: FA8–FA10 and complete F1–F8 integrated acceptance.
