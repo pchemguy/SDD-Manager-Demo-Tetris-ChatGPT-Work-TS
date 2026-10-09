@@ -119,3 +119,34 @@ it("successful grounded rotation retains its countdown; a floor failure is atomi
   expect(i.apply("rotateClockwise")).toBe(false);expect(i.snapshot()).toEqual(before);
   i.advance(100);expect(occupied(i)).toBe(4);
 });
+it("hold during the final drop millisecond replaces the piece with fresh timers and cannot refresh availability", () => {
+  const g=bagGame();g.advance(900);g.apply("hardDrop");g.advance(999);
+  expect(g.apply("hold")).toBe(true);expect(occupied(g)).toBe(0);
+  expect(g.snapshot()).toMatchObject({active:{kind:"I",y:0},held:"O",canHold:false});
+  g.advance(999);expect(g.snapshot().active!.y).toBe(0);g.advance(1);expect(g.snapshot().active!.y).toBe(1);
+  g.apply("hardDrop");g.apply("left");g.apply("rotateClockwise");g.apply("pause");g.apply("resume");
+  expect(g.snapshot().canHold).toBe(false);expect(g.apply("hold")).toBe(false);
+  g.advance(999);expect(occupied(g)).toBe(0);g.advance(1);
+  expect(g.snapshot()).toMatchObject({active:{kind:"T"},canHold:true});
+});
+it("a hold command at lock expiry applies to the successor and partitions remain equivalent", () => {
+  const a=bagGame(),b=bagGame();
+  for(const g of [a,b]){g.apply("hold");g.apply("hardDrop");g.advance(1000);expect(g.apply("hold")).toBe(true);g.apply("rotateClockwise");g.apply("hardDrop");}
+  a.advance(54321.125);for(let n=0;n<434;n++)b.advance(125);b.advance(71.125);
+  expect(a.snapshot()).toEqual(b.snapshot());
+});
+it("rotation into first grounding gets a full late-cycle interval", () => {
+  const g=new Game(bagSource(["T","I","O","S","Z","J","L"]));
+  for(let n=0;n<17;n++)expect(g.apply("softDrop")).toBe(true);
+  g.advance(900);expect(g.apply("rotateClockwise")).toBe(true);
+  g.advance(999);expect(occupied(g)).toBe(0);g.advance(1);expect(occupied(g)).toBe(4);
+});
+it("retained and modified feature snapshots cannot affect hold, kicked geometry or drop projection", () => {
+  const g=bagGame(),retained=g.snapshot();g.apply("hold");g.apply("rotateClockwise");moveTo(g,-2);g.apply("rotateClockwise");
+  const current=g.snapshot(),endpoint=current.ghost!.map(c=>({...c}));
+  current.ghost![0]!.x=99;current.active!.cells[0]!.x=99;current.held="Z";current.canHold=true;
+  expect(g.snapshot()).toMatchObject({held:"O",canHold:false});
+  g.apply("hardDrop");expect(g.snapshot().active!.cells).toEqual(endpoint);
+  expect(retained).toMatchObject({held:null,canHold:true,active:{kind:"O",x:4,y:0}});
+  g.apply("pause");const paused=g.snapshot();g.advance(1e6);expect(g.snapshot()).toEqual(paused);
+});
