@@ -2,7 +2,7 @@
 
 ## Current gate
 
-State: **Ready for specification acceptance**. Design conformance and specification QC pass; no confirmed issue remains. User acceptance of the precise feature specification is pending, so dependent feature planning has not started. This report establishes neither implementation nor product/browser verification.
+State: **Ready for dependent feature planning**. Design conformance and specification QC pass; no confirmed issue remains. The user accepted the complete specification at `2999f0fbaaa46813c97e2fed035dfab3b1b279fc` on 2026-10-09. Revision 1 records the current acceptance reconciliation. This report establishes neither implementation nor product/browser verification.
 
 Scope: [FEATURE-SPEC](FEATURE-SPEC.md), F1–F8 and FA1–FA10; no focused children. Campaign: [001_2606a72-modern-features](features/001_2606a72-modern-features/README.md). Preparation checkpoint: `a4185c2f586388171c4ef12314fb26e6a83ce8aa`; baseline: `2606a7213d4ddcf18497fafabb6cc5c349a26178`. The user accepted the design at the preparation checkpoint on 2026-10-09. Pending FEATURE_DECOMPOSITION changes reconcile acceptance, remove unselected alternatives, and link the specification; its accepted capability/component policies are unchanged.
 
@@ -43,3 +43,7 @@ The existing constant-source repeated-O unit/browser fixtures conflict with F2 i
 The authored local Markdown links resolve. F1–F8 and FA1–FA10 are unique and complete; acceptance references resolve to their canonical feature/baseline owners. Reviewed content hashes match the actual files. Git whitespace and owned-path checks pass; product sources and baseline specification/design/plan/tasks/review/report contents are unchanged. Root navigation identifies accepted design, pending specification acceptance, and absence of executable feature tasks.
 
 No correction/recheck cycle was necessary, so no Revision section is fabricated. No tests, builds, browser launches, compatibility checks, or external fact-checking are claimed for this documentation-only checkpoint. Future FEATURE-PLAN and FEATURE-TASKS must cover these contracts and pass their own QC; this report does not establish their readiness or host-object eligibility.
+
+## Revision 1 — Specification acceptance
+
+The user accepted FEATURE-SPEC at `2999f0fbaaa46813c97e2fed035dfab3b1b279fc` on 2026-10-09. Updated its authority and readiness paragraphs to record that acceptance. F1–F8 and FA1–FA10, accepted design policies, and main governing inputs are unchanged. Inspected the acceptance-only diff against the initial conformance coverage, rechecked current content identity and local navigation, and found no new issue or behavior decision. Current FEATURE-SPEC SHA-256: `c4c58e297e4a9e9005f45c750745e97f577b7f9fa36f1c01e7d8da2fec0c9e0b`. Initial reviewed-state identities/observations remain retained above. Gate: Ready for feature planning; no implementation check is claimed.

@@ -2,7 +2,7 @@
 
 ## Scope and authority
 
-This scoped delta belongs to [campaign 001_2606a72-modern-features](features/001_2606a72-modern-features/README.md). Its accepted design is [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md), accepted by the user at `a4185c2f586388171c4ef12314fb26e6a83ce8aa` on 2026-10-09. [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), and [DECOMPOSITION](DECOMPOSITION.md) supply the retained purpose and ownership. The precise refinements in this specification await user acceptance.
+This scoped delta belongs to [campaign 001_2606a72-modern-features](features/001_2606a72-modern-features/README.md). Its accepted design is [FEATURE_DECOMPOSITION](FEATURE_DECOMPOSITION.md), accepted by the user at `a4185c2f586388171c4ef12314fb26e6a83ce8aa` on 2026-10-09. [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), and [DECOMPOSITION](DECOMPOSITION.md) supply the retained purpose and ownership. The user accepted this specification at `2999f0fbaaa46813c97e2fed035dfab3b1b279fc` on 2026-10-09.
 
 The feature adds hold, ghost projection, seven-bag selection, horizontal wall kicks, and hard drop to the desktop browser game. It retains full-gravity-interval grounded locking, the 10 × 20 board without hidden rows, seven canonical geometries, clockwise-only rotation, one-piece next preview, line scoring/progression, pause/focus/restart lifecycle, detached snapshots, and static delivery. Multiplayer, touch controls, audio, persistence, expanded next queues, counterclockwise rotation, vertical floor kicks, spin/combo bonuses, and exact commercial-standard conformance are outside scope.
 
@@ -118,4 +118,4 @@ Accepted deltas refine baseline A1/A2/A4/A5/A6/A7/A8/A9/A10 through F2–F8; A3/
 
 ## Readiness and limits
 
-The [adjacent review](FEATURE-SPEC-REVIEW-REPORT.md) assesses design conformance and contract quality. No additional consequential design question is open; exact refinements above are presented for user acceptance before FEATURE-PLAN/layout preparation. This specification is not executable evidence, a task list, or permission to project hosted feature tasks. Product implementation has not started.
+The [adjacent review](FEATURE-SPEC-REVIEW-REPORT.md) assesses design conformance and contract quality. Specification acceptance is established; no consequential design or behavior question is open for FEATURE-PLAN/layout preparation. This specification is not executable evidence, a task list, or permission to project hosted feature tasks. Product implementation has not started.
