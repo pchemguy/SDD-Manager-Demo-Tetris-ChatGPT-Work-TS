@@ -50,8 +50,8 @@ Production static acceptance was verified on 2026-10-09 against the official cur
 
 | Target   | Actual runtime | Method                                                                                                                             |
 | -------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Chromium | 155.0.8059.39  | Official Chrome for Testing Stable headless shell, Playwright; seven production checks, DPR 1/2 and desktop resize.                |
-| Firefox  | 157.0.1        | Unpatched Mozilla release, geckodriver 0.37.1/W3C WebDriver; native keys/tab visibility, two sessions, DPR 1/2 and desktop resize. |
+| Chromium | 155.0.8059.39  | Official Chrome for Testing Stable headless shell, Playwright; 13 production checks, verified eleven-line level transition, native feature controls, DPR 1/2 and desktop resize.                |
+| Firefox  | 157.0.1        | Unpatched Mozilla release, geckodriver 0.37.1/W3C WebDriver; native feature keys/held latches/tab visibility, verified eleven-line level transition and top-out; two sessions, DPR 1/2 and desktop resize. |
 
 Version sources: [Chrome for Testing stable metadata](https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json), [Mozilla product details](https://product-details.mozilla.org/1.0/firefox_versions.json). [Mozilla geckodriver guidance](https://firefox-source-docs.mozilla.org/testing/geckodriver/Usage.html) explains testing an unpatched Firefox release; Playwright's bundled Firefox is a separate engine.
 

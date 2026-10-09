@@ -1,5 +1,5 @@
 import { drawsForBag } from "../helpers/random";
-import { TEST_BAG } from "../helpers/scenarios";
+import { TEST_BAG, CLEAR_TRACE } from "../helpers/scenarios";
 /** Native keys and controlled time verify the built ghost/drop/full-delay path. */
 import { test, expect } from "@playwright/test";
 test("ghost landing, scored drop, grounded movement and full delay agree", async ({page}, info) => {
@@ -90,4 +90,30 @@ test("native grounded kick cancels the old timer while rejected floor rotation r
   const before=await page.locator("#board").screenshot();await page.keyboard.press("ArrowUp");
   expect(Buffer.compare(before,await page.locator("#board").screenshot())).toBe(0);
   await page.clock.runFor(117);await expect(page.locator("#next-kind")).toHaveText("S");
+});
+
+/** Native controls follow an independently constructed trace through the level boundary. */
+test("native bag trace clears eleven lines and reaches level two", async ({page},info) => {
+  await page.clock.install({time:new Date("2026-10-09T12:00:00Z")});
+  await page.addInitScript((values)=>{let i=0;Math.random=()=>values[i++ % values.length]!;},drawsForBag(TEST_BAG));
+  await page.goto("/");await page.clock.pauseAt(new Date("2026-10-09T12:00:00.900Z"));
+  const colors={O:244,I:83,T:177,S:131,Z:238,J:125,L:238};
+  for(const [index,step] of CLEAR_TRACE.slice(0,32).entries()){
+    await expect(page.locator("#next-kind")).toHaveText(TEST_BAG[(index+1)%7]!);
+    const active=await page.locator("#board").evaluate((c:HTMLCanvasElement)=>{
+      const reds=[];for(let y=0;y<5;y++)for(let x=0;x<10;x++){
+        const red=c.getContext("2d")!.getImageData((x+.5)*c.width/10,(y+.5)*c.height/20,1,1).data[0]!;
+        if(red!==16)reds.push(red);
+      }return reds;
+    });
+    expect(active).toEqual(Array(4).fill(colors[step.kind]));
+    for(let n=0;n<step.orientation;n++)await page.keyboard.press("ArrowUp");
+    const origin=step.kind==="O"?4:3;
+    for(let n=0;n<Math.abs(step.x-origin);n++)await page.keyboard.press(step.x<origin?"ArrowLeft":"ArrowRight");
+    await page.keyboard.press("Space");await page.clock.runFor(1016);
+    await expect(page.locator("#lines")).toHaveText(String(step.total));
+    await expect(page.locator("#level")).toHaveText(step.total<10?"1":"2");
+  }
+  await expect(page.locator("#status")).toHaveText("Playing");
+  await page.screenshot({path:info.outputPath("level-two.png")});
 });

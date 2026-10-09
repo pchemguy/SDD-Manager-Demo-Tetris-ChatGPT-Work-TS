@@ -153,30 +153,20 @@ try {
       await run("return document.querySelector('#next-kind').textContent"),
       "I",
     );
-    const offset = await run(
-      "return {x:outerWidth-innerWidth,y:outerHeight-innerHeight}",
-    );
+    // Firefox's outer-to-content offset can change after DPI-adjusted resizing.
+    const viewport = async (width,height) => {
+      for(let attempt=0;attempt<4;attempt++){
+        const d=await run("return {w:innerWidth,h:innerHeight,outerW:outerWidth,outerH:outerHeight}");
+        if(d.w===width&&d.h===height)return;
+        await request(`${base}/window/rect`,{width:d.outerW+width-d.w,height:d.outerH+height-d.h});await delay(100);
+      }
+      const d=await run("return {w:innerWidth,h:innerHeight}");assert.equal(d.w,width);assert.equal(d.h,height);
+    };
     for (const size of [
       { width: 1024, height: 768 },
       { width: 1440, height: 1000 },
     ]) {
-      await request(`${base}/window/rect`, {
-        width: size.width + offset.x,
-        height: size.height + offset.y,
-      });
-      await delay(100);
-      // Firefox toolbar geometry can change after the first DPI-adjusted resize.
-      for (let attempt = 0; attempt < 3; attempt++) {
-        const dimensions = await run(
-          "return {w:innerWidth,h:innerHeight,outerW:outerWidth,outerH:outerHeight}",
-        );
-        if (dimensions.w >= size.width && dimensions.h >= size.height) break;
-        await request(`${base}/window/rect`, {
-          width: dimensions.outerW + size.width - dimensions.w,
-          height: dimensions.outerH + size.height - dimensions.h,
-        });
-        await delay(100);
-      }
+      await viewport(size.width,size.height);
       const measured = await run(
         `const c=document.querySelector('#board'),p=document.querySelector('#preview'),r=c.getBoundingClientRect(),b=document.querySelector('#restart').getBoundingClientRect();let colored=0;const ctx=c.getContext('2d');for(let y=0;y<20;y++)for(let x=0;x<10;x++)if(ctx.getImageData((x+.5)*c.width/10,(y+.5)*c.height/20,1,1).data[0]!==16)colored++;return {w:r.width,h:r.height,backing:c.width,backingH:c.height,dpr:devicePixelRatio,viewW:innerWidth,viewH:innerHeight,bottom:r.bottom,buttonBottom:b.bottom,colored,preview:p.width};`,
       );
@@ -194,6 +184,41 @@ try {
       assert.equal(measured.preview, 96 * ratio);
       await screenshot(`desktop-${size.width}`);
     }
+    // Both independent stable sessions exercise feature consumers with native keys.
+    const text = (id) => run("return document.querySelector('#'+arguments[0]).textContent",[id]);
+    const centers = () => run("const c=document.querySelector('#board'),ctx=c.getContext('2d'),points=[];for(let y=0;y<20;y++)for(let x=0;x<10;x++){const d=Array.from(ctx.getImageData((x+.5)*c.width/10,(y+.5)*c.height/20,1,1).data).slice(0,3);if(d[0]!==16)points.push({x,y,color:d});}return points");
+    await reset();
+    assert.equal(await text("held-kind"),"Empty");
+    const ghost=await run("const c=document.querySelector('#board');return Array.from(c.getContext('2d').getImageData(c.width*4.07/10,c.height*18.5/20,1,1).data).slice(0,3)");
+    assert.deepEqual(ghost,[185,197,213]);
+    await keys([{type:"keyDown",value:"c"},{type:"keyDown",value:" "},{type:"pause",duration:1200}]);
+    assert.equal(await text("held-kind"),"O");
+    assert.equal(await text("next-kind"),"S");
+    assert.equal(await text("score"),"36");
+    assert.equal(await text("hold-availability"),"Available · C");
+    await keys([{type:"keyDown",value:"c"},{type:"keyDown",value:" "}]);
+    assert.equal(await text("held-kind"),"O");assert.equal(await text("score"),"36");
+    await keys([{type:"keyUp",value:"c"},{type:"keyUp",value:" "}]);
+    await press("C");assert.equal(await text("held-kind"),"T");assert.equal(await text("next-kind"),"S");
+    await press("p");assert.equal(await text("hold-availability"),"Unavailable while paused");
+    await viewport(1024,768);
+    const heldGeometry=await run("const c=document.querySelector('#held-preview'),r=c.getBoundingClientRect(),f=document.querySelector('footer').getBoundingClientRect();return {w:c.width,h:c.height,css:r.width,bottom:f.bottom,view:innerHeight,color:Array.from(c.getContext('2d').getImageData(c.width*.5,c.height*.55,1,1).data).slice(0,3),instructions:document.querySelector('#instructions').textContent}");
+    assert.equal(heldGeometry.w,Math.round(heldGeometry.css*ratio));assert.equal(heldGeometry.h,heldGeometry.w);
+    console.log("Firefox held geometry",JSON.stringify(heldGeometry));await screenshot("held-paused");
+    assert(heldGeometry.bottom<=heldGeometry.view);for(const key of ["Space","C","P"])assert(heldGeometry.instructions.includes(key));
+    // Sample a filled T cell interior, rather than a background or grid gap.
+    assert.deepEqual(heldGeometry.color,[177,154,234]);await screenshot("held-paused");
+    await reset();assert.equal(await text("held-kind"),"Empty");
+    await press("c");await press("\uE013");
+    await keys(Array.from({length:5},()=>[{type:"keyDown",value:"\uE012"},{type:"keyUp",value:"\uE012"}]).flat());
+    await press("\uE013");
+    assert.deepEqual((await centers()).filter(p=>p.color[0]===83).map(({x,y})=>({x,y})),[{x:0,y:2},{x:1,y:2},{x:2,y:2},{x:3,y:2}]);
+    await screenshot("wall-kick");
+    await reset();await press("c");await press(" ");
+    assert.equal(await text("score"),"36");assert.equal(await text("next-kind"),"T");
+    const dropped=await centers();await press("\uE013");assert.deepEqual(await centers(),dropped,"Floor-only rotation must fail without translation");
+    await delay(1100);assert.equal(await text("next-kind"),"S");
+    await reset();
     if (ratio === 1) {
       const leftmost = () =>
         run(
@@ -271,26 +296,25 @@ try {
         await run("return document.querySelector('#score').textContent"),
         "0",
       );
-      // Clear two rows using seven different kinds and native commands from the shared trace.
+      // Validate the actual active color and next kind before every native placement.
       await reset();
-      for (const step of CLEAR_TRACE.slice(0,7)) {
-        await run("return document.querySelector('#next-kind').textContent");
-        for (let r=0;r<step.orientation;r++) await press("\uE013");
-        const origin = step.kind === "O" ? 4 : 3;
-        const horizontal = step.x < origin ? "\uE012" : "\uE014";
-        await keys(Array.from({length:Math.abs(step.x-origin)},()=>[
-          {type:"keyDown",value:horizontal},{type:"keyUp",value:horizontal}
-        ]).flat());
-        await press(" "); await delay(1050);
+      const colors={O:244,I:83,T:177,S:131,Z:238,J:125,L:238};
+      for(const [index,step] of CLEAR_TRACE.slice(0,32).entries()){
+        assert.equal(await text("next-kind"),TEST_BAG[(index+1)%7]);
+        assert.deepEqual((await centers()).filter(p=>p.y<5).map(p=>p.color[0]),Array(4).fill(colors[step.kind]));
+        const origin=step.kind==="O"?4:3,horizontal=step.x<origin?"\uE012":"\uE014";
+        const sequence=[...Array(step.orientation).fill("\uE013"),...Array(Math.abs(step.x-origin)).fill(horizontal)," "];
+        await keys(sequence.flatMap(value=>[{type:"keyDown",value},{type:"keyUp",value}]));
+        await delay(1050);
+        assert.equal(await text("lines"),String(step.total));assert.equal(await text("level"),step.total<10?"1":"2");
       }
-      assert.equal(
-        await run("return document.querySelector('#lines').textContent"),
-        "2",
-      );
-      await screenshot("row-clear");
+      await screenshot("level-two");console.log("Firefox DPR 1 native progression: eleven lines, level two");
       await reset();
+      await press("c");
       await hold("\uE015", 20000);
       assert.equal(await status(), "Game over");
+      assert.equal(await text("held-kind"),"O");assert.equal(await text("hold-availability"),"Unavailable after game over");
+      const ghostCount=await run("const c=document.querySelector('#board'),d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let n=0;for(let i=0;i<d.length;i+=4)if(d[i]===185&&d[i+1]===197&&d[i+2]===213)n++;return n");assert.equal(ghostCount,0);
       await screenshot("game-over");
       await reset();
       assert.equal(await status(), "Playing");
@@ -327,8 +351,8 @@ try {
       ratio,
       checks:
         ratio === 1
-          ? "production load, native controls/repeat/priority/release, pause/wait/resume, native tab visibility, keyboard restart, native row clear, top-out, rotation/lock/spawn, resize/pixels"
-          : "second independent session, minimum/resized desktop, square board/preview, DPR backing/pixels",
+          ? "production load, native controls/repeat/priority/release, pause/wait/resume, native tab visibility, keyboard restart, native eleven-line level transition with verified piece identities, held top-out, rotation/lock/spawn, hold/ghost/delayed drop/kicks and one-shot latches, resize/pixels"
+          : "second independent session, minimum/resized desktop, square board/next/held, DPR backing/pixels, hold/ghost/drop/kicks and one-shot latches, paused labels/instructions",
     });
     socket.close();
     socket = undefined;
