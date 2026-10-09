@@ -94,11 +94,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: segment elapsed updates at scheduled repeat boundaries, advance timers before each command, process foreground frame delays without dropping/capping gameplay time, render consistent snapshots.
             Evidence: npm test -- tests/browser; compare controlled frame partitions, lock/repeat equal-time boundaries and delayed frames, plus engine regressions and npm run typecheck/build.
             Verified: Two behavioral RED failures preceded integration. GREEN: all 49 unit tests, typecheck and build passed. A 5000 ms foreground stall equals 25 ms frame partitions across repeat/drop/lock/spawn; a lock/repeat tie applies the repeat to the new piece after locking. Key release stops its schedule, existing engine and presentation regressions pass.
-        - [ ] T-014 — Complete pause, focus, restart input cleanup, and disposal
+        - [x] T-014 — Complete pause, focus, restart input cleanup, and disposal
             Scope: src/browser/controller.ts/input.ts and focused controller/lifecycle tests.
             Depends on: T-013. Contracts: lifecycle/focus/resource obligations in S7; A8–A10.
             Outcome: Space pause/resume, blur/hidden pause with manual return, held-state/repeat cleanup at all required transitions, no Space hold toggle, clock rebasing without inactive-time replay, safe repeatable disposal.
             Evidence: npm test -- tests/browser; controlled pause/focus/visibility/restart/game-over transitions, no stale command/time leakage, no events/frames after disposal; npm run typecheck/build.
+            Verified: Two lifecycle RED failures preceded implementation. GREEN: 15 browser unit tests, typecheck/build passed. Verified Space release gating, pause/resume timer preservation without inactive replay, blur/hidden pause with manual return, held-schedule cleanup, fresh Restart timebase and repeated disposal removing events/queued-frame effects. Main composition subscribes real document visibility.
         - [ ] T-015 — Verify complete controls and lifecycle in the real browser
             Scope: tests/e2e controls/lifecycle scenarios, targeted integration repairs, current README/AGENTS behavior/check notes.
             Depends on: T-014. Contracts: S7; A8–A9 and disposal integration in A10.
