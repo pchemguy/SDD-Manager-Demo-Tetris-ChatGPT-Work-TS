@@ -21,7 +21,7 @@ Development uses [SDD Manager](SDD-MANAGER.md). See the [AI-assisted development
 - [Executable tasks](docs/dev/TASKS.md)
 - [Task conformance review](docs/dev/TASKS-REVIEW-REPORT.md)
 
-The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, arrow controls and Restart are present. Hold, ghost, seven-bag selection, wall kicks and hard drop belong to a separate future campaign.
+The specification and PLAN/layout are accepted. TASKS and full Phase 1 inline execution with GitHub tracking are accepted. The live browser loop, Canvas board/preview, statistics, arrow controls and Restart are present. The [modern-feature campaign](docs/dev/features/001_2606a72-modern-features/README.md) is open for hold, ghost, seven-bag selection, wall kicks and hard drop. Its [component design](docs/dev/FEATURE_DECOMPOSITION.md) is proposed for acceptance; feature implementation has not started. The controls below describe the implemented baseline.
 
 ## Development setup
 

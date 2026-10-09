@@ -8,7 +8,7 @@ Read [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md), [
 
 ## Current ownership
 
-The specification and PLAN/layout are accepted. TASKS is the sole baseline execution owner; the user accepted full Phase 1 inline execution with GitHub tracking. The complete engine/browser baseline, phase review and T-022 integration/publication are finished on main. No task range is active. Subsequent work requires a new authorized scope. No feature campaign exists. Modern features belong to a subsequent campaign.
+The complete baseline and T-022 integration/publication are finished on main. TASKS records completed baseline work. The user opened [modern-feature campaign 001_2606a72](docs/dev/features/001_2606a72-modern-features/README.md) for hold, ghost, seven-bag selection, wall kicks, and hard drop. Preparation is on design-docs/001_2606a72-modern-features, based on 2606a7213d4ddcf18497fafabb6cc5c349a26178; the target is main. [FEATURE_DECOMPOSITION](docs/dev/FEATURE_DECOMPOSITION.md) contains proposed design choices awaiting acceptance. No feature specification, plan, task list, or implementation branch exists yet. Read the active package before feature work; baseline task completion does not establish feature readiness. Preserve full-gravity-interval locking. No task range is active.
 
 ## Workflow
 
