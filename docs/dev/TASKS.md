@@ -100,11 +100,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: Space pause/resume, blur/hidden pause with manual return, held-state/repeat cleanup at all required transitions, no Space hold toggle, clock rebasing without inactive-time replay, safe repeatable disposal.
             Evidence: npm test -- tests/browser; controlled pause/focus/visibility/restart/game-over transitions, no stale command/time leakage, no events/frames after disposal; npm run typecheck/build.
             Verified: Two lifecycle RED failures preceded implementation. GREEN: 15 browser unit tests, typecheck/build passed. Verified Space release gating, pause/resume timer preservation without inactive replay, blur/hidden pause with manual return, held-schedule cleanup, fresh Restart timebase and repeated disposal removing events/queued-frame effects. Main composition subscribes real document visibility.
-        - [ ] T-015 — Verify complete controls and lifecycle in the real browser
+        - [x] T-015 — Verify complete controls and lifecycle in the real browser
             Scope: tests/e2e controls/lifecycle scenarios, targeted integration repairs, current README/AGENTS behavior/check notes.
             Depends on: T-014. Contracts: S7; A8–A9 and disposal integration in A10.
             Outcome: real key handling/default suppression, sustained/opposing movement, pause/focus and restart are verified against the built working game; retain engine/control separation and earlier play path.
             Evidence: npm run test:e2e with focused scenarios and recorded actual engine versions; browser demonstration of hold/release, inactive wait, explicit resume and clean restart. Unit/type/build regressions pass. Missing required target evidence remains visible for 1.4 completion.
+            Verified: All 53 unit tests, typecheck/build and four production browser tests passed on official stable Chromium 155.0.8059.39 headless runtime. Native keys verified holds/opposing release, scoring, Space hold/pause/wait/resume/default suppression and clean Restart. Browser-dispatched blur/focus verified listener integration; controlled controller tests cover hidden transitions and disposal. Full stable Firefox production acceptance remains T-019.
         - [ ] T-016 — Review, test, and report milestone 1.3
             Depends on: T-012–T-015 complete and published; earlier delivery milestones complete/closed if hosted.
             Scope: browser timing/input/lifecycle code and engine interactions; functional/usability demonstration and regression checks; required blocker repairs.
