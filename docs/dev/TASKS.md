@@ -12,7 +12,7 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
 
 ## Phase 1 — Baseline browser game
 
-- [ ] Phase 1 — Baseline browser game
+- [x] Phase 1 — Baseline browser game
     - [x] Milestone 1.1 — Playable end-to-end core
         - [x] T-001 — Establish the strict TypeScript static-app and check toolchain
             Scope: package manifest/lock, TypeScript/static-build/unit/browser configuration as needed, minimal entry page/composition, generated-output ignores, README and AGENTS setup/check commands.
@@ -153,4 +153,4 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Verified: Cross-milestone code/dependency review and A1-A11 acceptance completed. All 57 unit tests, typecheck/build and current-stable production checks passed (seven Chromium checks plus two Firefox sessions); native keys clear two rows and display Lines 2/Score 390. Added partition evidence through an elapsed-time level transition without changing production behavior. Phase/final reports aggregate no unresolved TODOs; final explicit main merge, merged checks and publication follow as the separate integration boundary.
 ## Progress and stopping boundary
 
-All delivery milestones 1.1–1.4 are complete and hosted closures are verified. T-022 owns final phase review/report reconciliation and explicit main integration/publication. Verified task checkboxes and task commits are the current progress authority. The accepted full-phase range controls execution; review tasks count toward next-N ranges. Partial ranges publish and pause on the phase branch. Full phase execution includes T-022's integration/publication boundary; it does not start the separate modern-feature campaign automatically.
+All delivery milestones 1.1–1.4 are complete and hosted closures are verified. All 22 task results/reports and five hosted milestone closures are verified. T-022 continues with explicit main integration, merged-state checks and target publication. Verified task checkboxes and task commits are the current progress authority. The accepted full-phase range controls execution; review tasks count toward next-N ranges. Partial ranges publish and pause on the phase branch. Full phase execution includes T-022's integration/publication boundary; it does not start the separate modern-feature campaign automatically.
