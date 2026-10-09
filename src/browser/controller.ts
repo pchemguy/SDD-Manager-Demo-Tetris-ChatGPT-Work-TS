@@ -12,7 +12,7 @@ export interface Clock {
   cancel(id: number): void;
 }
 import { Input } from "./input";
-const KEYS = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", " ", "p", "P"]);
+const KEYS = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", " ", "p", "P", "c", "C"]);
 /** Own chronological input/frame scheduling and browser lifecycle subscriptions. The injected clock must be monotonic. */
 export class Controller {
   private last: number;
@@ -79,6 +79,7 @@ export class Controller {
     } else if (this.game.snapshot().status === "running") {
       for (const action of this.input.press(e.key, at))
         if (action !== "togglePause") this.game.apply(action);
+      if (this.game.snapshot().status !== "running") this.input.clear();
     }
     this.draw();
   };

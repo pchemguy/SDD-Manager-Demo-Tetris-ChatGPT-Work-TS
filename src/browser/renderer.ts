@@ -14,19 +14,23 @@ const COLORS: Record<Kind, string> = {
 export class Renderer {
   private readonly context: CanvasRenderingContext2D;
   private readonly previewContext: CanvasRenderingContext2D;
+  private readonly heldContext: CanvasRenderingContext2D | null;
   /** Require working 2D Canvas contexts; throw instead of pretending a blank board rendered. */
   constructor(
     private readonly board: HTMLCanvasElement,
     private readonly preview: HTMLCanvasElement,
     private readonly pixelRatio: () => number = () =>
       globalThis.devicePixelRatio || 1,
+    private readonly held?: HTMLCanvasElement,
   ) {
     const context = board.getContext("2d"),
       previewContext = preview.getContext("2d");
-    if (!context || !previewContext)
+    const heldContext = held?.getContext("2d") ?? null;
+    if (!context || !previewContext || (held && !heldContext))
       throw new Error("A 2D Canvas context is required");
     this.context = context;
     this.previewContext = previewContext;
+    this.heldContext = heldContext;
   }
   /** Measure CSS size each frame, including display/DPI changes, and draw in CSS coordinates. */
   private prepare(
@@ -82,11 +86,16 @@ export class Renderer {
     if (snapshot.active)
       for (const { x, y } of snapshot.active.cells)
         this.paint(ctx, x * size, y * size, size, snapshot.active.kind);
-    const p = this.previewContext,
-      preview = this.prepare(this.preview, p),
-      points = cells({ ...spawn(snapshot.next), x: 0, y: 0 });
+    this.previewPiece(this.preview, this.previewContext, snapshot.next);
+    if (this.held && this.heldContext) this.previewPiece(this.held, this.heldContext, snapshot.held);
+  }
+  /** Clear each preview, then center canonical kind geometry; null means an empty held slot. */
+  private previewPiece(canvas: HTMLCanvasElement, p: CanvasRenderingContext2D, kind: Kind | null): void {
+    const preview = this.prepare(canvas, p);
     p.fillStyle = "#142235";
     p.fillRect(0, 0, preview.width, preview.height);
+    if (!kind) return;
+    const points = cells({ ...spawn(kind), x: 0, y: 0 });
     const minX = Math.min(...points.map((c) => c.x)),
       maxX = Math.max(...points.map((c) => c.x));
     const minY = Math.min(...points.map((c) => c.y)),
@@ -100,7 +109,7 @@ export class Renderer {
         offsetX + (x - minX) * unit,
         offsetY + (y - minY) * unit,
         unit,
-        snapshot.next,
+        kind,
       );
   }
 }

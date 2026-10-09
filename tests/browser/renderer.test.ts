@@ -87,3 +87,10 @@ it("draws inset ghost outlines before active solid cells, including paused overl
   expect(outline[0]).toMatchObject({x:122,y:542,fillsBefore:1});
   expect(b.paints.at(-4)).toMatchObject({x:121,y:541,w:28,h:28});
 });
+it("paints canonical held geometry and explicitly clears empty held previews", () => {
+  const b=canvas(300,600),p=canvas(120,120),h=canvas(120,120),g=bagGame();
+  const renderer=new Renderer(b.element,p.element,()=>1,h.element);
+  renderer.render(g.snapshot());expect(h.paints).toHaveLength(1);
+  g.apply("hold");renderer.render(g.snapshot());expect(h.paints).toHaveLength(6);
+  expect(h.paints.slice(-4).every(v=>v.color==="#f4d06f")).toBe(true);
+});

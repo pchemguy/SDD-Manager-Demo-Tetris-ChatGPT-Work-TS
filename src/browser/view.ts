@@ -4,7 +4,7 @@ export type TextTarget = Pick<HTMLElement, "textContent">;
 export type ViewTargets = Record<
   "score" | "lines" | "level" | "status",
   TextTarget
-> & { next?: TextTarget };
+> & { next?: TextTarget; held?: TextTarget; availability?: TextTarget };
 /** Project engine statistics into accessible textual elements. */
 export class View {
   constructor(private readonly targets: ViewTargets) {}
@@ -17,6 +17,11 @@ export class View {
     this.write(this.targets.lines, String(snapshot.lines));
     this.write(this.targets.level, String(snapshot.level));
     if (this.targets.next) this.write(this.targets.next, snapshot.next);
+    if (this.targets.held) this.write(this.targets.held, snapshot.held ?? "Empty");
+    if (this.targets.availability) this.write(this.targets.availability,
+      snapshot.status === "paused" ? "Unavailable while paused" :
+      snapshot.status === "gameOver" ? "Unavailable after game over" :
+      snapshot.canHold ? "Available · C" : "Used until lock");
     this.write(
       this.targets.status,
       { running: "Playing", paused: "Paused", gameOver: "Game over" }[

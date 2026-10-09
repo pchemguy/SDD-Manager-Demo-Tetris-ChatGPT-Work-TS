@@ -56,3 +56,8 @@ it("P case variants share one physical latch and never create repeat deadlines",
   expect(i.press("p", 30)).toEqual(["togglePause"]);
   expect(i.nextTime()).toBe(Infinity);
 });
+it("C case variants invoke hold once per release and preserve arrow schedules", () => {
+  const i=new Input();i.press("ArrowRight",0);
+  expect(i.press("c",100)).toEqual(["hold"]);expect(i.press("C",110)).toEqual([]);
+  expect(i.nextTime()).toBe(150);i.release("C",120);expect(i.press("c",130)).toEqual(["hold"]);
+});

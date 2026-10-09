@@ -22,7 +22,7 @@ body {
 }
 .game-shell {
   --cell: clamp(20px, calc((100vh - 168px) / 20), 36px);
-  width: calc(var(--cell) * 10 + 260px);
+  width: calc(var(--cell) * 10 + 300px);
   margin: 0 auto;
   padding: 24px 0 16px;
 }
@@ -56,7 +56,7 @@ h1 {
 }
 .game-layout {
   display: grid;
-  grid-template-columns: calc(var(--cell) * 10 + 16px) 220px;
+  grid-template-columns: calc(var(--cell) * 10 + 16px) 260px;
   gap: 24px;
 }
 .board-frame {
@@ -75,13 +75,13 @@ h1 {
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 .card {
   border: 1px solid #2c3b50;
   border-radius: 10px;
   background: #142235;
-  padding: 16px;
+  padding: 12px;
 }
 h2 {
   font-size: 11px;
@@ -93,9 +93,9 @@ h2 {
 .next {
   display: grid;
   justify-items: center;
-  padding: 14px;
+  padding: 12px;
 }
-#preview {
+#preview, #held-preview {
   display: block;
   width: 96px;
   height: 96px;
@@ -103,7 +103,7 @@ h2 {
 .stats {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 .stats > div {
   display: flex;
@@ -122,7 +122,7 @@ h2 {
 .controls p {
   font-size: 12px;
   color: #b9c5d5;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
 }
 kbd {
   display: inline-block;
@@ -173,3 +173,7 @@ footer {
   color: #f4d06f;
   margin-left: 6px;
 }
+
+.piece-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+#held-kind { color: #f4d06f; }
+#hold-availability { font-size: 11px; line-height: 1.3; color: #b9c5d5; text-align: center; margin: 6px 0 0; }

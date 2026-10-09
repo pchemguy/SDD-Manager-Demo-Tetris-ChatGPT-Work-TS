@@ -34,6 +34,7 @@
           ></canvas>
         </div>
         <aside class="sidebar">
+          <div class="piece-panels">
           <section class="card next">
             <h2>Up next <span id="next-kind"></span></h2>
             <canvas
@@ -43,6 +44,12 @@
               aria-label="Next piece"
             ></canvas>
           </section>
+          <section class="card next held">
+            <h2>Hold <span id="held-kind">Empty</span></h2>
+            <canvas id="held-preview" width="120" height="120" aria-label="Held piece"></canvas>
+            <p id="hold-availability">Available · C</p>
+          </section>
+          </div>
           <section class="card stats">
             <div><span>Score</span><strong id="score">0</strong></div>
             <div><span>Lines</span><strong id="lines">0</strong></div>
@@ -54,6 +61,7 @@
             <p><kbd>↑</kbd> Rotate</p>
             <p><kbd>↓</kbd> Soft drop</p>
             <p><kbd>Space</kbd> Hard drop</p>
+            <p><kbd>C</kbd> Hold piece</p>
             <p><kbd>P</kbd> Pause / resume</p>
             <p class="control-note">
               Hold arrows to repeat. Focus loss pauses; P resumes.

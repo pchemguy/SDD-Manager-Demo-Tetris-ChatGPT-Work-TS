@@ -204,3 +204,9 @@ it("Space drops once without changing arrow repeat deadlines or pausing", () => 
   expect(h.game.snapshot().status).toBe("running");
   h.controller.dispose();
 });
+it("controlled C case holds once and later arrow repeats move the replacement", () => {
+  const h=harness();h.key("ArrowRight");h.frame(100);
+  expect(h.key("c").defaultPrevented).toBe(true);h.key("C");
+  expect(h.game.snapshot()).toMatchObject({held:"O",canHold:false,active:{kind:"I",x:3},next:"T"});
+  h.frame(150);expect(h.game.snapshot().active!.x).toBe(4);h.controller.dispose();
+});

@@ -25,3 +25,20 @@ test("ghost landing, scored drop, grounded movement and full delay agree", async
   await page.getByRole("button",{name:"Restart game"}).click();
   await expect(page.locator("#score")).toHaveText("0");
 });
+test("native C hold shows empty, consumed, swap and paused states with bag-backed next", async ({page},info) => {
+  await page.clock.install({time:new Date("2026-10-09T12:00:00Z")});
+  await page.addInitScript((values)=>{let i=0;Math.random=()=>values[i++ % values.length]!;},drawsForBag(TEST_BAG));
+  await page.goto("/");await page.clock.pauseAt(new Date("2026-10-09T12:00:01Z"));
+  await expect(page.locator("#held-kind")).toHaveText("Empty");await expect(page.locator("#next-kind")).toHaveText("I");
+  await page.keyboard.press("c");await expect(page.locator("#held-kind")).toHaveText("O");
+  await expect(page.locator("#next-kind")).toHaveText("T");await expect(page.locator("#hold-availability")).toHaveText("Used until lock");
+  await page.keyboard.press("C");await expect(page.locator("#next-kind")).toHaveText("T");
+  const held = await page.locator("#held-preview").evaluate((c:HTMLCanvasElement)=>Array.from(c.getContext("2d")!.getImageData(c.width*.4,c.height*.4,1,1).data).slice(0,3));
+  expect(held).toEqual([244,208,111]);await page.screenshot({path:info.outputPath("held-used.png")});
+  await page.keyboard.press("Space");await page.clock.runFor(1016);await expect(page.locator("#hold-availability")).toHaveText("Available · C");
+  const next=await page.locator("#next-kind").textContent();await page.keyboard.press("c");
+  await expect(page.locator("#held-kind")).toHaveText("T");await expect(page.locator("#next-kind")).toHaveText(next!);
+  await page.keyboard.press("p");await expect(page.locator("#hold-availability")).toHaveText("Unavailable while paused");
+  await page.screenshot({path:info.outputPath("held-paused.png")});
+  await page.getByRole("button",{name:"Restart game"}).click();await expect(page.locator("#held-kind")).toHaveText("Empty");
+});

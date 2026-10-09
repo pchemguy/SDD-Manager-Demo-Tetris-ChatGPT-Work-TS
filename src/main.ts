@@ -13,6 +13,8 @@ const game = new Game(),
   renderer = new Renderer(
     element<HTMLCanvasElement>("board"),
     element<HTMLCanvasElement>("preview"),
+    undefined,
+    element<HTMLCanvasElement>("held-preview"),
   );
 const view = new View({
   score: element("score"),
@@ -20,6 +22,8 @@ const view = new View({
   level: element("level"),
   status: element("status"),
   next: element("next-kind"),
+  held: element("held-kind"),
+  availability: element("hold-availability"),
 });
 const controller = new Controller(
   game,

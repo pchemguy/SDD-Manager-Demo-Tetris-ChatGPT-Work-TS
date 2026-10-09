@@ -8,6 +8,7 @@ const ACTIONS: Record<string, InputAction> = {
   ArrowUp: "rotateClockwise",
   " ": "hardDrop",
   p: "togglePause",
+  c: "hold",
 };
 /** Retain physical holds and expose absolute repeat deadlines for chronological control. */
 export class Input {
@@ -17,7 +18,7 @@ export class Input {
   private downAt = Infinity;
   /** Return initial actions only for a fresh recognized keydown. */
   press(key: string, at: number, repeat = false): InputAction[] {
-    key = key === "P" ? "p" : key;
+    key = key.length === 1 ? key.toLowerCase() : key;
     const action = ACTIONS[key];
     if (!action || repeat || this.held.has(key)) return [];
     this.held.add(key);
@@ -30,7 +31,7 @@ export class Input {
   }
   /** Release a hold; an opposing horizontal survivor starts a fresh delay without an action. */
   release(key: string, at: number): void {
-    key = key === "P" ? "p" : key;
+    key = key.length === 1 ? key.toLowerCase() : key;
     this.held.delete(key);
     if (key === "ArrowDown") this.downAt = Infinity;
     if (key === this.horizontal) {
