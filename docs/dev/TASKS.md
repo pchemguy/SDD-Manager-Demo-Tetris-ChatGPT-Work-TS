@@ -75,11 +75,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: deterministic evidence for partition equivalence across locks/spawns/level changes, grounded-at-spawn behavior, gravity/lock ties, late landing, cancellation/re-grounding, post-clear spawn obstruction, and pause/resume remainders. Reuse valid fixtures; do not add redundant implementation-mirroring tests.
             Evidence: npm test -- tests/engine; compare independent controlled sessions under equivalent time partitions, test failure boundaries, npm run typecheck/build, and visible browser progression/lifecycle smoke. Preserve MVP regressions.
             Verified: Observed an early-deadline RED caused by epsilon event checks; replaced tolerance with explicit selected deadline equality. GREEN: 38 engine tests, typecheck/build and production Chromium smoke passed. Public-command fixture verified row clear before obstructed next-I spawn with no replacement draw; fractional partition/pause/tie tests passed. Native Canvas/HTML demonstration displayed Level 2, Lines 10, Paused then Playing with preserved timing.
-        - [ ] T-011 — Review, test, and report milestone 1.2
+        - [x] T-011 — Review, test, and report milestone 1.2
             Depends on: T-008–T-010 complete and published; milestone 1.1 complete/closed if hosted.
             Scope: whole S1–S6 engine, browser consumers, focused and regression evidence; code review, required repairs, and complete engine-contract exits.
             Evidence: A1–A7 engine obligations, unit/type/build checks and browser state demonstration pass; report committed/pushed; managed milestone closure read back if active.
             Report: docs/dev/reports/phases/1/1.2.md; include implemented features, Findings/Blockers and TODO.
+            Verified: Coherent S1-S6 engine/consumer code review completed; early-deadline finding repaired and rechecked. All 42 unit tests passed, with 38 engine tests; typecheck/build, production Chromium play smoke and native Level 2/pause-resume presentation passed. A1-A7 exits verified; report records later browser-control/compatibility gates.
     - [ ] Milestone 1.3 — Complete browser controls and lifecycle
         - [ ] T-012 — Implement deterministic held-key repeat and directional priority
             Scope: src/browser/input.ts and tests/browser/input.test.ts; controller consumes its command schedule.
