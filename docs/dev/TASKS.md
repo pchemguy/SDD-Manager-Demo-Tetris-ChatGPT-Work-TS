@@ -4,7 +4,7 @@
 
 This is the sole executable owner of the full baseline hierarchy. It derives from accepted [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), [DECOMPOSITION](DECOMPOSITION.md), [SPEC](SPEC.md), [PLAN](PLAN.md), and [layout](layout.md). [TASKS review](TASKS-REVIEW-REPORT.md) assesses generation quality; all checkboxes are unchecked because no implementation has occurred.
 
-PLAN/layout were accepted by the user on 2026-10-09 at `3b9f97b554611b0bad5841361bd13b4e36d0aedd`. The user accepted this list and selected full Phase 1 (T-001–T-022), inline execution, and GitHub tracking on 2026-10-09. The selected stopping boundary is complete baseline integration/publication; modern features remain outside this run. Activation has not yet occurred.
+PLAN/layout were accepted by the user on 2026-10-09 at `3b9f97b554611b0bad5841361bd13b4e36d0aedd`. The user accepted this list and selected full Phase 1 (T-001–T-022), inline execution, and GitHub tracking on 2026-10-09. The selected stopping boundary is complete baseline integration/publication; modern features remain outside this run. Phase activation is verified: phase label, five milestones and issues #1–#22 with exact task markers/associations. Working branch phase/1-baseline-browser-game starts at published preparation merge b3b3bfcba9fef0e67a45221049073743e6ed9caf.
 
 Before execution, integrate accepted preparation through the required explicit merge/check/push into actual default `main`, verify remote containment, and create `phase/1-baseline-browser-game`. Establish the hosted choice and eligible phase objects before its first task if tracking is enabled. No product dependency installation occurs during task preparation.
 
@@ -14,11 +14,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
 
 - [ ] Phase 1 — Baseline browser game
     - [ ] Milestone 1.1 — Playable end-to-end core
-        - [ ] T-001 — Establish the strict TypeScript static-app and check toolchain
+        - [x] T-001 — Establish the strict TypeScript static-app and check toolchain
             Scope: package manifest/lock, TypeScript/static-build/unit/browser configuration as needed, minimal entry page/composition, generated-output ignores, README and AGENTS setup/check commands.
             Depends on: accepted published preparation and phase activation; no prior task.
             Outcome: compatible pinned TypeScript/Vite/Vitest/Playwright tooling with strict checking, declared dev/build/preview/typecheck/test/test:e2e scripts and reproducible dependency setup. Verify package requirements from official sources and inspect browser availability early; report unavailable required engines without claiming compatibility.
             Evidence: npm ci, npm run typecheck, npm run build, and static page load succeed. Record actual versions; no product-completeness claim. Existing secret exclusion remains effective; Windows instructions use CMD-compatible commands.
+            Verified: npm ci, typecheck and production build passed on Node 24.19.0; Chromium 153.0.8010.0 loaded the static page in two successive contexts. Setup-only task has no game-behavior RED claim. Chromium CDN returned HTML; owned package extraction recovered launch. Firefox 157.0 page creation remains unverified after a sandbox crash and is retained as a later compatibility gate.
         - [ ] T-002 — Implement tetromino geometry and board operations
             Scope: src/engine/types.ts, pieces.ts, board.ts and focused tests/engine suites.
             Depends on: T-001. Contracts: S1, A1 and row-compaction portion of S5/A5.

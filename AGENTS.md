@@ -8,7 +8,7 @@ Read [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md), [
 
 ## Current ownership
 
-The specification and PLAN/layout are accepted. TASKS is the sole baseline execution owner; the user accepted full Phase 1 inline execution with GitHub tracking. No product source tree, test suite, or active feature campaign exists. Modern features belong to a subsequent campaign.
+The specification and PLAN/layout are accepted. TASKS is the sole baseline execution owner; the user accepted full Phase 1 inline execution with GitHub tracking. Product setup is present; game modules and suites follow in TASKS. No feature campaign exists. Modern features belong to a subsequent campaign.
 
 ## Workflow
 
@@ -16,4 +16,4 @@ Use SDD Manager's preparation, acceptance, verification, and Git publication pro
 
 Repository publication is already authorized; do not request repeated push permission. This does not settle unresolved product decisions or bypass readiness gates. Never commit credentials.
 
-Maintain current navigation and actual setup/check commands as the project develops. No product setup/build/test commands exist yet; do not claim planned checks have run. Consult closed campaign records only for a specific current need and leave them unchanged.
+Maintain current navigation and actual setup/check commands as the project develops. Declared commands are npm ci, npm run dev/typecheck/build/preview, npm test, and npm run test:e2e. Setup/typecheck/build and two-context static-page launches are verified; game suites do not exist yet. Browser checks spawn their server in the same command/process tree because separate tool executions do not share loopback listeners. Consult closed campaign records only for a specific current need and leave them unchanged.
