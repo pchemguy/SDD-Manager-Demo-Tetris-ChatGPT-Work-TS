@@ -8,7 +8,7 @@ Read [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md), [
 
 ## Current ownership
 
-The specification and PLAN/layout are accepted. TASKS is the sole baseline execution owner; the user accepted full Phase 1 inline execution with GitHub tracking. Product setup is present; game modules and suites follow in TASKS. No feature campaign exists. Modern features belong to a subsequent campaign.
+The specification and PLAN/layout are accepted. TASKS is the sole baseline execution owner; the user accepted full Phase 1 inline execution with GitHub tracking. The complete engine/browser baseline and stable-version acceptance are implemented; delivery documentation and final review/integration are active. No feature campaign exists. Modern features belong to a subsequent campaign.
 
 ## Workflow
 
@@ -16,4 +16,4 @@ Use SDD Manager's preparation, acceptance, verification, and Git publication pro
 
 Repository publication is already authorized; do not request repeated push permission. This does not settle unresolved product decisions or bypass readiness gates. Never commit credentials.
 
-Maintain current navigation and actual setup/check commands as the project develops. Declared commands are npm ci, npm run dev/typecheck/build/preview, npm test, and npm run test:e2e. Setup/typecheck/build and two-context static-page launches are verified; engine/input/controller/presentation suites exercise progression, chronological repeat scheduling and lifecycle cleanup. Browser tests serve the production build; build before running them. Browser checks spawn their server in the same command/process tree because separate tool executions do not share loopback listeners. Consult closed campaign records only for a specific current need and leave them unchanged.
+Maintain current navigation and actual setup/check commands as the project develops. Declared commands are npm ci, npm run dev/typecheck/build/preview, npm test, npm run test:e2e, and npm run test:e2e:stable. Setup/typecheck/build and stable production browser acceptance are verified; engine/input/controller/presentation suites exercise progression, chronological repeat scheduling, lifecycle cleanup and rendering. Browser tests serve the production build; build before running them. Browser checks spawn their server in the same command/process tree because separate tool executions do not share loopback listeners. Stable acceptance uses externally provisioned official Chromium headless and unpatched Firefox/geckodriver executables; see README for paths and process-scoped sandbox environment. Bundled browsers do not establish stable-version acceptance. Consult closed campaign records only for a specific current need and leave them unchanged.

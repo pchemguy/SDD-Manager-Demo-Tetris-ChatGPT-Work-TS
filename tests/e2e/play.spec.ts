@@ -1,2 +1,39 @@
-import {test,expect} from '@playwright/test';
-test('production game spawns, moves, rotates, drops, locks, spawns and restarts',async({page})=>{const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await expect(page.locator('#status')).toHaveText('Playing');const canvas=page.locator('#board');const before=await canvas.screenshot();await page.keyboard.press('ArrowLeft');expect(Buffer.compare(before,await canvas.screenshot())).not.toBe(0);await page.keyboard.press('ArrowUp');for(let i=0;i<20;i++)await page.keyboard.press('ArrowDown');await expect(page.locator('#score')).not.toHaveText('0');await page.waitForTimeout(1100);const colors=await canvas.evaluate((node:HTMLCanvasElement)=>{const data=node.getContext('2d')!.getImageData(0,0,node.width,node.height).data;let top=0,bottom=0;for(let y=0;y<20;y++)for(let x=0;x<10;x++){const i=((y*30+15)*node.width+x*30+15)*4;if(data[i]!==16){if(y<5)top++;if(y>14)bottom++;}}return {top,bottom};});expect(colors.top).toBe(4);expect(colors.bottom).toBe(4);await page.getByRole('button',{name:'Restart game'}).click();await expect(page.locator('#score')).toHaveText('0');expect(errors).toEqual([]);});
+/** Exercise the production static game through native keys and observable Canvas/HTML state. */
+import { test, expect } from "@playwright/test";
+test("production game spawns, moves, rotates, drops, locks, spawns and restarts", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/");
+  await expect(page.locator("#status")).toHaveText("Playing");
+  const canvas = page.locator("#board");
+  const before = await canvas.screenshot();
+  await page.keyboard.press("ArrowLeft");
+  expect(Buffer.compare(before, await canvas.screenshot())).not.toBe(0);
+  await page.keyboard.press("ArrowUp");
+  for (let i = 0; i < 20; i++) await page.keyboard.press("ArrowDown");
+  await expect(page.locator("#score")).not.toHaveText("0");
+  await page.waitForTimeout(1100);
+  const colors = await canvas.evaluate((node: HTMLCanvasElement) => {
+    const data = node
+      .getContext("2d")!
+      .getImageData(0, 0, node.width, node.height).data;
+    let top = 0,
+      bottom = 0;
+    for (let y = 0; y < 20; y++)
+      for (let x = 0; x < 10; x++) {
+        const i = ((y * 30 + 15) * node.width + x * 30 + 15) * 4;
+        if (data[i] !== 16) {
+          if (y < 5) top++;
+          if (y > 14) bottom++;
+        }
+      }
+    return { top, bottom };
+  });
+  expect(colors.top).toBe(4);
+  expect(colors.bottom).toBe(4);
+  await page.getByRole("button", { name: "Restart game" }).click();
+  await expect(page.locator("#score")).toHaveText("0");
+  expect(errors).toEqual([]);
+});

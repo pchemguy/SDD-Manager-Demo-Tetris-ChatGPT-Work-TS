@@ -1,6 +1,49 @@
-import {it,expect} from 'vitest';
-import {Input} from '../../src/browser/input';
-it('initial actions and horizontal/down deadlines ignore native/duplicate keydown',()=>{const i=new Input();expect(i.press('ArrowLeft',0)).toEqual(['left']);expect(i.press('ArrowLeft',5,true)).toEqual([]);expect(i.press('ArrowLeft',10)).toEqual([]);expect(i.nextTime()).toBe(150);expect(i.take(149)).toEqual([]);expect(i.take(150)).toEqual(['left']);expect(i.nextTime()).toBe(200);expect(i.press('ArrowDown',160)).toEqual(['softDrop']);expect(i.take(200)).toEqual(['left']);expect(i.take(210)).toEqual(['softDrop']);});
-it('recent horizontal wins and releasing it reactivates the other after fresh delay',()=>{const i=new Input();i.press('ArrowLeft',0);expect(i.press('ArrowRight',25)).toEqual(['right']);expect(i.nextTime()).toBe(175);i.release('ArrowRight',100);expect(i.nextTime()).toBe(250);expect(i.take(249)).toEqual([]);expect(i.take(250)).toEqual(['left']);i.release('ArrowLeft',300);expect(i.nextTime()).toBe(Infinity);});
-it('orders coincident horizontal before down repeats',()=>{const i=new Input();i.press('ArrowRight',0);i.press('ArrowDown',0);expect(i.take(50)).toEqual(['softDrop']);expect(i.take(100)).toEqual(['softDrop']);expect(i.take(150)).toEqual(['right','softDrop']);});
-it('rotation and Space require release, and clear removes old held schedules',()=>{const i=new Input();expect(i.press('ArrowUp',0)).toEqual(['rotateClockwise']);expect(i.press('ArrowUp',10)).toEqual([]);i.release('ArrowUp',20);expect(i.press('ArrowUp',30)).toEqual(['rotateClockwise']);expect(i.press(' ',40)).toEqual(['togglePause']);expect(i.press(' ',50,true)).toEqual([]);i.press('ArrowDown',60);i.clear();expect(i.nextTime()).toBe(Infinity);expect(i.press('ArrowDown',80)).toEqual(['softDrop']);});
+/** Verify held-key deadlines, opposing-key priority and release behavior without a browser clock. */
+import { it, expect } from "vitest";
+import { Input } from "../../src/browser/input";
+it("initial actions and horizontal/down deadlines ignore native/duplicate keydown", () => {
+  const i = new Input();
+  expect(i.press("ArrowLeft", 0)).toEqual(["left"]);
+  expect(i.press("ArrowLeft", 5, true)).toEqual([]);
+  expect(i.press("ArrowLeft", 10)).toEqual([]);
+  expect(i.nextTime()).toBe(150);
+  expect(i.take(149)).toEqual([]);
+  expect(i.take(150)).toEqual(["left"]);
+  expect(i.nextTime()).toBe(200);
+  expect(i.press("ArrowDown", 160)).toEqual(["softDrop"]);
+  expect(i.take(200)).toEqual(["left"]);
+  expect(i.take(210)).toEqual(["softDrop"]);
+});
+it("recent horizontal wins and releasing it reactivates the other after fresh delay", () => {
+  const i = new Input();
+  i.press("ArrowLeft", 0);
+  expect(i.press("ArrowRight", 25)).toEqual(["right"]);
+  expect(i.nextTime()).toBe(175);
+  i.release("ArrowRight", 100);
+  expect(i.nextTime()).toBe(250);
+  expect(i.take(249)).toEqual([]);
+  expect(i.take(250)).toEqual(["left"]);
+  i.release("ArrowLeft", 300);
+  expect(i.nextTime()).toBe(Infinity);
+});
+it("orders coincident horizontal before down repeats", () => {
+  const i = new Input();
+  i.press("ArrowRight", 0);
+  i.press("ArrowDown", 0);
+  expect(i.take(50)).toEqual(["softDrop"]);
+  expect(i.take(100)).toEqual(["softDrop"]);
+  expect(i.take(150)).toEqual(["right", "softDrop"]);
+});
+it("rotation and Space require release, and clear removes old held schedules", () => {
+  const i = new Input();
+  expect(i.press("ArrowUp", 0)).toEqual(["rotateClockwise"]);
+  expect(i.press("ArrowUp", 10)).toEqual([]);
+  i.release("ArrowUp", 20);
+  expect(i.press("ArrowUp", 30)).toEqual(["rotateClockwise"]);
+  expect(i.press(" ", 40)).toEqual(["togglePause"]);
+  expect(i.press(" ", 50, true)).toEqual([]);
+  i.press("ArrowDown", 60);
+  i.clear();
+  expect(i.nextTime()).toBe(Infinity);
+  expect(i.press("ArrowDown", 80)).toEqual(["softDrop"]);
+});

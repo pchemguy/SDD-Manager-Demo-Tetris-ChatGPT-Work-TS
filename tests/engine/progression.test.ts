@@ -1,6 +1,46 @@
-import {it,expect} from 'vitest';
-import {lineAward,levelFor,gravity} from '../../src/engine/progression';
-import {repeatedO,placeO,ground,occupied,moveTo} from '../helpers/scenarios';
-it('awards 0–4 clears using the pre-clear level',()=>{expect([0,1,2,3,4].map(n=>lineAward(n,3))).toEqual([0,300,900,1500,2400]);});
-it('handles single/multiple line threshold crossings and fractional gravity floor',()=>{expect([0,9,10,19,21].map(levelFor)).toEqual([1,1,2,2,3]);expect(gravity(2)).toBe(800);expect(gravity(3)).toBeCloseTo(640,12);expect(gravity(8)).toBeCloseTo(209.7152,12);expect(gravity(30)).toBe(100);});
-it('integrates ten-line progression, pre-clear awards and new full lock interval',()=>{const g=repeatedO();for(let n=0;n<5;n++)for(const x of [0,2,4,6,8])placeO(g,x);expect(g.snapshot().lines).toBe(10);expect(g.snapshot().level).toBe(2);expect(g.snapshot().score).toBe(1950);expect(g.snapshot().gravityInterval).toBe(800);g.advance(799);expect(g.snapshot().active!.y).toBe(0);g.advance(1);expect(g.snapshot().active!.y).toBe(1);moveTo(g,0);ground(g);const score=g.snapshot().score;expect(g.apply('softDrop')).toBe(false);expect(g.snapshot().score).toBe(score);g.advance(799);expect(occupied(g)).toBe(0);g.advance(1);expect(occupied(g)).toBe(4);for(const x of [2,4,6,8])placeO(g,x);expect(g.snapshot().lines).toBe(12);expect(g.snapshot().score-score).toBe(672);});
+/** Check exact scoring formulas and real gameplay through cumulative level transitions. */
+import { it, expect } from "vitest";
+import { lineAward, levelFor, gravity } from "../../src/engine/progression";
+import {
+  repeatedO,
+  placeO,
+  ground,
+  occupied,
+  moveTo,
+} from "../helpers/scenarios";
+it("awards 0–4 clears using the pre-clear level", () => {
+  expect([0, 1, 2, 3, 4].map((n) => lineAward(n, 3))).toEqual([
+    0, 300, 900, 1500, 2400,
+  ]);
+});
+it("handles single/multiple line threshold crossings and fractional gravity floor", () => {
+  expect([0, 9, 10, 19, 21].map(levelFor)).toEqual([1, 1, 2, 2, 3]);
+  expect(gravity(2)).toBe(800);
+  expect(gravity(3)).toBeCloseTo(640, 12);
+  expect(gravity(8)).toBeCloseTo(209.7152, 12);
+  expect(gravity(30)).toBe(100);
+});
+it("integrates ten-line progression, pre-clear awards and new full lock interval", () => {
+  const g = repeatedO();
+  for (let n = 0; n < 5; n++) for (const x of [0, 2, 4, 6, 8]) placeO(g, x);
+  expect(g.snapshot().lines).toBe(10);
+  expect(g.snapshot().level).toBe(2);
+  expect(g.snapshot().score).toBe(1950);
+  expect(g.snapshot().gravityInterval).toBe(800);
+  g.advance(799);
+  expect(g.snapshot().active!.y).toBe(0);
+  g.advance(1);
+  expect(g.snapshot().active!.y).toBe(1);
+  moveTo(g, 0);
+  ground(g);
+  const score = g.snapshot().score;
+  expect(g.apply("softDrop")).toBe(false);
+  expect(g.snapshot().score).toBe(score);
+  g.advance(799);
+  expect(occupied(g)).toBe(0);
+  g.advance(1);
+  expect(occupied(g)).toBe(4);
+  for (const x of [2, 4, 6, 8]) placeO(g, x);
+  expect(g.snapshot().lines).toBe(12);
+  expect(g.snapshot().score - score).toBe(672);
+});
