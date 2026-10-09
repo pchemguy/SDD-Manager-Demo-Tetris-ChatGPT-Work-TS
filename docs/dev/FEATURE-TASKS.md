@@ -38,11 +38,12 @@ Verification below is planned, not performed. Existing commands are `npm run typ
             Outcome: ghost outline under active geometry, paused/no-active rendering, readable current Space/P instructions and real built-page drop/lock/spawn/restart. Inspect existing external browser availability early without claiming final supported-target acceptance.
             Evidence: focused renderer checks, npm run typecheck/build, built-page Chromium feature/play/control smoke and screenshot/pixel inspection. Observe ghost/drop endpoint agreement, full late landing interval, grounded movement, pause/focus and Restart; hold/bag/kick/final-DPR evidence stays explicitly deferred.
             Verified: RED: renderer expected four inset outlines but received none. Verification: npm test 66 passing; npm run build passes; all eight production Chromium checks pass on official headless 155.0.8059.39. Native keys with controlled clock/pixels verify ghost endpoint, 36 points, late full interval, zero repeat, grounded movement, pause and Restart. Inspected ghost.png: readable glyphs/control labels and distinct outline. Existing Firefox 157.0.1 executable available; final stable acceptance/hold/bag/kicks deferred to assigned tasks.
-        - [ ] T-027 — Review, test and report milestone 2.1
+        - [x] T-027 — Review, test and report milestone 2.1
             Depends on: T-023–T-026 verified, committed and published.
             Scope: integrated query/session/input/render slice and dependencies; sdd-verify code review, milestone exits/regressions, required repairs and real-play/readability evidence.
             Evidence: npm test, npm run typecheck/build and relevant production checks pass; report scoped functionality, usability/timing risks and honest 2.2–2.4 deferrals. Reconcile issue/milestone closure if tracking is active.
             Report: docs/dev/features/001_2606a72-modern-features/reports/2.1.md; concise implemented features, Findings/Blockers and TODO (None when empty).
+            Verified: Inline integrated code review at b4e5c82 found no blocking defect. Unchanged T-026 evidence reused: 66 unit tests, strict build and eight production Chromium checks pass; ghost screenshot inspected. Milestone 2.1 exits verified with bag/hold/kicks/final Firefox explicitly pending. Published report reports/2.1.md has Findings/Blockers None and TODO None.
     - [ ] Milestone 2.2 — Seven-bag and usable hold
         - [ ] T-028 — Build per-game seven-bag selection and controlled shuffle helpers
             Scope: src/engine/random.ts, tests/engine/random.test.ts and planned tests/helpers/random.ts.
