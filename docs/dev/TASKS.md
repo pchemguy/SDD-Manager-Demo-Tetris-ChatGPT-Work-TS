@@ -143,7 +143,7 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Evidence: milestone 1.4 exits, full applicable unit/type/build/browser checks and visual inspection pass; report committed/pushed; managed task/milestone closure confirmed if active.
             Report: docs/dev/reports/phases/1/1.4.md; include implemented features, delivery/browser limits, Findings/Blockers and TODO.
             Verified: Coherent desktop/rendering/tooling/documentation/browser-harness review found no unresolved required defect. Clean install, 56 unit tests, typecheck/build, 14 standard Playwright checks, seven stable-Chromium checks and two stable Firefox sessions passed. Screenshots/pixels verified desktop/DPR and accessible controls. Report resolves rounding/fixture findings and records headless/full-Chrome environment limits.
-    - [ ] Milestone 1.5 — Phase review
+    - [x] Milestone 1.5 — Phase review
         - [x] T-022 — Review, test, and report phase 1 and baseline completion
             Depends on: all delivery milestones 1.1–1.4 complete, reviewed, published, and closed if hosted; not on closure of its own 1.5 milestone.
             Scope: cross-milestone code/dependency review, S1–S8/A1–A11 acceptance and regressions, all required repairs, current docs, and aggregation of unresolved/deferred findings with options and provenance.
