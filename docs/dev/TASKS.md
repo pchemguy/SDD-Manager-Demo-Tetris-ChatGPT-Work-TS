@@ -50,11 +50,12 @@ Verification commands below are planned. T-001 declares compatible pinned toolin
             Outcome: live elapsed-time engine updates, initial keydown arrow controls, suppressed native repeats/default scrolling, Restart, and browser game-over display. Preserve lock chronology; explicitly identify repeat/pause/focus/resize compatibility deferrals in checkpoint documentation.
             Evidence: npm test -- tests/browser; npm run typecheck; npm run build; focused browser smoke and an actual playable spawn/move/rotate/drop/lock/new-spawn/restart path. Gather row-clear/top-out integrated evidence with deterministic test scenarios, without adding a production mutation hook.
             Verified: Two controller RED tests became GREEN. Four browser unit tests, strict typecheck and build passed. Built-page Chromium smoke passed spawn/move/rotate/soft-drop/lock/new-spawn/Restart with no page errors; public-command controller scenarios verified two-row clearing and top-out. Missing Vite CSS declaration was repaired; pre-rebuild stale static output was not counted as acceptance.
-        - [ ] T-007 — Review, test, and report milestone 1.1
+        - [x] T-007 — Review, test, and report milestone 1.1
             Depends on: T-001–T-006 complete and published.
             Scope: complete integrated MVP and dependencies; read-only code review through sdd-verify, required repairs through implementation, focused/full available regressions, demonstration of readable board/movement/full grounded delay, and explicit deferrals.
             Evidence: milestone 1.1 PLAN exits, passing engine/browser unit checks, typecheck/build and browser evidence; repair all required blockers; commit/push report and reconcile issue/milestone closure if active. Record usability/risk observations for human continue/amend/simplify/stop decisions.
             Report: docs/dev/reports/phases/1/1.1.md; include concise implemented features, checks/results, Findings/Blockers and TODO (None if empty).
+            Verified: Read-only coherent core code review found no required milestone defect. All 32 unit tests, typecheck/build and built-page Chromium play smoke passed; native public-command rendering verified row clear and top-out. Report records intentional PLAN deferrals and pending final browser compatibility.
     - [ ] Milestone 1.2 — Progression and complete engine contracts
         - [ ] T-008 — Implement scoring, level thresholds, and gravity progression
             Scope: src/engine/progression.ts, game integration, tests/engine/progression.test.ts and integrated progression scenarios.
